@@ -1,0 +1,18 @@
+.contact-textarea{
+    border-color: #959595 !important;
+    margin-top: 16px;
+    border-radius: 16px !important;
+    padding-left: 43px !important;
+    font-size: 17px !important;
+    resize: none;
+}
+img.contactm{
+    max-width: 320px;
+    margin: auto;
+    /* float: inherit; */
+    display: table;
+    margin-top: 32px;
+}
+.contact-area{
+    margin-top: -344px;
+}

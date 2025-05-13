@@ -1,0 +1,46 @@
+button.btn-mid{
+    min-width: 122px;
+  padding: 12px 32px;
+  }
+  .font-small{
+    font-size: 16px !important;font-weight: normal !important;
+  }
+.btn-mid-small{
+    padding: 12px 30px !important;
+  }
+  .btn-mid-small {
+    padding: 12px 36px!important;
+}
+.kid-btn .all-select-btn input[type="checkbox"] + label{
+  padding: 12px 14px !important;min-width: 60px;  
+}
+.basic-page{
+  max-width: 640px;
+}
+.basic-page-full{
+  max-width: 100% !important;
+}
+.body-type-btn button.formBtn {
+  padding: 12px 30px;
+  min-width: 100px;
+}
+
+
+.footershape-basics{
+  position: inherit;
+  float: right;
+}
+.arrowba{
+  float: right;
+  font-size: 27px;
+  position: absolute;
+  right: 26px;
+  bottom: 10px;
+}
+@media (min-width:200px) and (max-width:767px) {
+  .p-ends-res {
+    padding-left: 12px !important;
+    padding-right: 8px !important;
+    margin-top: 7px;
+  }
+  }

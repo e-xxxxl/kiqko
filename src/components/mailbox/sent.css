@@ -1,0 +1,80 @@
+.sent-left-profile {
+    width: 100%;
+    float: left;
+}
+.profile-left-sent {
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+.profile-left-sent img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.profile-sent-details {
+    width: 72%;
+    float: left;
+    margin-left: 8px;
+}
+.profile-sent-details h4 {
+    width: 100%;
+    float: left;
+    margin-bottom: 0px;
+}
+.profile-sent-details p {
+    width: 100%;
+    float: left;
+    margin-top: 0px; color: #969696
+    ;
+}
+span.ver-span {
+    color: #2ec541;
+   
+}
+span.vers-icon-sent {
+    width: 21px;
+    margin-right: 10px;
+}
+span.video-icon-sent {
+    width: 21px;
+    margin-left: 20px;
+}
+p.p-time-sent {
+    color: #969696;
+    font-weight: bold;
+    margin-top: 17px;
+}
+p.p-user-message {
+    color: #969696;
+}
+p.p-user-message span {
+    width: 100%;
+    float: left;
+    margin-top: 32px;
+    line-height: 25px;
+}
+p.p-user-message label {
+    margin-top: 30px;
+}
+button.btn-reply {
+    width: 130px;
+    height: 40px;
+    border-radius: 40px;
+    border: solid 1px #6f6f6f;
+    background: transparent;
+    color: #6f6f6f;
+    padding: 3px 18px; cursor: pointer;
+}
+button.btn-reply:hover{
+    background: transparent;
+    border: solid 1px #6f6f6f; color: #000;
+}
+button.btn-reply img {
+    float: left;
+    width: 30px;
+}
+.delete-sent{
+    width: auto;
+    float:right;
+}

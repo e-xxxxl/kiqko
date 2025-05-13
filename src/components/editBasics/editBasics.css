@@ -1,0 +1,25 @@
+button.btn-mid{
+    min-width: 122px;
+  padding: 12px 32px;
+  }
+  .font-small{
+    font-size: 16px !important;font-weight: normal !important;
+  }
+.btn-mid-small{
+    padding: 12px 30px !important;
+  }
+  .btn-mid-small {
+    padding: 12px 36px!important;
+}
+.kid-btn .all-select-btn input[type="checkbox"] + label{
+  padding: 12px 14px !important;min-width: 60px;  
+}
+.basic-page{
+  max-width: 640px;
+}
+.body-type-btn button.formBtn {
+  padding: 12px 30px;
+  min-width: 100px;
+}
+
+

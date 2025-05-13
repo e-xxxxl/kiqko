@@ -1,0 +1,97 @@
+.add-photo{
+    width: 146px;
+    height: 138px;
+    background-image: url(../../../assets/images/add-photo.png);
+    margin: auto;
+    margin-top:34px;
+    overflow: hidden;
+}
+.add-photo input {
+    width: 146px;
+    height: 133px;
+    border: gainsboro;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.add-photo-upload{
+    width: 250px;
+    height: 250px;
+    background-image: url(../../../assets/images/cropimg.png);
+    margin: auto;
+    overflow: hidden;
+}
+.add-photo-upload input {
+    width: 250px;
+    height: 250px;
+    border: gainsboro;
+    cursor: pointer;
+    opacity: 0;
+}
+.caption-area{
+    width: 400px;
+    margin: auto;
+    display: table;
+    float: inherit;
+    margin-top: 32px;
+}
+.form-field-row input.form-custom {
+    background-color: #ebebeb;
+    border: 0px;
+    border-radius: 40px;
+    height: 52px;
+    font-size: 17px;
+    padding-bottom: 0px;
+}
+.upload-field-photo{
+    padding-top: 0px !important;
+}
+.check-upload {
+    width: 240px;
+    margin: auto;margin-top: 8px;
+}
+
+.check-upload  .check-long label {
+    font-size: 18px;
+    top: 4px;
+    left: 9px;
+}
+.photo-list-all ul {
+    width: 103%;
+   float: left;
+   padding: 0px;
+}
+.photo-list-all ul li {
+    width: 146px; height: 133px;
+    float: left;
+    list-style: none; margin-top: 22px;
+    margin-right: 1.9%;
+}
+.photo-list-all ul li .add-photo{
+    margin-top: 0px;
+}
+.photo-list {
+    width: 100%;
+    height: 133px;
+    position: relative;
+}
+.photo-list img{
+    width: 100%; height: 133px; object-fit: cover;border-radius: 12px;
+}
+span.close-photo {
+    position: absolute;
+    top: 8px;
+    right: 6px;
+    background: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 40px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 18px;
+    color: #f90000;
+    cursor: pointer;
+}
+span.close-photo:hover{
+    color: #b10202;
+}

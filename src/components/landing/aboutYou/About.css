@@ -1,0 +1,43 @@
+.about-you{
+ max-width: 100%;
+}
+.about-field-style{
+    width: 80%;
+    margin: auto;
+    position: relative;
+    z-index: 99;
+}
+
+.about-field-style .form-control {
+    border-color: #627280;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: italic; resize: none;
+}
+.input-head{
+    height: 50px;
+}
+.about-field-style .form-control:focus {
+    background: #fff !important; border-color: #627280 !important;
+}
+span.char-span {
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #c4bfbf;
+    position: absolute;
+    right: 15px;
+    bottom: 2px;
+}
+.about-p-modal{
+    font-size: 16px; white-space: nowrap;
+}
+
+@media (min-width:200px) and (max-width:700px) {
+    .about-field-area {
+        width: 100%;
+        left: 4%;
+    }
+    }

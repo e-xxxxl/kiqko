@@ -1,0 +1,20 @@
+.select-search select.form-select {
+    border-color: #627280;
+    font-size: 14px;
+    color: #70757d;
+    font-weight: normal;
+    font-style: italic;height: 50px;font-family: segoeui;
+}
+span.span-notic {
+    color: #949393;
+    font-family: segoeui;
+    font-style: italic;
+    font-size: 13px;
+    margin-left: 4%;
+}
+.search-location-you {
+    margin-top: -166px;
+}
+.mt-custom-cont{
+    margin-top: 200px;
+}
