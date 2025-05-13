@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useEffect, useState} from 'react';
 import CommonLayout from "../../layouts/Common";
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
@@ -87,32 +87,100 @@ import wantkids2 from '../../assets/images/want-kids.png';
 import herefor2 from '../../assets/images/here-for.png';
 import profilevid from '../../assets/images/profilevid.png';
 import serr from '../../assets/images/serr.png';
-import { useEffect } from 'react';
-import axios from 'axios';
+
 
 
 
 
 import utils from '../utils';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const Profile = () => {
 const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
 const [isShowBlockUser, setIsBlockUser] = useState(false);
-const [profileData, setProfileData] = useState(null);
+ const [user, setUser] = useState(null);
+  const [profileDetails, setProfileDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
 
-useEffect(() => {
-  const fetchProfile = async () => {
+//    useEffect(() => {
+//     const userId = localStorage.getItem('userId');
+//     if (!userId) return;
+
+//     const fetchUser = async () => {
+//       try {
+//         const res = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+//         const data = await res.json();
+
+//         if (res.ok) {
+//           setUser(data);
+//         } else {
+//           console.error(data.message);
+//         }
+//       } catch (err) {
+//         console.error('Error fetching user profile:', err);
+//       }
+//     };
+
+//     fetchUser();
+//   }, []);
+
+ useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    const fetchProfileDetails = async () => {
+    const userId = localStorage.getItem('userId');
+
     try {
-      const res = await axios.get('/api/profile/me'); // adjust endpoint as needed
-      setProfileData(res.data);
+      const detailsRes = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+      const detailsData = await detailsRes.json();
+
+      if (detailsRes.ok) {
+        setProfileDetails(detailsData); // this will be the user's profile
+         setUser(detailsData);
+      } else {
+        console.error('Error fetching profile:', detailsData.message);
+      }
     } catch (err) {
-      console.error("Error fetching profile:", err);
+      console.error('Error:', err);
     }
   };
 
-  fetchProfile();
-}, []);
+
+    const fetchData = async () => {
+      try {
+        // Fetch basic user data
+        const userRes = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+        const userData = await userRes.json();
+
+      //   if (userRes.ok) {
+      //     setUser(userData);
+          
+      //     // Fetch additional profile details
+      //     const detailsRes = await fetch(`http://localhost:5000/api/users/${userId}`);
+      //     const detailsData = await detailsRes.json();
+          
+      //     if (detailsRes.ok) {
+      //       setProfileDetails(detailsData);
+      //     }
+      //   } else {
+      //     console.error(userData.message);
+      //   }
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData(); fetchProfileDetails();
+  }, []);
+
+
+//   if (!user) return <p>Loading...</p>;
+
+
 // Gallary Image View Start
 const gallaryImgList = [
 { imgUrl: profile, caption: 'BeBold 2022 BeBless' },
@@ -304,39 +372,22 @@ return (
                         </div>
                       
                         <div className="profile-user-details text-start">
-                           {/* <h1>
-                              Anna1234
-                              <span className="icon-profile">
-                              <img src={proficon} alt="proficon" />
-                              <span className="span-tooltip-profile">Verified! <img src={verifiedvac} alt="verifiedvac" /></span>
-                              </span>
-                              <span className="span-vac-icon">
-                                 <NavLink exact to="">
-                                    <img src={vaccineIcon} alt="vaccineIcon" />
-                                    <span className="span-tooltip-profile left-30">Yes, I’m Vaccinated <img src={likevac} alt="likevac" /></span>
-                                 </NavLink>
-                              </span>
-                           </h1> */}
                            <h1>
-  {profileData?.username || 'Unknown User'}
-  {profileData?.isVerified && (
-    <span className="icon-profile">
-      <img src={proficon} alt="proficon" />
-      <span className="span-tooltip-profile">
-        Verified! <img src={verifiedvac} alt="verifiedvac" />
+  {user?.username}
+  <span className="icon-profile">
+    <img src={proficon} alt="proficon" />
+    <span className="span-tooltip-profile">
+      Verified! <img src={verifiedvac} alt="verifiedvac" />
+    </span>
+  </span>
+  <span className="span-vac-icon">
+    <NavLink exact to="">
+      <img src={vaccineIcon} alt="vaccineIcon" />
+      <span className="span-tooltip-profile left-30">
+        Yes, I’m Vaccinated <img src={likevac} alt="likevac" />
       </span>
-    </span>
-  )}
-  {profileData?.isVaccinated && (
-    <span className="span-vac-icon">
-      <NavLink exact to="">
-        <img src={vaccineIcon} alt="vaccineIcon" />
-        <span className="span-tooltip-profile left-30">
-          Yes, I’m Vaccinated <img src={likevac} alt="likevac" />
-        </span>
-      </NavLink>
-    </span>
-  )}
+    </NavLink>
+  </span>
 </h1>
 
                            <p className="address-p">
@@ -393,18 +444,51 @@ return (
                            */}
                            </p>
                            <div className="profile-user-details-inner">
-                              <h2>Woman seeking a Man, 24-34</h2>
-                              <h3> <span className="pro-icon-all">26, Single, Asian, 5’ 7”</span></h3>
-                              <h3><span className="pro-icon-all"> <img src={bodytype2} alt="reporticon" /> </span> Slim</h3>
-                              <h3><span className="pro-icon-all"> <img src={kids2} alt="reporticon" /> </span>Yes, they sometimes live at home </h3>
-                              <h3><span className="pro-icon-all"> <img src={wantkids2} alt="reporticon" /> </span>No </h3>
-                              <h3><span className="pro-icon-all"> <img src={herefor2} alt="reporticon" /> </span> Long-tern</h3>
+      {profileDetails ? (
+        <>
+          <h2>{profileDetails.seeking || 'Not specified'}</h2>
+          <h3>
+            <span className="pro-icon-all">
+              {user.age}, {user.maritalStatus}, {user.ethnicity}, {user.height}
+            </span>
+          </h3>
+          <h3>
+            <span className="pro-icon-all">
+              <img src={bodytype2} alt="body type" />
+            </span>
+            {profileDetails.bodyType || 'Not specified'}
+          </h3>
+          <h3>
+            <span className="pro-icon-all">
+              <img src={kids2} alt="kids status" />
+            </span>
+            {profileDetails.hasKids || 'Not specified'}
+          </h3>
+          <h3>
+            <span className="pro-icon-all">
+              <img src={wantkids2} alt="wants kids" />
+            </span>
+            {profileDetails.wantsKids || 'Not specified'}
+          </h3>
+          <h3>
+            <span className="pro-icon-all">
+              <img src={herefor2} alt="relationship goal" />
+            </span>
+            {profileDetails.relationshipGoal || 'Not specified'}
+          </h3>
+       {/* Edit button for existing info */}
+          <Link to="/edit-basics" className="btn btn-outline-primary mt-3">
+            Edit Information
+          </Link>
+        </>
+      ) : (
+        <Link to="/edit-profile" className="btn btn-primary">
+          Add Your Information
+        </Link>
+      )}
+    </div>
+ 
 
-                 
-                              {/* 
-                              <h5>Last online 1 Day 14 Hours</h5>
-                              */}
-                           </div>
                         </div>
                         <div className="all-user-btn">
                            <button className="btn mes-btn"> 

@@ -137,6 +137,11 @@ const Login = () => {
 
       if (data.success) {
         alert('Login successful!');
+        //    localStorage.setItem('userId', data.user.id);
+
+    // Optionally save more user info
+    localStorage.setItem('userId', data.user);
+
         history.push('/profile'); // or dashboard
       } else {
         alert(data.message || 'Invalid credentials.');

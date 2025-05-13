@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useEffect, useState} from 'react';
 import CommonLayout from "../../layouts/Common";
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
@@ -93,6 +93,30 @@ import utils from '../utils';
 const EditProfile = () => {
   const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
   const [isShowBlockUser, setIsBlockUser] = useState(false);
+  const [user, setUser] = useState(null);
+
+
+     useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    const fetchUser = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+        const data = await res.json();
+
+        if (res.ok) {
+          setUser(data);
+        } else {
+          console.error(data.message);
+        }
+      } catch (err) {
+        console.error('Error fetching user profile:', err);
+      }
+    };
+
+    fetchUser();
+  }, []);
    // Gallary Image View Start
    const gallaryImgList = [
       { imgUrl: profile, caption: 'BeBold 2022 BeBless' },
@@ -293,17 +317,23 @@ const EditProfile = () => {
               </div>
           
                 <div className="profile-user-details text-start">
-                  <h1>
-                    Anna1234
-                    <span className="icon-profile">
-                      <img src={proficon} alt="proficon" />
-                      <span className="span-tooltip-profile">Verified! <img src={verifiedvac} alt="verifiedvac" /></span>
-                      </span>
-                   <span className="span-vac-icon"> <NavLink exact to="">
-                     <img src={vaccineIcon} alt="vaccineIcon" />
-                     <span className="span-tooltip-profile left-30">Yes, I’m Vaccinated <img src={likevac} alt="likevac" /></span>
-                     </NavLink></span>
-                    </h1>
+                   <h1>
+  {user?.username}
+  <span className="icon-profile">
+    <img src={proficon} alt="proficon" />
+    <span className="span-tooltip-profile">
+      Verified! <img src={verifiedvac} alt="verifiedvac" />
+    </span>
+  </span>
+  <span className="span-vac-icon">
+    <NavLink exact to="">
+      <img src={vaccineIcon} alt="vaccineIcon" />
+      <span className="span-tooltip-profile left-30">
+        Yes, I’m Vaccinated <img src={likevac} alt="likevac" />
+      </span>
+    </NavLink>
+  </span>
+</h1>
                     <p className="address-p">
                       <span className="location-icon"><img src={location} alt="location" /></span>
                       Bangkok, Thailand

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CommonLayout from "../../layouts/Common";
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
@@ -26,7 +26,77 @@ import liveicon from '../../assets/images/liveicon.png';
 import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 const EditBasics = () => {
+ const [formData, setFormData] = useState({
+    gender: '',
+    birthDate: {
+      month: '',
+      day: '',
+      year: ''
+    },
+    ethnicity: '',
+    maritalStatus: '',
+    height: '165cm - (5\'5")',
+    bodyType: '',
+    hasKids: '',
+    wantsKids: '',
+    hereFor: '',
+    wouldRelocate: ''
+  });
+   const userId = localStorage.getItem('userId');
+
+    const history = useHistory();
+     const [loading, setLoading] = useState(true);
+
+
+ const handleChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleBirthdayChange = (part, value) => {
+    setFormData(prev => ({
+      ...prev,
+      birthDate: {
+        ...prev.birthDate,
+        [part]: value
+      }
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { month, day, year } = formData.birthDate;
+
+  // Convert to valid date string: "YYYY-MM-DD"
+  const formattedBirthDate = new Date(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
+
+  // Replace birthDate object with proper Date
+  const formattedData = {
+    ...formData,
+    birthDate: formattedBirthDate,
+  };
+    try {
+      const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formattedData)
+      });
+      if (res.ok) {
+       history.push('/profile')
+      }
+    } catch (err) {
+      console.error('Error updating profile:', err);
+    }
+  };
+
+  // if (loading) return <div>Loading...</div>;
+
+  
     return (
         <CommonLayout>
 <section className="all-top-shape"> 
@@ -88,7 +158,7 @@ const EditBasics = () => {
                 </div>
             </Col>
     <Col md={9}>
-        <div className="profile-main-part-area-inner bg-all-pages">
+        {/* <div className="profile-main-part-area-inner bg-all-pages">
             <Col md={12} className="all-title-top mb-4 text-center">
                 <h4>Edit Basics</h4>
             </Col>
@@ -531,7 +601,327 @@ const EditBasics = () => {
        
        
 
+        </div> */}
+
+          <div className="profile-main-part-area-inner bg-all-pages">
+      <Col md={12} className="all-title-top mb-4 text-center">
+        <h4>Edit Basics</h4>
+      </Col>
+
+      <div className="page-wrapper-all">
+        <div className="pageWrapper-inner mt-5 basic-page basic-page-full">
+          <form onSubmit={handleSubmit}>
+            {/* Gender Selection */}
+            <Row className="m-0-responsive">
+              <Col md={12}>
+                <label className="labelForm">I am a</label>
+                <Button 
+                  className={`formBtn all-select-btnr ${formData.gender === 'Woman' ? 'active' : ''}`}
+                  variant="primary"
+                  onClick={() => handleChange('gender', 'Woman')}
+                  type="button"
+                >
+                  <input 
+                    type="radio" 
+                    id="Female" 
+                    checked={formData.gender === 'Woman'}
+                    onChange={() => {}}
+                  />
+                  <label htmlFor="Female">Woman</label>
+                </Button>
+                <Button 
+                  className={`formBtn all-select-btnr ${formData.gender === 'Man' ? 'active' : ''}`}
+                  variant="primary"
+                  onClick={() => handleChange('gender', 'Man')}
+                  type="button"
+                >
+                  <input 
+                    type="radio" 
+                    id="Male" 
+                    checked={formData.gender === 'Man'}
+                    onChange={() => {}}
+                  />
+                  <label htmlFor="Male">Man</label>
+                </Button>
+              </Col>
+            </Row>
+
+            {/* Birthday Selection */}
+            <Row className="row-custom-width m-0-responsive">
+              <label className="labelForm mt-4">Birthday</label>
+              <Col className="ps-1 p-ends-res pe-2" md={4}>
+                <Form.Select 
+                  className="form-custom-inner brder-form" 
+                  size="lg"
+                  value={formData.birthDate.month}
+                  onChange={(e) => handleBirthdayChange('month', e.target.value)}
+                >
+                  <option value="">Month</option>
+                  {Array.from({length: 12}, (_, i) => (
+                    <option key={i+1} value={i+1}>
+                      {new Date(0, i).toLocaleString('default', {month: 'long'})}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Col>
+              <Col className="ps-2 p-ends-res pe-1" md={4}>
+                <Form.Select 
+                  className="form-custom-inner brder-form" 
+                  size="lg"
+                  value={formData.birthDate.day}
+                  onChange={(e) => handleBirthdayChange('day', e.target.value)}
+                >
+                  <option value="">Day</option>
+                  {Array.from({length: 31}, (_, i) => (
+                    <option key={i+1} value={i+1}>{i+1}</option>
+                  ))}
+                </Form.Select>
+              </Col>
+              <Col className="pe-2" md={4}>
+                <Form.Select 
+                  className="form-custom-inner brder-form" 
+                  size="lg"
+                  value={formData.birthDate.year}
+                  onChange={(e) => handleBirthdayChange('year', e.target.value)}
+                >
+                  <option value="">Year</option>
+                  {Array.from({length: 100}, (_, i) => {
+                    const year = new Date().getFullYear() - i;
+                    return <option key={year} value={year}>{year}</option>;
+                  })}
+                </Form.Select>
+              </Col>
+            </Row>
+
+            {/* Ethnicity Selection */}
+            <Row className="m-0-responsive">
+              <Col className="mt-4 pt-3" md={12}>
+                <label className="labelForm">Race</label>
+                {[
+                  'White / Caucasian',
+                  'Asian',
+                  'Black / African Decent',
+                  'Latino / Hispanic',
+                  'North American',
+                  'East Indian',
+                  'Pacific Islander',
+                  'Middle Eastern',
+                  'Mixed Race',
+                  'Other Race'
+                ].map(race => (
+                  <Button 
+                    key={race}
+                    className={`formBtn all-select-btnr ${formData.ethnicity === race ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('ethnicity', race)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={race.replace(/\s+/g, '')} 
+                      checked={formData.ethnicity === race}
+                      onChange={() => {}}
+                    />
+                    <label htmlFor={race.replace(/\s+/g, '')}>{race}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            {/* Marital Status */}
+            <Row className="m-0-responsive">
+              <Col className="mt-4 pt-3" md={12}>
+                <label className="labelForm">Marital Status</label>
+                {['Single', 'Divorced', 'Separated', 'Widowed', 'Attached'].map(status => (
+                  <Button 
+                    key={status}
+                    className={`formBtn all-select-btnr ${formData.maritalStatus === status ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('maritalStatus', status)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={status} 
+                      checked={formData.maritalStatus === status}
+                      onChange={() => {}}
+                    />
+                    <label className="btn-mid" htmlFor={status}>{status}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            {/* Height */}
+            <Row className="m-0-responsive">
+              <label className="labelForm mt-4">Height</label>
+              <Col className="pe-0" md={3}>
+                <Form.Select 
+                  className="form-custom-inner brder-form font-small" 
+                  size="lg"
+                  value={formData.height}
+                  onChange={(e) => handleChange('height', e.target.value)}
+                >
+                  {[
+                    '150cm - (4\'11")', '152cm - (5\'0")', '155cm - (5\'1")', '157cm - (5\'2")',
+                    '160cm - (5\'3")', '163cm - (5\'4")', '165cm - (5\'5")', '168cm - (5\'6")',
+                    '170cm - (5\'7")', '173cm - (5\'8")', '175cm - (5\'9")', '178cm - (5\'10")',
+                    '180cm - (5\'11")', '183cm - (6\'0")', '185cm - (6\'1")', '188cm - (6\'2")',
+                    '191cm - (6\'3")', '193cm - (6\'4")', '195cm - (6\'5")', '198cm - (6\'6")',
+                    '201cm - (6\'7")', '203cm - (6\'8")', '205cm - (6\'9")', '208cm - (6\'10")',
+                    '210cm - (6\'11")', '213cm - (7\'0")'
+                  ].map(height => (
+                    <option key={height} value={height}>{height}</option>
+                  ))}
+                </Form.Select>
+              </Col>
+            </Row>
+
+            {/* Body Type */}
+            <Row className="m-0-responsive">
+              <Col className="mt-4 pt-3 body-type-btnr" md={12}>
+                <label className="labelForm">Body Type</label>
+                {[
+                  'Slim / Slender', 'Athletic / Fit', 'Average', 'Curvy',
+                  'Muscular', 'A few extra pounds', 'Big and Beautiful', 'Heavy'
+                ].map(type => (
+                  <Button 
+                    key={type}
+                    className={`formBtn all-select-btnr ${formData.bodyType === type ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('bodyType', type)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={type.replace(/\s+/g, '')} 
+                      checked={formData.bodyType === type}
+                      onChange={() => {}}
+                    />
+                    <label htmlFor={type.replace(/\s+/g, '')}>{type}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            {/* Have Kids */}
+            <Row className="m-0-responsive">
+              <Col className="mt-4 pt-3 kid-btn" md={12}>
+                <label className="labelForm">Have Kids</label>
+                {[
+                  'No',
+                  'Yes, they live at home',
+                  'Yes, they sometimes live at home',
+                  'Yes, they live away from home'
+                ].map(option => (
+                  <Button 
+                    key={option}
+                    className={`formBtn all-select-btnr ${formData.hasKids === option ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('hasKids', option)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={option.replace(/\s+/g, '')} 
+                      checked={formData.hasKids === option}
+                      onChange={() => {}}
+                    />
+                    <label htmlFor={option.replace(/\s+/g, '')}>{option}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            {/* Want Kids */}
+            <Row className="m-0-responsive">
+              <Col className="mt-4 pt-3 kid-btn" md={12}>
+                <label className="labelForm">Want Kids</label>
+                {['Yes', 'No', 'Maybe', 'Undecided'].map(option => (
+                  <Button 
+                    key={option}
+                    className={`formBtn all-select-btnr ${formData.wantsKids === option ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('wantsKids', option)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={`w${option}`} 
+                      checked={formData.wantsKids === option}
+                      onChange={() => {}}
+                    />
+                    <label htmlFor={`w${option}`}>{option}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            {/* Here For */}
+            <Row className="m-0-responsive here-for">
+              <Col className="mt-4 pt-3 kid-btn" md={12}>
+                <label className="labelForm">Here For</label>
+                {['Long-term', 'Short-term', 'Dating', 'Friendship', 'Hangout Buddy'].map(option => (
+                  <Button 
+                    key={option}
+                    className={`formBtn all-select-btnr ${formData.hereFor === option ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('hereFor', option)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={option.replace(/\s+/g, '')} 
+                      checked={formData.hereFor === option}
+                      onChange={() => {}}
+                    />
+                    <label htmlFor={option.replace(/\s+/g, '')}>{option}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            {/* Relocate */}
+            <Row className="m-0-responsive">
+              <Col className="mt-4 pt-3 kid-btn" md={12}>
+                <label className="labelForm">Relocate</label>
+                {['No', 'Yes', 'Undecided'].map(option => (
+                  <Button 
+                    key={option}
+                    className={`formBtn all-select-btnr ${formData.wouldRelocate === option ? 'active' : ''}`}
+                    variant="primary"
+                    onClick={() => handleChange('wouldRelocate', option)}
+                    type="button"
+                  >
+                    <input 
+                      type="radio" 
+                      id={`${option}r`} 
+                      checked={formData.wouldRelocate === option}
+                      onChange={() => {}}
+                    />
+                    <label htmlFor={`${option}r`}>{option}</label>
+                  </Button>
+                ))}
+              </Col>
+            </Row>
+
+            <Row>
+              <Col className="mt-12 mt-5" md={12}>
+                <Button 
+                  type="submit" 
+                  className="all-btn-round mt-4 text-center" 
+                  variant="primary"
+                >
+                  SAVE CHANGES
+                </Button>
+              </Col>
+            </Row>
+          </form>
         </div>
+      </div>
+    </div>
+  {/* );
+}; */}
     </Col>
     </Row>
     </Container>
