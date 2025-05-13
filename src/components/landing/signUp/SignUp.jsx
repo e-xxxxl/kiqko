@@ -1,108 +1,3 @@
-// import React from 'react';
-// import Form from 'react-bootstrap/Form';
-// import Col from 'react-bootstrap/esm/Col';
-// import Row from 'react-bootstrap/esm/Row';
-// import { MdOutlineArrowForward } from "react-icons/md";
-// import Container from 'react-bootstrap/esm/Container';
-// import shape from '../../../assets/images/shape2.png';
-// import bgweball from '../../../assets/images/bgweball.png';
-// import downloadApp from '../../../assets/images/downloadApp.png';
-// import apps from '../../../assets/images/apps.png';
-// import appg from '../../../assets/images/appg.png';
-// import Button from '@restart/ui/esm/Button';
-// import { NavLink } from 'react-router-dom';
-
-// const SignUp = () => {
-//     return (
-//      <section>
-//         <section className="all-top-shape all-shape-inner">
-//             <img src={shape} alt="shape" />
-//         </section>
-//         <div className="all-container margin-bottom-step">
-//         <div className="all-container-inner setting-area position-top-all">
-//                 <Container>
-//                 <div className="all-seting-area">
-//                     <Row className="m-0-responsive">
-//                     <Col md={12} className="all-title-top mb-1 text-center">
-//                             <h4>Sign Up</h4>
-//                         </Col>
-//                         <Col md={12}>
-//                          <p className="p-up-loc text-center mt-1">Please complete this form to create an account.
-//                         </p>
-//                         </Col>
-//                     </Row>
-//                     <Form>
-//                     <Row className="m-0-responsive">
-//                     <Col md={6}>
-//                         <Form.Group className="mb-2">
-//                         <Form.Control className="form-custom" type="text" placeholder="Username" />
-//                         </Form.Group>
-//                     </Col>
-//                     <Col md={6}>
-//                         <Form.Group className="mb-2">
-//                         <Form.Control className="form-custom" type="email" placeholder="Email Address" />
-//                     </Form.Group>
-//                     </Col>
-
-//                     <Col md={6}>
-//                         <Form.Group className="mb-2">
-//                         <Form.Control className="form-custom" type="password" placeholder="Password" />
-//                         </Form.Group>
-//                     </Col>
-
-//                     <Col md={6}>
-//                         <Form.Group className="mb-2">
-//                         <Form.Control className="form-custom" type="password" placeholder="Confirm Password" />
-//                         </Form.Group>
-//                     </Col>
-
-//                     <Col md={12}>
-//                         <p className="all-login-p text-center"> Password must have at least 6 characters, one uppercase letter, one lowercase letter, one number and one special character.</p>
-//                     </Col>
-
-//                         <Col md={6} className="text-center offset-md-3 btn-modal-round">
-//                         <NavLink exact to="/verify-email">
-//                             <Button className="full-width btn-all-landing margin-all-modal-btn btn" variant="link">
-//                         Submit<MdOutlineArrowForward className="arrow-sign" />
-//                         </Button>
-//                         </NavLink>
-//                     </Col>
-
-//                     <Col lg={12}>
-//                         <p className="all-login-p text-center mb-0"> By clicking Submit button you agree with our Terms of Use & Privacy Policy.</p>
-//                         <p className="login-p link-color color-blue-link">
-//                         <strong>Have an account?  <NavLink exact to="/login">Login</NavLink></strong>
-//                     </p>
-//                     </Col>
-//                     </Row>
-//                     <Row  className="m-0-responsive">
-//                         <hr className="hr-color mt-1"></hr>
-
-//                         <p className="text-center app-p mb-0"><span><img src={downloadApp} alt="downloadApp" /></span>Download our app for:</p>
-
-//                        <div className="col-md-12 text-center">
-//                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={apps} alt="apps" /></Button></NavLink>
-//                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={appg} alt="appg" /></Button></NavLink>
-//                        </div>
-//                     </Row>
-                    
-//                     </Form>
-//                     </div>
-//                 </Container>
-           
-//             </div>
-//             {/* shape-footer-all */}
-//             <div className="shape-footer-all">
-//             <img src={bgweball} alt="bgweball" />
-//             </div>
-//             {/* shape-footer-all */}
-//         </div>
-       
-//         </section>
-//     );
-// };
-
-// export default SignUp;
 
 
 import React, { useState } from 'react';
@@ -117,6 +12,7 @@ import downloadApp from '../../../assets/images/downloadApp.png';
 import apps from '../../../assets/images/apps.png';
 import appg from '../../../assets/images/appg.png';
 import Button from '@restart/ui/esm/Button';
+import './Signup.css';
 import { NavLink, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -200,118 +96,156 @@ const SignUp = () => {
     };
 
     return (
-        <section>
-            <section className="all-top-shape all-shape-inner">
-                <img src={shape} alt="shape" />
-            </section>
-            <div className="all-container margin-bottom-step">
-                <div className="all-container-inner setting-area position-top-all">
-                    <Container>
-                        <div className="all-seting-area">
-                            <Row className="m-0-responsive">
-                                <Col md={12} className="all-title-top mb-1 text-center">
-                                    <h4>Sign Up</h4>
-                                </Col>
-                                <Col md={12}>
-                                    <p className="p-up-loc text-center mt-1">Please complete this form to create an account.</p>
-                                </Col>
-                            </Row>
-                            <Form onSubmit={handleSubmit}>
-                                <Row className="m-0-responsive">
-                                    <Col md={6}>
-                                        <Form.Group className="mb-2">
+        <section className="signup-section">
+            {/* Background Shapes */}
+            <div className="background-shapes">
+                <img src={shape} alt="decorative shape" className="top-shape" />
+                <img src={bgweball} alt="background wave" className="bottom-wave" />
+            </div>
+
+            {/* Main Form Container */}
+            <Container className="signup-container">
+                <Row className="justify-content-center">
+                    <Col lg={8} xl={6}>
+                        <div className="signup-card">
+                            {/* Header Section */}
+                            <div className="text-center mb-4">
+                                <h2 className="signup-title">Create Your Account</h2>
+                                <p className="signup-subtitle">Join our community to get started</p>
+                            </div>
+
+                            {/* Signup Form */}
+                            <Form onSubmit={handleSubmit} className="signup-form">
+                                <Row>
+                                    {/* Username Field */}
+                                    <Col md={6} className="mb-3">
+                                        <Form.Group controlId="username">
+                                            <Form.Label className="form-label">Username</Form.Label>
                                             <Form.Control
-                                                className={`form-custom ${errors.username ? 'is-invalid' : ''}`}
                                                 type="text"
-                                                placeholder="Username"
                                                 name="username"
                                                 value={formData.username}
                                                 onChange={handleChange}
+                                                className={`form-control-custom ${errors.username ? 'is-invalid' : ''}`}
+                                                placeholder="Enter your username"
                                             />
-                                            {errors.username && <div className="invalid-feedback">{errors.username}</div>}
+                                            {errors.username && <div className="invalid-feedback animated-feedback">{errors.username}</div>}
                                         </Form.Group>
                                     </Col>
-                                    <Col md={6}>
-                                        <Form.Group className="mb-2">
+
+                                    {/* Email Field */}
+                                    <Col md={6} className="mb-3">
+                                        <Form.Group controlId="email">
+                                            <Form.Label className="form-label">Email Address</Form.Label>
                                             <Form.Control
-                                                className={`form-custom ${errors.email ? 'is-invalid' : ''}`}
                                                 type="email"
-                                                placeholder="Email Address"
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
+                                                className={`form-control-custom ${errors.email ? 'is-invalid' : ''}`}
+                                                placeholder="your@email.com"
                                             />
-                                            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                                            {errors.email && <div className="invalid-feedback animated-feedback">{errors.email}</div>}
                                         </Form.Group>
                                     </Col>
 
-                                    <Col md={6}>
-                                        <Form.Group className="mb-2">
-                                            <Form.Control
-                                                className={`form-custom ${errors.password ? 'is-invalid' : ''}`}
-                                                type="password"
-                                                placeholder="Password"
-                                                name="password"
-                                                value={formData.password}
-                                                onChange={handleChange}
-                                            />
-                                            {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+                                    {/* Password Field */}
+                                    <Col md={6} className="mb-3">
+                                        <Form.Group controlId="password">
+                                            <Form.Label className="form-label">Password</Form.Label>
+                                            <div className="password-input-group">
+                                                <Form.Control
+                                                    type="password"
+                                                    name="password"
+                                                    value={formData.password}
+                                                    onChange={handleChange}
+                                                    className={`form-control-custom ${errors.password ? 'is-invalid' : ''}`}
+                                                    placeholder="Create password"
+                                                />
+                                                <i className="bi bi-eye-slash password-toggle"></i>
+                                            </div>
+                                            {errors.password && <div className="invalid-feedback animated-feedback">{errors.password}</div>}
                                         </Form.Group>
                                     </Col>
 
-                                    <Col md={6}>
-                                        <Form.Group className="mb-2">
-                                            <Form.Control
-                                                className={`form-custom ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                                                type="password"
-                                                placeholder="Confirm Password"
-                                                name="confirmPassword"
-                                                value={formData.confirmPassword}
-                                                onChange={handleChange}
-                                            />
-                                            {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
+                                    {/* Confirm Password Field */}
+                                    <Col md={6} className="mb-3">
+                                        <Form.Group controlId="confirmPassword">
+                                            <Form.Label className="form-label">Confirm Password</Form.Label>
+                                            <div className="password-input-group">
+                                                <Form.Control
+                                                    type="password"
+                                                    name="confirmPassword"
+                                                    value={formData.confirmPassword}
+                                                    onChange={handleChange}
+                                                    className={`form-control-custom ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                                                    placeholder="Confirm password"
+                                                />
+                                                <i className="bi bi-eye-slash password-toggle"></i>
+                                            </div>
+                                            {errors.confirmPassword && <div className="invalid-feedback animated-feedback">{errors.confirmPassword}</div>}
                                         </Form.Group>
                                     </Col>
+                                </Row>
 
-                                    <Col md={12}>
-                                        <p className="all-login-p text-center"> Password must have at least 6 characters, one uppercase letter, one lowercase letter, one number and one special character.</p>
-                                    </Col>
+                                {/* Password Requirements */}
+                                <div className="password-requirements mb-4">
+                                    <p className="requirement-text">
+                                        <i className="bi bi-check-circle"></i> Minimum 6 characters
+                                    </p>
+                                    <p className="requirement-text">
+                                        <i className="bi bi-check-circle"></i> At least one uppercase & lowercase letter
+                                    </p>
+                                    <p className="requirement-text">
+                                        <i className="bi bi-check-circle"></i> Include one number and special character
+                                    </p>
+                                </div>
 
-                                    <Col md={6} className="text-center offset-md-3 btn-modal-round">
-                                        <Button
-                                            type="submit"
-                                            className="full-width btn-all-landing margin-all-modal-btn btn"
-                                            variant="link"
-                                        >
-                                            Submit<MdOutlineArrowForward className="arrow-sign" />
+                                {/* Submit Button */}
+                                <div className="d-grid mb-3">
+                                    <Button type="submit" className="signup-button">
+                                        Create Account <MdOutlineArrowForward className="button-arrow" />
+                                    </Button>
+                                </div>
+
+                                {/* Terms & Conditions */}
+                                <div className="terms-agreement text-center mb-4">
+                                    <p className="terms-text">
+                                        By creating an account, you agree to our <NavLink to="/terms" className="terms-link">Terms of Use</NavLink> and <NavLink to="/privacy" className="terms-link">Privacy Policy</NavLink>.
+                                    </p>
+                                </div>
+
+                                {/* Divider */}
+                                <div className="divider-with-text mb-4">
+                                    <span className="divider-text">or</span>
+                                </div>
+
+                                {/* Login Link */}
+                                <div className="text-center mb-4">
+                                    <p className="login-redirect">
+                                        Already have an account? <NavLink to="/login" className="login-link">Log in here</NavLink>
+                                    </p>
+                                </div>
+
+                                {/* App Download Section */}
+                                <div className="app-download-section text-center">
+                                    <p className="download-text mb-3">
+                                        <img src={downloadApp} alt="Download app" className="download-icon" /> Get our mobile app for better experience
+                                    </p>
+                                    <div className="app-buttons">
+                                        <Button variant="link" className="app-download-btn">
+                                            <img src={apps} alt="App Store" className="app-icon" />
                                         </Button>
-                                    </Col>
-
-                                    <Col lg={12}>
-                                        <p className="all-login-p text-center mb-0"> By clicking Submit button you agree with our Terms of Use & Privacy Policy.</p>
-                                        <p className="login-p link-color color-blue-link">
-                                            <strong>Have an account?  <NavLink exact to="/login">Login</NavLink></strong>
-                                        </p>
-                                    </Col>
-                                </Row>
-                                <Row className="m-0-responsive">
-                                    <hr className="hr-color mt-1"></hr>
-
-                                    <p className="text-center app-p mb-0"><span><img src={downloadApp} alt="downloadApp" /></span>Download our app for:</p>
-
-                                    <div className="col-md-12 text-center">
-                                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={apps} alt="apps" /></Button></NavLink>
-                                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={appg} alt="appg" /></Button></NavLink>
+                                        <Button variant="link" className="app-download-btn">
+                                            <img src={appg} alt="Google Play" className="app-icon" />
+                                        </Button>
                                     </div>
-                                </Row>
+                                </div>
                             </Form>
                         </div>
-                    </Container>
-                </div>
-                <div className="shape-footer-all">
-                    <img src={bgweball} alt="bgweball" />
-                </div>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         </section>
     );
 };
