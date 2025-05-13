@@ -87,7 +87,8 @@ import wantkids2 from '../../assets/images/want-kids.png';
 import herefor2 from '../../assets/images/here-for.png';
 import profilevid from '../../assets/images/profilevid.png';
 import serr from '../../assets/images/serr.png';
-
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -97,6 +98,21 @@ import utils from '../utils';
 const Profile = () => {
 const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
 const [isShowBlockUser, setIsBlockUser] = useState(false);
+const [profileData, setProfileData] = useState(null);
+
+
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const res = await axios.get('/api/profile/me'); // adjust endpoint as needed
+      setProfileData(res.data);
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+    }
+  };
+
+  fetchProfile();
+}, []);
 // Gallary Image View Start
 const gallaryImgList = [
 { imgUrl: profile, caption: 'BeBold 2022 BeBless' },
@@ -288,7 +304,7 @@ return (
                         </div>
                       
                         <div className="profile-user-details text-start">
-                           <h1>
+                           {/* <h1>
                               Anna1234
                               <span className="icon-profile">
                               <img src={proficon} alt="proficon" />
@@ -300,7 +316,29 @@ return (
                                     <span className="span-tooltip-profile left-30">Yes, I’m Vaccinated <img src={likevac} alt="likevac" /></span>
                                  </NavLink>
                               </span>
-                           </h1>
+                           </h1> */}
+                           <h1>
+  {profileData?.username || 'Unknown User'}
+  {profileData?.isVerified && (
+    <span className="icon-profile">
+      <img src={proficon} alt="proficon" />
+      <span className="span-tooltip-profile">
+        Verified! <img src={verifiedvac} alt="verifiedvac" />
+      </span>
+    </span>
+  )}
+  {profileData?.isVaccinated && (
+    <span className="span-vac-icon">
+      <NavLink exact to="">
+        <img src={vaccineIcon} alt="vaccineIcon" />
+        <span className="span-tooltip-profile left-30">
+          Yes, I’m Vaccinated <img src={likevac} alt="likevac" />
+        </span>
+      </NavLink>
+    </span>
+  )}
+</h1>
+
                            <p className="address-p">
                               <span className="location-icon"><img src={location} alt="location" /></span>
                               Bangkok, Thailand
