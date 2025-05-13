@@ -133,8 +133,10 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
     const userId = localStorage.getItem('userId');
 
     try {
-      const detailsRes = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+      const detailsRes = await fetch(`http://localhost:5000/api/users/profilee/${userId}`);
       const detailsData = await detailsRes.json();
+      console.log(detailsData);
+      
 
       if (detailsRes.ok) {
         setProfileDetails(detailsData); // this will be the user's profile
@@ -153,6 +155,8 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
         // Fetch basic user data
         const userRes = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
         const userData = await userRes.json();
+        console.log(userData);
+        
 
       //   if (userRes.ok) {
       //     setUser(userData);
