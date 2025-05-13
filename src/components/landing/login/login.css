@@ -1,0 +1,259 @@
+/* Login Page Container */
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+.login-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.top-decoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.floating-shape {
+  max-width: 250px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bottom-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.wave-pattern {
+  width: 100%;
+}
+
+/* Login Card */
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Header Styles */
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.welcome-text {
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.login-subtext {
+  color: #718096;
+  font-size: 1rem;
+}
+
+/* Form Elements */
+.input-label {
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a0aec0;
+  font-size: 1.1rem;
+}
+
+.modern-input {
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.modern-input:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #a0aec0;
+}
+
+/* Remember Me & Forgot Password */
+.remember-check .form-check-input {
+  border: 1px solid #cbd5e0;
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 0.2em;
+}
+
+.remember-check .form-check-label {
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.forgot-password {
+  color: #4299e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: #3182ce;
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-button {
+  background-color: #4299e1;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.2);
+}
+
+.button-arrow {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.login-button:hover .button-arrow {
+  transform: translateX(3px);
+}
+
+/* Sign Up Link */
+.signup-prompt {
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+.signup-link {
+  color: #4299e1;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* Divider */
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #e2e8f0;
+}
+
+.divider-text {
+  padding: 0 1rem;
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+/* App Download Section */
+.app-download-section {
+  margin-top: 1.5rem;
+}
+
+.download-text {
+  color: #718096;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.download-icon {
+  height: 18px;
+  margin-right: 0.5rem;
+}
+
+.app-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.app-download-btn {
+  padding: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.app-download-btn:hover {
+  transform: translateY(-2px);
+}
+
+.app-download-btn img {
+  height: 40px;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .login-card {
+    padding: 1.5rem;
+  }
+  
+  .welcome-text {
+    font-size: 1.5rem;
+  }
+  
+  .floating-shape {
+    max-width: 180px;
+  }
+}

@@ -1,107 +1,3 @@
-// import React from 'react';
-// import Form from 'react-bootstrap/Form';
-// import Col from 'react-bootstrap/esm/Col';
-// import Row from 'react-bootstrap/esm/Row';
-// import { MdOutlineArrowForward } from "react-icons/md";
-// import Container from 'react-bootstrap/esm/Container';
-// import shape from '../../../assets/images/shape2.png';
-// import bgweball from '../../../assets/images/bgweball.png';
-// import downloadApp from '../../../assets/images/downloadApp.png';
-// import apps from '../../../assets/images/apps.png';
-// import appg from '../../../assets/images/appg.png';
-// import Button from '@restart/ui/esm/Button';
-// import { NavLink } from 'react-router-dom';
-
-// const Login = () => {
-//     return (
-//         <section>
-//         <section className="all-top-shape all-shape-inner">
-//             <img src={shape} alt="shape" />
-//         </section>
-//         <div className="all-container margin-bottom-step">
-//         <div className="all-container-inner setting-area position-top-all">
-//                 <Container>
-//                 <div className="all-seting-area">
-//                     <Row className="m-0-responsive">
-//                     <Col md={12} className="all-title-top mb-1 text-center">
-//                             <h4>Login</h4>
-//                         </Col>
-//                         <Col md={12}>
-//                          <p className="p-up-loc text-center mt-1">Please login with your credentials.
-//                         </p>
-//                         </Col>
-//                     </Row>
-//                     <Form>
-//                     <Row className="m-0-responsive">
-//                     <Col md={6}>
-//                         <Form.Group className="mb-2">
-//                         <Form.Control className="form-custom" type="text" placeholder="Username" />
-//                         </Form.Group>
-//                     </Col>
-//                     <Col md={6}>
-//                         <Form.Group className="mb-2">
-//                         <Form.Control className="form-custom" type="password" placeholder="Password" />
-//                     </Form.Group>
-//                     </Col>
-
-//                     <Col md={6} className="text-right">
-//                         <Form.Group className="mb-3 check-form check-long-all float-right-all margin-right-check login-remember" controlId="formBasicCheckbox">
-//                             <Form.Check type="checkbox" label="Remember me" />
-//                         </Form.Group>
-//                     </Col>
-//                     <Col md={6}>
-//                     <p className="login-p link-color float-left-all ms-4">
-//                         <NavLink exact to="/sign-up">Forgot Password?</NavLink>
-//                     </p>
-//                     </Col>
-                   
-
-             
-//                         <Col md={6} className="text-center offset-md-3 btn-modal-round">
-//                         <NavLink exact to="/profile">
-//                             <Button className="full-width btn-all-landing margin-all-modal-btn btn mtb-53" variant="link">
-//                         Login<MdOutlineArrowForward className="arrow-sign" />
-//                         </Button>
-//                         </NavLink>
-//                     </Col>
-
-//                     <Col lg={12}>
-                        
-//                         <p className="login-p link-color color-blue-link">
-//                         <strong>Not a member?  <NavLink exact to="/sign-up">Sign Up here.</NavLink></strong>
-//                     </p>
-//                     </Col>
-//                     </Row>
-//                     <Row className="m-0-responsive">
-//                         <hr className="hr-color mt-1"></hr>
-
-//                         <p className="text-center app-p mb-0"><span><img src={downloadApp} alt="downloadApp" /></span>Download our app for:</p>
-
-//                        <div className="col-md-12 text-center">
-//                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={apps} alt="apps" /></Button></NavLink>
-//                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={appg} alt="appg" /></Button></NavLink>
-//                        </div>
-//                     </Row>
-                    
-//                     </Form>
-//                     </div>
-//                 </Container>
-           
-//             </div>
-//             {/* shape-footer-all */}
-//             <div className="shape-footer-all">
-//             <img src={bgweball} alt="bgweball" />
-//             </div>
-//             {/* shape-footer-all */}
-//         </div>
-       
-//         </section>
-//     );
-// };
-
-// export default Login;
-
-
 
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
@@ -115,6 +11,7 @@ import downloadApp from '../../../assets/images/downloadApp.png';
 import apps from '../../../assets/images/apps.png';
 import appg from '../../../assets/images/appg.png';
 import Button from '@restart/ui/esm/Button';
+import './login.css';
 import { NavLink, useHistory } from 'react-router-dom';
 
 const Login = () => {
@@ -130,7 +27,7 @@ const Login = () => {
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({ usernameOrEmail, password }),
+        body: JSON.stringify({ usernameOrEmail, password }),
       });
 
       const data = await response.json();
@@ -148,94 +45,133 @@ const Login = () => {
   };
 
   return (
-    <section>
-      <section className="all-top-shape all-shape-inner">
-        <img src={shape} alt="shape" />
-      </section>
-      <div className="all-container margin-bottom-step">
-        <div className="all-container-inner setting-area position-top-all">
-          <Container>
-            <div className="all-seting-area">
-              <Row className="m-0-responsive">
-                <Col md={12} className="all-title-top mb-1 text-center">
-                  <h4>Login</h4>
-                </Col>
-                <Col md={12}>
-                  <p className="p-up-loc text-center mt-1">Please login with your credentials.</p>
-                </Col>
-              </Row>
-
-              <Form onSubmit={handleLogin}>
-                <Row className="m-0-responsive">
-                  <Col md={6}>
-                    <Form.Group className="mb-2">
-                      <Form.Control
-  type="text"
-  placeholder="Username or Email"
-  value={usernameOrEmail}
-  onChange={(e) => setUsernameOrEmail(e.target.value)}
-  required
-/>
-
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group className="mb-2">
-                      <Form.Control
-                        className="form-custom"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                      />
-                    </Form.Group>
-                  </Col>
-
-                  <Col md={6} className="text-right">
-                    <Form.Group className="mb-3 check-form check-long-all float-right-all margin-right-check login-remember">
-                      <Form.Check type="checkbox" label="Remember me" />
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <p className="login-p link-color float-left-all ms-4">
-                      <NavLink exact to="/forgot-password">Forgot Password?</NavLink>
-                    </p>
-                  </Col>
-
-                  <Col md={6} className="text-center offset-md-3 btn-modal-round">
-                    <Button type="submit" className="full-width btn-all-landing margin-all-modal-btn btn mtb-53" variant="link">
-                      Login <MdOutlineArrowForward className="arrow-sign" />
-                    </Button>
-                  </Col>
-
-                  <Col lg={12}>
-                    <p className="login-p link-color color-blue-link">
-                      <strong>Not a member? <NavLink exact to="/sign-up">Sign Up here.</NavLink></strong>
-                    </p>
-                  </Col>
-                </Row>
-
-                <Row className="m-0-responsive">
-                  <hr className="hr-color mt-1"></hr>
-                  <p className="text-center app-p mb-0">
-                    <span><img src={downloadApp} alt="downloadApp" /></span>Download our app for:
-                  </p>
-                  <div className="col-md-12 text-center">
-                    <NavLink exact to="bout"><Button className="btn-app-link"><img src={apps} alt="apps" /></Button></NavLink>
-                    <NavLink exact to="bout"><Button className="btn-app-link"><img src={appg} alt="appg" /></Button></NavLink>
-                  </div>
-                </Row>
-              </Form>
-            </div>
-          </Container>
-          <div className="shape-footer-all">
-            <img src={bgweball} alt="bgweball" />
-          </div>
+    <section className="login-page">
+      {/* Background Elements */}
+      <div className="login-background">
+        <div className="top-decoration">
+          <img src={shape} alt="decorative shape" className="floating-shape" />
+        </div>
+        <div className="bottom-decoration">
+          <img src={bgweball} alt="wave pattern" className="wave-pattern" />
         </div>
       </div>
+
+      {/* Main Content */}
+      <div className="login-container">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={6} md={8}>
+              <div className="login-card">
+                {/* Header Section */}
+                <div className="login-header text-center mb-4">
+                  <h2 className="welcome-text">Welcome Back</h2>
+                  <p className="login-subtext">Sign in to access your account</p>
+                </div>
+
+                {/* Login Form */}
+                <Form onSubmit={handleLogin} className="auth-form">
+                  <Row>
+                    {/* Username/Email Field */}
+                    <Col md={12} className="mb-3">
+                      <Form.Group controlId="usernameOrEmail">
+                        <Form.Label className="input-label">Username or Email</Form.Label>
+                        <div className="input-with-icon">
+                          <i className="bi bi-person input-icon"></i>
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter your username or email"
+                            value={usernameOrEmail}
+                            onChange={(e) => setUsernameOrEmail(e.target.value)}
+                            className="modern-input"
+                            required
+                          />
+                        </div>
+                      </Form.Group>
+                    </Col>
+
+                    {/* Password Field */}
+                    <Col md={12} className="mb-3">
+                      <Form.Group controlId="password">
+                        <Form.Label className="input-label">Password</Form.Label>
+                        <div className="input-with-icon">
+                          <i className="bi bi-lock input-icon"></i>
+                          <Form.Control
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="modern-input"
+                            required
+                          />
+                          <i className="bi bi-eye-slash password-toggle"></i>
+                        </div>
+                      </Form.Group>
+                    </Col>
+
+                    {/* Remember Me & Forgot Password */}
+                    <Col md={12} className="mb-4">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <Form.Check
+                          type="checkbox"
+                          id="rememberMe"
+                          label="Remember me"
+                          className="remember-check"
+                        />
+                        <NavLink to="/forgot-password" className="forgot-password">
+                          Forgot Password?
+                        </NavLink>
+                      </div>
+                    </Col>
+
+                    {/* Submit Button */}
+                    <Col md={12} className="mb-4">
+                      <Button type="submit" className="login-button w-100">
+                        Log In <MdOutlineArrowForward className="button-arrow" />
+                      </Button>
+                    </Col>
+
+                    {/* Sign Up Link */}
+                    <Col md={12} className="text-center mb-4">
+                      <p className="signup-prompt">
+                        Not a member yet? <NavLink to="/sign-up" className="signup-link">Create an account</NavLink>
+                      </p>
+                    </Col>
+
+                    {/* Divider */}
+                    <Col md={12} className="mb-4">
+                      <div className="divider-with-text">
+                        <span className="divider-line"></span>
+                        <span className="divider-text">or</span>
+                        <span className="divider-line"></span>
+                      </div>
+                    </Col>
+
+                    {/* App Download Section */}
+                    <Col md={12} className="text-center">
+                      <div className="app-download-section">
+                        <p className="download-text mb-3">
+                          <img src={downloadApp} alt="download" className="download-icon" />
+                          Get our mobile app for better experience
+                        </p>
+                        <div className="app-buttons">
+                          <Button variant="link" className="app-download-btn">
+                            <img src={apps} alt="App Store" />
+                          </Button>
+                          <Button variant="link" className="app-download-btn">
+                            <img src={appg} alt="Google Play" />
+                          </Button>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                </Form>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </section>
-  );
+ );
 };
 
 export default Login;
