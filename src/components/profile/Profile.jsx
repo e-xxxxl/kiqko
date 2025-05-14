@@ -140,7 +140,7 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
 
       if (detailsRes.ok) {
         setProfileDetails(detailsData); // this will be the user's profile
-         setUser(detailsData);
+         // setDe(detailsData);
       } else {
         console.error('Error fetching profile:', detailsData.message);
       }
@@ -158,19 +158,19 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
         console.log(userData);
         
 
-      //   if (userRes.ok) {
-      //     setUser(userData);
+        if (userRes.ok) {
+          setUser(userData);
           
-      //     // Fetch additional profile details
-      //     const detailsRes = await fetch(`http://localhost:5000/api/users/${userId}`);
-      //     const detailsData = await detailsRes.json();
+         //  // Fetch additional profile details
+         //  const detailsRes = await fetch(`http://localhost:5000/api/users/${userId}`);
+         //  const detailsData = await detailsRes.json();
           
-      //     if (detailsRes.ok) {
-      //       setProfileDetails(detailsData);
-      //     }
-      //   } else {
-      //     console.error(userData.message);
-      //   }
+         //  if (detailsRes.ok) {
+         //    setProfileDetails(detailsData);
+         //  }
+        } else {
+          console.error(userData.message);
+        }
       } catch (err) {
         console.error('Error fetching data:', err);
       } finally {
@@ -450,12 +450,21 @@ return (
                            <div className="profile-user-details-inner">
       {profileDetails ? (
         <>
-          <h2>{profileDetails.seeking || 'Not specified'}</h2>
-          <h3>
-            <span className="pro-icon-all">
-              {user.age}, {user.maritalStatus}, {user.ethnicity}, {user.height}
-            </span>
-          </h3>
+          <h2>
+  {profileDetails.gender === 'Woman' ? 'Woman seeking Man' : 
+   profileDetails.gender === 'Man' ? 'Man seeking Woman' : 
+   'Not specified'}
+   
+  {profileDetails.age && ` age(${profileDetails.age}) +`}
+</h2>
+<h3>
+  <span className="pro-icon-all">
+    {profileDetails.age && `${profileDetails.age}, `}
+    {profileDetails.maritalStatus && `${profileDetails.maritalStatus}, `}
+    {profileDetails.ethnicity && `${profileDetails.ethnicity}, `}
+    {profileDetails.height && profileDetails.height}
+  </span>
+</h3>
           <h3>
             <span className="pro-icon-all">
               <img src={bodytype2} alt="body type" />
@@ -478,7 +487,7 @@ return (
             <span className="pro-icon-all">
               <img src={herefor2} alt="relationship goal" />
             </span>
-            {profileDetails.relationshipGoal || 'Not specified'}
+            {profileDetails.hereFor || 'Not specified'}
           </h3>
        {/* Edit button for existing info */}
           <Link to="/edit-basics" className="btn btn-outline-primary mt-3">

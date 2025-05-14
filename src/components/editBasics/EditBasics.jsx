@@ -28,7 +28,7 @@ import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 const EditBasics = () => {
- const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     gender: '',
     birthDate: {
       month: '',
@@ -38,12 +38,13 @@ const EditBasics = () => {
     ethnicity: '',
     maritalStatus: '',
     height: '165cm - (5\'5")',
+    age: '19', // Add this line with a default value
     bodyType: '',
     hasKids: '',
     wantsKids: '',
     hereFor: '',
     wouldRelocate: ''
-  });
+});
    const userId = localStorage.getItem('userId');
 
     const history = useHistory();
@@ -776,6 +777,23 @@ const EditBasics = () => {
                 </Form.Select>
               </Col>
             </Row>
+
+  {/* Age */}
+<Row className="m-0-responsive">
+  <label className="labelForm mt-4">Age</label>
+  <Col className="pe-0" md={3}>
+    <Form.Select 
+      className="form-custom-inner brder-form font-small" 
+      size="lg"
+      value={formData.age}
+      onChange={(e) => handleChange('age', e.target.value)}
+    >
+     {Array.from({length: 82}, (_, i) => i + 19).map(age => (
+        <option key={age} value={age.toString()}>{age}</option>
+      ))}
+    </Form.Select>
+  </Col>
+</Row>
 
             {/* Body Type */}
             <Row className="m-0-responsive">

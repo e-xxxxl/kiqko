@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Delete.css';
 import CommonLayout from '../../layouts/Common';
 import shape from '../../assets/images/shape2.png';
 import Col from 'react-bootstrap/esm/Col';
@@ -24,10 +25,66 @@ import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
 import './Setting.css';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
 const DeleteAccount = () => {
+ const [showModal, setShowModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const history = useHistory();
+  const userId = localStorage.getItem('userId');
+
+
+    const handleDeleteAccount = async () => {
+  if (!userId) {
+    alert('User ID not found');
+    return;
+  }
+
+  setIsDeleting(true);
+  try {
+    const res = await fetch(`http://localhost:5000/api/users/delete/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // First check if the response is JSON
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await res.text();
+      throw new Error(text || 'Server returned non-JSON response');
+    }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || 'Failed to delete account');
+    }
+
+    // Clear all user-related data from localStorage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('profileData');
+    
+    // Redirect to home page
+    history.push('/');
+    window.location.reload();
+
+  } catch (err) {
+    console.error('Error deleting account:', err);
+    // Show the raw error message if it's HTML, but truncate it
+    const errorMessage = err.message.includes('<!DOCTYPE') 
+      ? 'Server error occurred' 
+      : err.message;
+    alert(errorMessage);
+  } finally {
+    setIsDeleting(false);
+    setShowModal(false);
+  }
+};
     return (
 <CommonLayout>
 <section className="all-top-shape"> 
@@ -95,30 +152,59 @@ const DeleteAccount = () => {
             </Col>
 
             <div className="all-seting-area-pass">
-                    <Row>
-                        <Col md={12}>
-                            
-                         <p className="p-update-premium text-start">
-                         Deleting your account is permanent, and deleted accounts cannot be reinstated. Please note that if you're a Featured Member, your upgrade is non-refundable and cannot be transferred to a new account. This action will permanently delete your account and will remove all your photos and posts from the database.
+      <Row>
+        <Col md={12}>
+          <p className="p-update-premium text-start">
+            Deleting your account will permanently remove all your data from our system.
+            This action cannot be undone.
+          </p>
+          <p className="p-update-premium mt-4 click-delete text-start">
+            Consider <NavLink to="/hide-profile">hiding your profile</NavLink> instead if you want to take a break.
+          </p>
+        </Col>
+      </Row>
 
-                             </p>
-                             <p className="p-update-premium mt-4 click-delete text-start">
-                             Instead of deleting your account why not hide your profile from all user,  <NavLink exact to="/hide-profile">click here</NavLink> to hide your profile. 
-                             </p>
-                        </Col>
-                    </Row>
+      <Row>
+        <Col md={6} className="pr-1 up-field">
+          <Button 
+            className="btn-upgrade btn-later" 
+            variant="primary"
+            onClick={() => history.push('/profile')}
+          >
+            Cancel
+          </Button>
+        </Col>
+        <Col md={6} className="pl-0 up-field">
+          <Button 
+            className="btn-upgrade btn-upgrade-now" 
+            variant="danger"
+            onClick={() => setShowModal(true)}
+            disabled={isDeleting}
+          >
+            {isDeleting ? 'Deleting...' : 'Delete Account'}
+          </Button>
+        </Col>
+      </Row>
 
-                    <Row>
-                    <Col md={6} className="pr-1 up-field">
-                    <Button className="btn-upgrade btn-later" variant="primary">Cancel</Button>
-                    </Col>
-                    <Col md={6} className="pl-0 up-field">
-                    <Button className="btn-upgrade btn-upgrade-now" variant="primary">Yes</Button>
-                    </Col>
-                    </Row>
-                    </div>
-                
-
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Final Confirmation</h3>
+            <p>This will permanently delete your account and all associated data.</p>
+            <p>Are you absolutely sure?</p>
+            <div className="modal-buttons">
+              <Button variant="secondary" onClick={() => setShowModal(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={handleDeleteAccount}>
+                Yes, Delete Permanently
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
         </div>
     </Col>
     </Row>
