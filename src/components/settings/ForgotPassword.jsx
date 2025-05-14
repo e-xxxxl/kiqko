@@ -21,12 +21,12 @@ const ForgotPassword = () => {
                 <div className="all-seting-area">
                     <Row>
                         <Col md={12}>
-                         <p className="p-up-loc text-center">Enter the email associated with your account. We will email you a link to reset your password.</p>
+                         <p className="p-up-loc text-center">Enter the email associated with your account. We will email you a code to reset your password.</p>
                         </Col>
                         <Col className="mt-2 offset-md-3" md={6}>
                         <Form.Control className="input-settings text-center" type="email" placeholder="e.g. (”email@sample1.com”)" />
                        
-                        <Button className="settings-btn mt-4" variant="primary">Send Link</Button>
+                        <Button className="settings-btn mt-4" variant="primary">Send Code</Button>
                         </Col>
                     </Row>
                     <Row>
