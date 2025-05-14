@@ -86,108 +86,126 @@ const DeleteAccount = () => {
   }
 };
     return (
-        <CommonLayout>
-            <section className="all-top-shape">
-                <img src={shape} alt="shape" />
-            </section>
-            <div className="all-container">
-                <div className="pr pb-5 mb-5">
-                    <div className="page-wrapper-all">
-                        <Container>
-                            <Row>
-                                <Col md={3}>
-                                    <div className="left-panel-allpages mar-top-left">
-                                        <div className="top-user-id text-center">
-                                            <div className="online-user-all">
-                                                <h5 className="border-h5">Users Online Now</h5>
-                                                <div className="online-user-status border-right-online">
-                                                    <h6>Women</h6>
-                                                    <h4>1234</h4>
-                                                </div>
-                                                <div className="online-user-status">
-                                                    <h6>men</h6>
-                                                    <h4>1565</h4>
+    <CommonLayout>
+        <section className="all-top-shape">
+            <img src={shape} alt="shape" />
+        </section>
+        <div className="all-container">
+            <div className="pr pb-5 mb-5">
+                <div className="page-wrapper-all">
+                    <Container>
+                        <Row>
+                            <Col md={3}>
+                                <div className="left-panel-allpages mar-top-left">
+                                    <div className="top-user-id text-center">
+                                        <div className="online-user-all">
+                                            <h5 className="border-h5">Users Online Now</h5>
+                                            <div className="online-user-status border-right-online">
+                                                <h6>Women</h6>
+                                                <h4>1234</h4>
+                                            </div>
+                                            <div className="online-user-status">
+                                                <h6>men</h6>
+                                                <h4>1565</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="user-type-left">
+                                        <ul className="list-user-type left-nav">
+                                            <li>
+                                                <NavLink exact to="/profile" activeClassName="active"><img src={homea} alt="homea" />Home</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink exact to="/search-results" activeClassName="active"><img src={serr} alt="liveicon" />Search Results</NavLink>
+                                            </li>
+                                            <li><NavLink exact to="/live-users" activeClassName="active"><img src={liveicon} alt="liveicon" />Live Users</NavLink></li>
+                                            <li><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></li>
+                                            <li><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></li>
+                                            <li><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></li>
+                                            <li><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></li>
+                                            <li><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></li>
+                                            <li><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></li>
+                                            <li><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></li>
+                                            <li><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></li>
+                                            <li><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></li>
+                                            <li><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></li>
+                                            <li><NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></li>
+                                            <li><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></li>
+                                            <li><NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </Col>
+                  
+                            <Col md={9}>
+                                <div className="profile-main-part-area-inner bg-all-pages mb-0-see">
+                                    <Col md={12} className="all-title-top mb-4 text-center">
+                                        <h4>Delete Account </h4>
+                                    </Col>
+
+                                    <div className="all-seting-area-pass">
+                                        <Row>
+                                            <Col md={12}>
+                                                <p className="p-update-premium text-start">
+                                                    Deleting your account will permanently remove all your data from our system.
+                                                    This action cannot be undone.
+                                                </p>
+                                                <p className="p-update-premium mt-4 click-delete text-start">
+                                                    Consider <NavLink to="/hide-profile">hiding your profile</NavLink> instead if you want to take a break.
+                                                </p>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col md={6} className="pr-1 up-field">
+                                                <Button 
+                                                    className="btn-upgrade btn-later" 
+                                                    variant="primary"
+                                                    onClick={() => history.push('/profile')}
+                                                >
+                                                    Cancel
+                                                </Button>
+                                            </Col>
+                                            <Col md={6} className="pl-0 up-field">
+                                                <Button 
+                                                    className="btn-upgrade btn-upgrade-now" 
+                                                    variant="danger"
+                                                    onClick={() => setShowModal(true)}
+                                                    disabled={isDeleting}
+                                                >
+                                                    {isDeleting ? 'Deleting...' : 'Delete Account'}
+                                                </Button>
+                                            </Col>
+                                        </Row>
+
+                                        {/* Confirmation Modal */}
+                                        {showModal && (
+                                            <div className="modal-overlay">
+                                                <div className="modal-content">
+                                                    <h3>Final Confirmation</h3>
+                                                    <p>This will permanently deletee your account and all associated data.</p>
+                                                    <p>Are you absolutely sure?</p>
+                                                    <div className="modal-buttons">
+                                                        <Button variant="secondary" onClick={() => setShowModal(false)}>
+                                                            Cancel
+                                                        </Button>
+                                                        <Button variant="danger" onClick={handleDeleteAccount}>
+                                                            Yes, Delete Permanently
+                                                        </Button>
+                                                    </div>
                                                 </div>
                                             </div>
-
-
-                                        </div>
-
-
-                                        <div className="user-type-left">
-                                            <ul className="list-user-type left-nav">
-                                                <li>
-                                                    <NavLink exact to="/profile" activeClassName="active"><img src={homea} alt="homea" />Home</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink exact to="/search-results" activeClassName="active"><img src={serr} alt="liveicon" />Search Results</NavLink>
-                                                </li>
-                                                <li><NavLink exact to="/live-users" activeClassName="active"><img src={liveicon} alt="liveicon" />Live Users</NavLink></li>
-                                                <li><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></li>
-                                                <li><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></li>
-                                                <li><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></li>
-                                                <li><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></li>
-                                                <li><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></li>
-                                                <li><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></li>
-                                                <li><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></li>
-                                                <li><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></li>
-                                                <li><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></li>
-                                                <li><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></li>
-                                                <li><NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></li>
-                                                <li><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></li>
-                                                <li><NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></li>
-
-
-                                            </ul>
-                                        </div>
-
-
-
+                                        )}
                                     </div>
-                                </Col>
-                                <Col md={9}>
-                                    <div className="profile-main-part-area-inner bg-all-pages mb-0-see">
-                                        <Col md={12} className="all-title-top mb-4 text-center">
-                                            <h4>Delete Account </h4>
-                                        </Col>
-
-                                        <div className="all-seting-area-pass">
-                                            <Row>
-                                                <Col md={12}>
-
-                                                    <p className="p-update-premium text-start">
-                                                        Deleting your account is permanent, and deleted accounts cannot be reinstated. Please note that if you're a Featured Member, your upgrade is non-refundable and cannot be transferred to a new account. This action will permanently delete your account and will remove all your photos and posts from the database.
-
-                                                    </p>
-                                                    <p className="p-update-premium mt-4 click-delete text-start">
-                                                        Instead of deleting your account why not hide your profile from all user,  <NavLink exact to="/hide-profile">click here</NavLink> to hide your profile.
-                                                    </p>
-                                                </Col>
-                                            </Row>
-
-                                            <Row>
-                                                <Col md={6} className="pr-1 up-field">
-                                                    <Button className="btn-upgrade btn-later" variant="primary">Cancel</Button>
-                                                </Col>
-                                                <Col md={6} className="pl-0 up-field">
-                                                    <Button className="btn-upgrade btn-upgrade-now" variant="primary">Yes</Button>
-                                                </Col>
-                                            </Row>
-                                        </div>
-
-
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </div>
-
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
             </div>
-        </CommonLayout>
-
-
-    );
-};
+        </div>
+    </CommonLayout>
+)};
 
 export default DeleteAccount;
