@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/esm/Container';
 import shape from '../../assets/images/shape2.png';
 import Form from 'react-bootstrap/Form';
 import { MdOutlineArrowForward } from "react-icons/md";
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 

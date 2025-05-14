@@ -4,7 +4,8 @@ import Row from 'react-bootstrap/esm/Row';
 import Container from 'react-bootstrap/esm/Container';
 import { DropdownButton, Nav } from 'react-bootstrap';
 import './Footer.css';
-import Dropdown from '@restart/ui/esm/Dropdown';
+import { Dropdown } from 'react-bootstrap';
+
 
 const Footer = () => {
     return (

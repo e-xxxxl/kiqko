@@ -4,7 +4,7 @@ import shape from '../../assets/images/shape2.png';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import Container from 'react-bootstrap/esm/Container';
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import photo2 from '../../assets/images/photo2.jpg';
 import photo4 from '../../assets/images/photo4.png';

@@ -11,7 +11,7 @@ import bgweball from '../../../assets/images/bgweball.png';
 import downloadApp from '../../../assets/images/downloadApp.png';
 import apps from '../../../assets/images/apps.png';
 import appg from '../../../assets/images/appg.png';
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import './verify.css'
 import { NavLink } from 'react-router-dom';
 

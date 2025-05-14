@@ -9,7 +9,7 @@ import bgweball from '../../../assets/images/bgweball.png';
 // import apps from '../../../assets/images/apps.png';
 // import appg from '../../../assets/images/appg.png';
 import { MdOutlineArrowForward } from "react-icons/md";
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const VerifyCode = () => {

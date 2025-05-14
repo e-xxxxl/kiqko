@@ -5,7 +5,7 @@ import changeicon from '../../assets/images/chan-icon.png';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import Container from 'react-bootstrap/esm/Container';
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import './Setting.css';
 
 const PasswordChanged = () => {

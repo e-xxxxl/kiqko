@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Container from 'react-bootstrap/esm/Container';
 import './About.css';
 import { Form } from 'react-bootstrap';
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import Covid19 from './Covid19';
 
 

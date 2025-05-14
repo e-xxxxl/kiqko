@@ -4,7 +4,7 @@ import shape from '../../assets/images/shape2.png';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import Container from 'react-bootstrap/esm/Container';
-import Button from '@restart/ui/esm/Button';
+import { Button, Dropdown } from 'react-bootstrap';
 import hideicon from '../../assets/images/hide.png';
 import { NavLink } from 'react-router-dom';
 
