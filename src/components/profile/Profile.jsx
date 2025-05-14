@@ -111,7 +111,7 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
 
 //     const fetchUser = async () => {
 //       try {
-//         const res = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+//         const res = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
 //         const data = await res.json();
 
 //         if (res.ok) {
@@ -150,7 +150,7 @@ useEffect(() => {
   const fetchLocation = async () => {
     try {
       const userId = localStorage.getItem('userId');
-      const res = await fetch(`http://localhost:5000/api/users/location/${userId}`);
+      const res = await fetch(`https://kiqko-backend.onrender.com/api/users/location/${userId}`);
       const data = await res.json();
       setUserLocation(data); // data will be { city, state, country }
     } catch (err) {
@@ -170,7 +170,7 @@ useEffect(() => {
     const userId = localStorage.getItem('userId');
 
     try {
-      const detailsRes = await fetch(`http://localhost:5000/api/users/profilee/${userId}`);
+      const detailsRes = await fetch(`https://kiqko-backend.onrender.com/api/users/profilee/${userId}`);
       const detailsData = await detailsRes.json();
       console.log(detailsData);
       
@@ -190,7 +190,7 @@ useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch basic user data
-        const userRes = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+        const userRes = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
         const userData = await userRes.json();
         console.log(userData);
         
@@ -199,7 +199,7 @@ useEffect(() => {
           setUser(userData);
           
          //  // Fetch additional profile details
-         //  const detailsRes = await fetch(`http://localhost:5000/api/users/${userId}`);
+         //  const detailsRes = await fetch(`https://kiqko-backend.onrender.com/api/users/${userId}`);
          //  const detailsData = await detailsRes.json();
           
          //  if (detailsRes.ok) {

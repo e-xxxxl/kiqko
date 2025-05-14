@@ -102,7 +102,7 @@ const EditProfile = () => {
 
     const fetchUser = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/users/profile/${userId}`);
+        const res = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
         const data = await res.json();
 
         if (res.ok) {

@@ -44,7 +44,7 @@ const DeleteAccount = () => {
 
         setIsDeleting(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/users/delete/${userId}`, {
+            const res = await fetch(`https://kiqko-backend.onrender.com/api/users/delete/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

@@ -80,7 +80,7 @@ const [formData, setFormData] = useState({
     birthDate: formattedBirthDate,
   };
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+      const res = await fetch(`https://kiqko-backend.onrender.com/api/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

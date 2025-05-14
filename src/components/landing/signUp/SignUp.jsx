@@ -75,7 +75,7 @@ const SignUp = () => {
         if (!validateForm()) return;
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', {
+            const response = await axios.post('https://kiqko-backend.onrender.com/api/auth/signup', {
                 username: formData.username,
                 email: formData.email,
                  gender: formData.gender,
