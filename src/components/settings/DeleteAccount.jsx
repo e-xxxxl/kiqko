@@ -164,18 +164,6 @@ const DeleteAccount = () => {
                                                     </p>
                                                 </Col>
                                             </Row>
-            <div className="all-seting-area-pass">
-      <Row>
-        <Col md={12}>
-          <p className="p-update-premium text-start">
-            Deleting your account will permanently remove all your data from our system.
-            This action cannot be undone.
-          </p>
-          <p className="p-update-premium mt-4 click-delete text-start">
-            Consider <NavLink to="/hide-profile">hiding your profile</NavLink> instead if you want to take a break.
-          </p>
-        </Col>
-      </Row>
 
                                             <Row>
                                                 <Col md={6} className="pr-1 up-field">
@@ -193,52 +181,6 @@ const DeleteAccount = () => {
                             </Row>
                         </Container>
                     </div>
-      <Row>
-        <Col md={6} className="pr-1 up-field">
-          <Button 
-            className="btn-upgrade btn-later" 
-            variant="primary"
-            onClick={() => history.push('/profile')}
-          >
-            Cancel
-          </Button>
-        </Col>
-        <Col md={6} className="pl-0 up-field">
-          <Button 
-            className="btn-upgrade btn-upgrade-now" 
-            variant="danger"
-            onClick={() => setShowModal(true)}
-            disabled={isDeleting}
-          >
-            {isDeleting ? 'Deleting...' : 'Delete Account'}
-          </Button>
-        </Col>
-      </Row>
-
-      {/* Confirmation Modal */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Final Confirmation</h3>
-            <p>This will permanently delete your account and all associated data.</p>
-            <p>Are you absolutely sure?</p>
-            <div className="modal-buttons">
-              <Button variant="secondary" onClick={() => setShowModal(false)}>
-                Cancel
-              </Button>
-              <Button variant="danger" onClick={handleDeleteAccount}>
-                Yes, Delete Permanently
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-        </div>
-    </Col>
-    </Row>
-    </Container>
-    </div>
 
                 </div>
             </div>
