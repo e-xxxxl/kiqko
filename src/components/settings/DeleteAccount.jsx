@@ -191,7 +191,7 @@ const DeleteAccount = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>Final Confirmation</h3>
-            <p>This will permanently delete your account and all associated data.</p>
+            <p>This will permanently deletee your account and all associated data.</p>
             <p>Are you absolutely sure?</p>
             <div className="modal-buttons">
               <Button variant="secondary" onClick={() => setShowModal(false)}>
