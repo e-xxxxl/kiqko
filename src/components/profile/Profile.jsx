@@ -639,7 +639,7 @@ return (
                                  </ul>
                                  </Col>
                               </Row>
-                              <h3 className="text-start h3-all-title mt-3 mb-3">Say Hello to Anna1234</h3>
+                              <h3 className="text-start h3-all-title mt-3 mb-3">Say Hello to  {user?.username}</h3>
                               <div className="search-user-profile">
                                  <Form>
                                     <Form.Group className="mb-2">
