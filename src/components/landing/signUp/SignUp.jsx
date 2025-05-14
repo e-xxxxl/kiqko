@@ -21,6 +21,7 @@ const SignUp = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
+         gender: '',
         password: '',
         confirmPassword: ''
     });
@@ -35,33 +36,38 @@ const SignUp = () => {
         });
     };
 
-    const validateForm = () => {
-        const newErrors = {};
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+   const validateForm = () => {
+    const newErrors = {};
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
-        if (!formData.username.trim()) {
-            newErrors.username = 'Username is required';
-        }
+    if (!formData.username.trim()) {
+        newErrors.username = 'Username is required';
+    }
 
-        if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = 'Email is invalid';
-        }
+    if (!formData.gender) {
+        newErrors.gender = 'Gender is required';
+    }
 
-        if (!formData.password) {
-            newErrors.password = 'Password is required';
-        } else if (!passwordRegex.test(formData.password)) {
-            newErrors.password = 'Password must have at least 6 characters, one uppercase, one lowercase, one number and one special character';
-        }
+    if (!formData.email.trim()) {
+        newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = 'Email is invalid';
+    }
 
-        if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = 'Passwords do not match';
-        }
+    if (!formData.password) {
+        newErrors.password = 'Password is required';
+    } else if (!passwordRegex.test(formData.password)) {
+        newErrors.password = 'Password must have at least 6 characters, one uppercase, one lowercase, one number and one special character';
+    }
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+    if (formData.password !== formData.confirmPassword) {
+        newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+};
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,6 +78,7 @@ const SignUp = () => {
             const response = await axios.post('http://localhost:5000/api/auth/signup', {
                 username: formData.username,
                 email: formData.email,
+                 gender: formData.gender,
                 password: formData.password
             });
 
@@ -148,6 +155,9 @@ const SignUp = () => {
                                             {errors.email && <div className="invalid-feedback animated-feedback">{errors.email}</div>}
                                         </Form.Group>
                                     </Col>
+                                
+
+
 
                                     {/* Password Field */}
                                     <Col md={6} className="mb-3">
@@ -187,6 +197,27 @@ const SignUp = () => {
                                         </Form.Group>
                                     </Col>
                                 </Row>
+
+                                {/* Gender Field */}
+<Col md={6} className="mb-3">
+    <Form.Group controlId="gender">
+        <Form.Label className="form-label">Gender</Form.Label>
+        <Form.Select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className={`form-control-custom ${errors.gender ? 'is-invalid' : ''}`}
+        >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </Form.Select>
+        {errors.gender && (
+            <div className="invalid-feedback animated-feedback">{errors.gender}</div>
+        )}
+    </Form.Group>
+</Col>
 
                                 {/* Password Requirements */}
                                 <div className="password-requirements mb-4">

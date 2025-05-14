@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonLayout from '../../layouts/Common';
 import shape from '../../assets/images/shape2.png';
 import searchLocUp from '../../assets/images/searchLocUp.png';
@@ -27,6 +27,73 @@ import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
 
 const UpdateLocation = () => {
+
+    const [formData, setFormData] = useState({
+    city: '',
+    state: '',
+    country: ''
+  });
+  const [userId, setUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Get userId from localStorage when component mounts
+    const id = localStorage.getItem('userId');
+    if (!id) {
+      console.error('User ID not found');
+      // You might want to redirect to login here
+      return;
+    }
+    setUserId(id);
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!userId) {
+      console.error('No user ID available');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      const response = await fetch(`http://localhost:5000/api/users/update-location/${userId}`, {
+        method: 'POST',  // or 'POST' depending on your API
+        headers: {
+          'Content-Type': 'application/json',
+         
+        },
+        body: JSON.stringify({
+          city: formData.city,
+          state: formData.state,
+          country: formData.country
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log('Location updated successfully:', result);
+      // Add success notification here
+    } catch (error) {
+      console.error('Error updating location:', error);
+      // Add error notification here
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
     return (
 
         <CommonLayout>
@@ -89,22 +156,46 @@ const UpdateLocation = () => {
                 </div>
             </Col>
     <Col md={9}>
-        <div className="profile-main-part-area-inner bg-all-pages  mb-0-see">
-            <Col md={12} className="all-title-top mb-4 text-center">
-                <h4>Update Location</h4>
-            </Col>
-            <Row>
-                        <Col className="text-center" md={12}>
-                            <p className="p-up-loc mb-2">Update Your Location Here.</p>
-                        </Col>
-                        <Col md={7}>
-                        <img className="seac-map" src={searchLocUp} alt="searchLocUp" />
-                        </Col>
-                        <Col className="mt-2 up-field" md={5}>
-                        <Form.Control className="input-settings font-segoeui" type="text" placeholder="City / Town" />
-                        <Form.Control className="input-settings font-segoeui" type="text" placeholder="State / Province" />
-                        <Form.Select className="input-settings font-segoeui" size="lg">
-                        <option>Country</option>
+        <div className="profile-main-part-area-inner bg-all-pages mb-0-see">
+      <Col md={12} className="all-title-top mb-4 text-center">
+        <h4>Update Location</h4>
+      </Col>
+      <Row>
+        <Col className="text-center" md={12}>
+          <p className="p-up-loc mb-2">Update Your Location Here.</p>
+        </Col>
+        <Col md={7}>
+          <img className="seac-map" src={searchLocUp} alt="searchLocUp" />
+        </Col>
+        <Col className="mt-2 up-field" md={5}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Control 
+              className="input-settings font-segoeui" 
+              type="text" 
+              name="city"
+              placeholder="City / Town" 
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
+            <Form.Control 
+              className="input-settings font-segoeui" 
+              type="text" 
+              name="state"
+              placeholder="State / Province" 
+              value={formData.state}
+              onChange={handleChange}
+              required
+            />
+            <Form.Select 
+              className="input-settings font-segoeui" 
+              size="lg"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              required
+            >
+              <option>Country</option>
                         <option value="Cambodia">Cambodia</option>
                     <option value="China">China</option>
                     <option value="Hong Kong">Hong Kong</option>
@@ -351,13 +442,19 @@ const UpdateLocation = () => {
                     <option value="Yemen">Yemen</option>
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
-                        </Form.Select>
-                        <Button className="settings-btn mt-4 font-segoeui" variant="primary">Update Location</Button>
-                        </Col>
-
-                        
-                    </Row>
-        </div>
+            </Form.Select>
+            <Button 
+              className="settings-btn mt-4 font-segoeui" 
+              variant="primary" 
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Updating...' : 'Update Location'}
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </div>
     </Col>
     </Row>
     </Container>

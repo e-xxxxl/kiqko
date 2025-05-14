@@ -101,6 +101,8 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
  const [user, setUser] = useState(null);
   const [profileDetails, setProfileDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [userLocation, setUserLocation] = useState(null);
+
 
 
 //    useEffect(() => {
@@ -124,6 +126,41 @@ const [isShowBlockUser, setIsBlockUser] = useState(false);
 
 //     fetchUser();
 //   }, []);
+//   useEffect(() => {
+//     const fetchOnlineCounts = async () => {
+//       try {
+//         const res = await fetch('/api/users/online-counts');
+//         const data = await res.json();
+//         setCounts(data);
+//       } catch (err) {
+//         console.error("Failed to fetch online counts:", err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchOnlineCounts();
+    
+//     // Refresh every 30 seconds
+//     const interval = setInterval(fetchOnlineCounts, 30000);
+//     return () => clearInterval(interval);
+//   }, []);
+
+useEffect(() => {
+  const fetchLocation = async () => {
+    try {
+      const userId = localStorage.getItem('userId');
+      const res = await fetch(`http://localhost:5000/api/users/location/${userId}`);
+      const data = await res.json();
+      setUserLocation(data); // data will be { city, state, country }
+    } catch (err) {
+      console.error('Failed to fetch location:', err);
+    }
+  };
+
+  fetchLocation();
+}, []);
+
 
  useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -395,8 +432,14 @@ return (
 </h1>
 
                            <p className="address-p">
-                              <span className="location-icon"><img src={location} alt="location" /></span>
-                              Bangkok, Thailand
+                            {userLocation?.city && userLocation?.country ? (
+  <span className="location-icon">
+    <img src={location} alt="location" /> {userLocation.city}, {userLocation.country}
+  </span>
+) : (
+  <span>No location set</span>
+)}
+
                               <Accordion className="acc-wrapper-custom" defaultActiveKey={['0']} alwaysOpen>
                                  <Accordion.Item eventKey="0">
                                     <Accordion.Header> 
