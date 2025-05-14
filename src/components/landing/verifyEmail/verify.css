@@ -1,0 +1,296 @@
+/* Verification Page Styles */
+.verify-email-section {
+    position: relative;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+.top-shape-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.top-shape-decoration img {
+    width: 100%;
+    height: auto;
+}
+
+.verify-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.verify-content-wrapper {
+    padding-top: 40px;
+}
+
+.verification-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    margin: 0 auto;
+}
+
+.verification-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.verification-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.verification-subtext {
+    color: #6c757d;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.verification-note {
+    background-color: #f0f7ff;
+    color: #0066cc;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.verification-note i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.email-display {
+    text-align: center;
+    margin: 25px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.sent-to-label {
+    font-size: 16px;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.email-address {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    word-break: break-all;
+}
+
+.otp-input-group {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.otp-input-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.otp-input-container {
+    position: relative;
+    display: inline-block;
+    width: 240px;
+}
+
+.otp-input {
+    font-size: 24px;
+    letter-spacing: 10px;
+    text-align: center;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.otp-input:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    background-color: white;
+}
+
+.otp-underline {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #007bff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.otp-input:focus ~ .otp-underline {
+    transform: scaleX(1);
+}
+
+.action-buttons {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.verify-button {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    min-width: 200px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.verify-button:hover {
+    background-color: #0069d9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.verify-button:disabled {
+    background-color: #b3d7ff;
+    transform: none;
+    box-shadow: none;
+}
+
+.resend-code {
+    text-align: center;
+    color: #6c757d;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.resend-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.resend-link:hover {
+    color: #0056b3;
+}
+
+.download-app-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.divider-with-text {
+    position: relative;
+    margin: 30px 0;
+    text-align: center;
+    color: #adb5bd;
+}
+
+.divider-with-text:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e9ecef;
+    z-index: -1;
+}
+
+.divider-with-text span {
+    background-color: white;
+    padding: 0 15px;
+}
+
+.app-benefits {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #495057;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.app-icon {
+    margin-right: 10px;
+    height: 20px;
+}
+
+.app-download-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.app-download-link {
+    transition: transform 0.3s ease;
+}
+
+.app-download-link:hover {
+    transform: translateY(-3px);
+}
+
+.app-store-image, .play-store-image {
+    height: 40px;
+    border-radius: 8px;
+}
+
+.bottom-shape-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bottom-shape-decoration img {
+    width: 100%;
+    height: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .verification-card {
+        padding: 30px 20px;
+    }
+    
+    .verification-title {
+        font-size: 24px;
+    }
+    
+    .otp-input {
+        font-size: 20px;
+        padding: 10px 12px;
+        width: 180px;
+    }
+    
+    .verify-button {
+        min-width: 160px;
+        padding: 10px 20px;
+    }
+}

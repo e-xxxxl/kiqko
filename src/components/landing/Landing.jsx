@@ -17,6 +17,7 @@ import paly from '../../assets/images/paly.png';
 const Landing = () => {
 
     return (
+        
         <div>
             <Cookie isOpen={true} /> 
             <section className="landing-area text-center">

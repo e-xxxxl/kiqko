@@ -1,82 +1,3 @@
-// import React from 'react';
-// import Form from 'react-bootstrap/Form';
-// import Col from 'react-bootstrap/esm/Col';
-// import Row from 'react-bootstrap/esm/Row';
-// import Container from 'react-bootstrap/esm/Container';
-// import shape from '../../../assets/images/shape2.png';
-// import bgweball from '../../../assets/images/bgweball.png';
-// import downloadApp from '../../../assets/images/downloadApp.png';
-// import apps from '../../../assets/images/apps.png';
-// import appg from '../../../assets/images/appg.png';
-// import Button from '@restart/ui/esm/Button';
-// import { NavLink } from 'react-router-dom';
-
-
-// const VerifyEmail = () => {
-//     return (
-     
-//                 <section>
-//         <section className="all-top-shape all-shape-inner">
-//             <img src={shape} alt="shape" />
-//         </section>
-//         <div className="all-container margin-bottom-step">
-//         <div className="all-container-inner setting-area position-top-all">
-//                 <Container>
-//                 <div className="all-seting-area">
-//                     <Row>
-//                     <Col md={12} className="all-title-top mb-1 text-center">
-//                             <h4>Verify Email</h4>
-//                         </Col>
-//                         <Col md={12}>
-//                          <p className="p-up-loc text-center mt-1 mb-2">
-//                          To activate your account, we sent you a verification code <br/>
-// to the email address you sign up with.
-//                         </p>
-//                         </Col>
-//                     </Row>
-//                     <Form>
-//                     <Row>
-//                     <Col lg={12}>
-//                         <p className="all-login-p text-center mb-0 mt-0"> Please check your spam or junk folder.</p>
-//                         <h5 className="text-center h5-verify">Email sent to:</h5>
-//                     <span className="text-center span-verify">********123@gmail.com</span>
-//                     <p className="text-center p-verufy-all-small color-blue-link mt-5 pt-2"><strong> <NavLink exact to="/verify-code">Resend code</NavLink></strong></p>
-//                         <p className="login-p link-color">
-                        
-//                     </p>
-//                     </Col>
-//                     </Row>
-//                     <Row className="m-0-responsive">
-//                         <hr className="hr-color margintop-116"></hr>
-
-//                         <p className="text-center app-p mb-0"><span><img src={downloadApp} alt="downloadApp" /></span>Download our app for:</p>
-
-//                        <div className="col-md-12 text-center">
-//                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={apps} alt="apps" /></Button></NavLink>
-//                        <NavLink exact to="bout"><Button className="btn-app-link"> <img src={appg} alt="appg" /></Button></NavLink>
-//                        </div>
-//                     </Row>
-                    
-//                     </Form>
-//                     </div>
-//                 </Container>
-           
-//             </div>
-//             {/* shape-footer-all */}
-//             <div className="shape-footer-all">
-//             <img src={bgweball} alt="bgweball" />
-//             </div>
-//             {/* shape-footer-all */}
-//         </div>
-       
-//         </section>
-           
-                    
-     
-//     );
-// };
-
-// export default VerifyEmail;
 
 
 import React, { useState, useEffect } from 'react';
@@ -91,6 +12,7 @@ import downloadApp from '../../../assets/images/downloadApp.png';
 import apps from '../../../assets/images/apps.png';
 import appg from '../../../assets/images/appg.png';
 import Button from '@restart/ui/esm/Button';
+import './verify.css'
 import { NavLink } from 'react-router-dom';
 
 const VerifyEmail = () => {
@@ -155,97 +77,103 @@ const VerifyEmail = () => {
   };
 
   return (
-    <section>
-      <section className="all-top-shape all-shape-inner">
-        <img src={shape} alt="shape" />
-      </section>
-      <div className="all-container margin-bottom-step">
-        <div className="all-container-inner setting-area position-top-all">
+    <section className="verify-email-section">
+      <div className="top-shape-decoration">
+        <img src={shape} alt="decorative shape" className="shape-image" />
+      </div>
+
+      <div className="verify-container">
+        <div className="verify-content-wrapper">
           <Container>
-            <div className="all-seting-area">
-              <Row>
-                <Col md={12} className="all-title-top mb-1 text-center">
-                  <h4>Verify Email</h4>
-                </Col>
-                <Col md={12}>
-                  <p className="p-up-loc text-center mt-1 mb-2">
-                    To activate your account, we sent you a verification code <br />
-                    to the email address you signed up with.
-                  </p>
-                </Col>
-              </Row>
-
-              <Form onSubmit={handleVerify}>
-                <Row>
-                  <Col lg={12}>
-                    <p className="all-login-p text-center mb-0 mt-0">
-                      Please check your spam or junk folder.
+            <div className="verification-card">
+              <Row className="justify-content-center">
+                <Col md={10} lg={8} xl={6}>
+                  <div className="verification-header">
+                    <h4 className="verification-title">Verify Your Email</h4>
+                    <p className="verification-subtext">
+                      We've sent a 6-digit verification code to your email address.
+                      Please enter it below to activate your account.
                     </p>
-                    <h5 className="text-center h5-verify">Email sent to:</h5>
-                    <span className="text-center span-verify d-block">{email}</span>
+                    <div className="verification-note">
+                      <i className="bi bi-info-circle"></i> Don't forget to check your spam or junk folder
+                    </div>
+                  </div>
 
-                    {/* OTP input */}
-                    <Form.Group controlId="formOtp" className="text-center mt-4">
-                      <Form.Label>Enter verification code</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter 6-digit code"
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                        maxLength={6}
-                        required
-                        style={{ maxWidth: '200px', margin: '0 auto' }}
-                      />
+                  <Form onSubmit={handleVerify} className="verification-form">
+                    <div className="email-display">
+                      <h5 className="sent-to-label">Email sent to:</h5>
+                      <span className="email-address">{email}</span>
+                    </div>
+
+                    <Form.Group controlId="formOtp" className="otp-input-group">
+                      <Form.Label>Verification Code</Form.Label>
+                      <div className="otp-input-container">
+                        <Form.Control
+                          type="text"
+                          placeholder="• • • • • •"
+                          value={otp}
+                          onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                          maxLength={6}
+                          required
+                          className="otp-input"
+                        />
+                        <div className="otp-underline"></div>
+                      </div>
                     </Form.Group>
 
-                    <div className="text-center mt-3">
+                    <div className="action-buttons">
                       <Button
                         type="submit"
-                        className="btn btn-primary"
+                        className="verify-button"
                         disabled={verifying}
                       >
-                        {verifying ? 'Verifying...' : 'Verify Code'}
+                        {verifying ? (
+                          <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Verifying...
+                          </>
+                        ) : 'Verify Account'}
                       </Button>
                     </div>
 
-                    <p
-                      className="text-center p-verufy-all-small color-blue-link mt-4 pt-2"
-                      onClick={handleResend}
-                      style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                    >
-                      <strong>Resend code</strong>
-                    </p>
-                  </Col>
-                </Row>
+                    <div className="resend-code">
+                      Didn't receive the code?{' '}
+                      <button
+                        type="button"
+                        className="resend-link"
+                        onClick={handleResend}
+                      >
+                        Resend code
+                      </button>
+                    </div>
+                  </Form>
 
-                <Row className="m-0-responsive">
-                  <hr className="hr-color margintop-116"></hr>
-                  <p className="text-center app-p mb-0">
-                    <span>
-                      <img src={downloadApp} alt="downloadApp" />
-                    </span>
-                    Download our app for:
-                  </p>
-                  <div className="col-md-12 text-center">
-                    <NavLink exact to="bout">
-                      <Button className="btn-app-link">
-                        <img src={apps} alt="apps" />
-                      </Button>
-                    </NavLink>
-                    <NavLink exact to="bout">
-                      <Button className="btn-app-link">
-                        <img src={appg} alt="appg" />
-                      </Button>
-                    </NavLink>
+                  <div className="download-app-section">
+                    <div className="divider-with-text">
+                      <span>Get the app</span>
+                    </div>
+                    <p className="app-benefits">
+                      <img src={downloadApp} alt="app icon" className="app-icon" />
+                      Better experience with our mobile app
+                    </p>
+                    <div className="app-download-buttons">
+                      <NavLink to="bout" className="app-download-link">
+                        <img src={apps} alt="App Store" className="app-store-image" />
+                      </NavLink>
+                      <NavLink to="bout" className="app-download-link">
+                        <img src={appg} alt="Google Play" className="play-store-image" />
+                      </NavLink>
+                    </div>
                   </div>
-                </Row>
-              </Form>
+                </Col>
+              </Row>
             </div>
           </Container>
-          <div className="shape-footer-all">
-            <img src={bgweball} alt="bgweball" />
-          </div>
         </div>
+      </div>
+
+      <div className="bottom-shape-decoration">
+        <img src={bgweball} alt="bottom decoration" className="shape-image" />
       </div>
     </section>
   );
