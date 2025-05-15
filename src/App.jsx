@@ -59,6 +59,7 @@ import ManageMedia from './components/settings/ManageMedia';
 import Report from './components/profile/Report';
 import Liveusers from './components/live-users/Liveusers';
 import Loginr from './components/landing/loginr/Loginr';
+import OtpReset from './components/settings/OtpReset';
 
 
 
@@ -212,6 +213,9 @@ function App() {
             </Route>
             <Route path="/password-changed">
               <PasswordChanged/>
+            </Route>
+            <Route path="/password-otp">
+              <OtpReset/>
             </Route>
             <Route path="/hide-profile">
               <HideProfile/>
