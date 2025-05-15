@@ -1,67 +1,70 @@
-.footer-area {
-    width: 100%;
-    float: left;
-    background: #ebebeb;
-    padding:16px 0px 17px 0px;
-    font-family: 'Open Sans', sans-serif;
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-p.p-copy-right {
-    font-size: 16px;
-    color: #969696;
-    margin: 0px;margin-top: 10px;
-}
-.nav-footer.nav a {
-    font-size: 14px;
-    padding: 0px 16px;
-    color: #969696;position: relative;
-}
-.nav-footer.nav a:after {
-    width: 8px;
-    height: 1px;
-    background: #969696;
-    display: block;
-    content: '';
-    right: -5px;
-    position: absolute;
-    top: 11px;
+.brand-name {
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.2rem;
 }
 
-.li-dooted:after{
-    display: none !important;
+.copyright {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
 }
 
-.nav-footer {
-    margin-top: 10px;
+.social-icons {
+  font-size: 1.2rem;
 }
-.drop-down-custom {
-    margin-top: 10px;
-}
-.nav-footer.nav a:hover {
-    color: #2989e2;
-}
-@media (min-width:200px) and (max-width:767px) {
-p.p-copy-right{
-    text-align: center;
-}
-.nav-footer {
-    text-align: center;
-    display: block;
-}
-.nav-footer.nav a:after{
-    display: none;
-}
-.drop-down-custom {
-    margin-top: 10px;
-    margin: auto;
-    display: table;
-    float: inherit;
-    margin-top: 32px;
-}
-}
-@media (min-width:200px) and (max-width:640px) {
-.custom-navbar {
-    right: 5%;
 
+.social-icon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
 }
+
+.social-icon:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.25rem 0;
+  transition: all 0.3s ease;
+}
+
+.footer-nav .nav-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.disclaimer p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+.language-toggle {
+  border-radius: 20px;
+  padding: 0.25rem 1rem;
+}
+
+.dropdown-item {
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767.98px) {
+  .footer-nav {
+    justify-content: center !important;
+  }
+  
+  .disclaimer {
+    text-align: center !important;
+  }
 }

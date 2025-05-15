@@ -1,0 +1,16 @@
+.online-users-widget {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.online-count-card {
+  transition: transform 0.2s ease;
+}
+
+.online-count-card:hover {
+  transform: translateY(-2px);
+}
+
+.border-bottom {
+  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+}

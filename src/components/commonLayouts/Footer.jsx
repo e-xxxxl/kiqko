@@ -1,60 +1,167 @@
-import React from 'react';
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import Container from 'react-bootstrap/esm/Container';
-import { DropdownButton, Nav } from 'react-bootstrap';
+import React, { useState } from 'react';
+
+import { Col, Row, Container, Nav, Dropdown } from 'react-bootstrap';
+
 import './Footer.css';
-import { Dropdown } from 'react-bootstrap';
+
+import { useTranslation } from 'react-i18next';
+
 
 
 const Footer = () => {
-    return (
-        <div className="footer-area">
-            <Container>
-                <Row>
-                    <Col md={3}>
-                        <p className="p-copy-right">© Copyright 2022, KIQKO</p>
-                    </Col>
 
-                    <Col className="ps-0" md={7}>
-                        <Nav className="nav-footer">
-                            <Nav.Item>
-                                <Nav.Link href="/terms">TERMS OF USE</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="/privacy">PRIVACY POLICY</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="/cookie-policy">COOKIE POLICY</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="/safety-tips">SAFETY TIPS</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="/faq">FAQ</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className="li-dooted" href="/contact-us">
-                                    CONTACT US
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                    </Col>
+  const { t, i18n } = useTranslation();
 
-                    <Col md={2}>
-                        <DropdownButton className="drop-down-custom" id="dropdown-basic-button" title="LANGUAGE">
-                            <Dropdown.Item>English</Dropdown.Item>
-                            <Dropdown.Item>French</Dropdown.Item>
-                            <Dropdown.Item>Chinese</Dropdown.Item>
-                            <Dropdown.Item>German</Dropdown.Item>
-                            <Dropdown.Item>Thailand</Dropdown.Item>
-                        </DropdownButton>
-                    </Col>
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
 
-                </Row>
-            </Container>
-        </div>
-    );
+
+
+  const languages = [
+
+    { code: 'en', name: 'English' },
+
+    { code: 'fr', name: 'Français' },
+
+    { code: 'zh', name: '中文' },
+
+    { code: 'de', name: 'Deutsch' },
+
+    { code: 'th', name: 'ไทย' }
+
+  ];
+
+
+
+  const changeLanguage = (language) => {
+
+    i18n.changeLanguage(language.code);
+
+    setSelectedLanguage(language.name);
+
+  };
+
+
+
+  return (
+
+    <footer className="footer-area bg-dark text-white py-4">
+
+      <Container>
+
+        <Row className="align-items-center">
+
+          <Col md={3} className="mb-3 mb-md-0">
+
+            <p className="mb-0 text-muted">© {new Date().getFullYear()} KIQKO</p>
+
+          </Col>
+
+
+
+          <Col md={7} className="px-0 px-md-3">
+
+            <Nav className="nav-footer justify-content-center justify-content-md-start">
+
+              {[
+
+                { path: '/terms', label: t('terms') },
+
+                { path: '/privacy', label: t('privacy') },
+
+                { path: '/cookie-policy', label: t('cookiePolicy') },
+
+                { path: '/safety-tips', label: t('safetyTips') },
+
+                { path: '/faq', label: t('faq') },
+
+                { path: '/contact-us', label: t('contact') }
+
+              ].map((item, index) => (
+
+                <Nav.Item key={index} className="px-2">
+
+                  <Nav.Link
+
+                    href={item.path}
+
+                    className="text-white text-decoration-none"
+
+                    activeClassName="active"
+
+                  >
+
+                    {item.label}
+
+                  </Nav.Link>
+
+                </Nav.Item>
+
+              ))}
+
+            </Nav>
+
+          </Col>
+
+
+
+          <Col md={2} className="text-md-end mt-3 mt-md-0">
+
+            <Dropdown>
+
+              <Dropdown.Toggle
+
+                variant="outline-light"
+
+                id="dropdown-language"
+
+                className="d-inline-flex align-items-center"
+
+              >
+
+                <span className="me-2">{selectedLanguage}</span>
+
+                <i className="bi bi-translate"></i>
+
+              </Dropdown.Toggle>
+
+
+
+              <Dropdown.Menu className="dropdown-menu-end">
+
+                {languages.map((language) => (
+
+                  <Dropdown.Item
+
+                    key={language.code}
+
+                    onClick={() => changeLanguage(language)}
+
+                    active={i18n.language === language.code}
+
+                  >
+
+                    {language.name}
+
+                  </Dropdown.Item>
+
+                ))}
+
+              </Dropdown.Menu>
+
+            </Dropdown>
+
+          </Col>
+
+        </Row>
+
+      </Container>
+
+    </footer>
+
+  );
+
 };
+
+
 
 export default Footer;

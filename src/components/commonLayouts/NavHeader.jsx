@@ -1,111 +1,134 @@
-import React from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar'
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import Container from 'react-bootstrap/esm/Container';
+import React, { useState } from 'react';
+import { Navbar, Nav, Container, Dropdown, Button, Form, InputGroup } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { 
+  FiSearch, 
+  FiVideo, 
+  FiImage, 
+  FiMessageSquare, 
+  FiBell,
+  FiUser,
+  FiMenu,
+  FiX,
+  FiPlus,
+  FiHome
+} from 'react-icons/fi';
+import { BsBroadcast, BsGrid3X3Gap } from 'react-icons/bs';
+import { RiLiveLine } from 'react-icons/ri';
 import './NavHeader.css';
 import useravatar from '../../assets/images/fev1.jpg';
-
-import searchnav from '../../assets/images/searchnav.png';
-import golive from '../../assets/images/golive.png';
-import postvodeo from '../../assets/images/postvodeo.png';
-import uploadimage from '../../assets/images/uploadimage.png';
-import chat from '../../assets/images/chat.png';
-import notification from '../../assets/images/notification.png';
-
-import logoi from '../../assets/images/logo-inner.png';
-// import { NavDropdown } from 'react-bootstrap';
-// import settingView from '../../assets/images/myProfile.png';
-// import settingEdit from '../../assets/images/editPofile.png';
-// import settingUpload from '../../assets/images/updateLocation.png';
-// import settingReset from '../../assets/images/resetPassword.png';
-// import settingHide from '../../assets/images/hideProfile.png';
-// import settingDelete from '../../assets/images/deleteAccount.png';
-// import settingLogout from '../../assets/images/logout.png';
-// import manageMedia from '../../assets/images/manageMedia.png';
-// import viewedMe from '../../assets/images/viewedMe.png';
-// import myLikes from '../../assets/images/myLikes.png';
-// import likesMe from '../../assets/images/likesMe.png';
-// import yourm from '../../assets/images/yourm.png';
-// import blockedUsers from '../../assets/images/blockedUsers.png';
-
-
-import Dropdown from 'react-bootstrap/Dropdown'
+import logo from '../../assets/images/logo-inner.png';
 
 const NavHeader = () => {
-    return (
-        <div>
-            <Navbar className="customHeader" bg="light" expand="lg">
-                <Container>
-                    <Row>
-                        <Col md={2} className="nav-grid-cutom">
-                            <h2 className="navLogo"> <NavLink exact to="/"><img src={logoi} alt="logoi" /></NavLink></h2>
-                        </Col>
-                        <Col md={9} className="nav-grid-cutom">
+  const [expanded, setExpanded] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="m-auto custom-navbar">
-                                <NavLink exact to="/search-filters" activeClassName="active"><span><img src={searchnav} alt="searchnav" /></span>SEARCH</NavLink>
-                                    <NavLink exact to="" activeClassName="active"><span><img src={golive} alt="golive" /></span>Go Live</NavLink>
-                                    <NavLink exact to="/" activeClassName="active"><span><img src={postvodeo} alt="postvodeo" /></span>Post video</NavLink>
-                                    <NavLink exact to="/" activeClassName="active"><span><img src={uploadimage} alt="uploadimage" /></span>Upload Image</NavLink>
-                                    <NavLink exact to="/" activeClassName="active"><span><img src={chat} alt="chat" /></span>Chat</NavLink>
-                                    <NavLink exact to="/Notifications" activeClassName="active"><span><img src={notification} alt="notification" /></span>Notifications</NavLink>
-                                  
-                                </Nav>
-                            </Navbar.Collapse>
+  const navItems = [
+    { path: "/", icon: <FiHome size={18} />, text: "Home" },
+    { path: "/search-filters", icon: <FiSearch size={18} />, text: "Search" },
+    { path: "#live", icon: <RiLiveLine size={18} />, text: "Live" },
+    { path: "#video", icon: <FiVideo size={18} />, text: "Video" },
+    { path: "#image", icon: <FiImage size={18} />, text: "Image" },
+    { path: "#chat", icon: <FiMessageSquare size={18} />, text: "Chat" },
+    { path: "/notifications", icon: <FiBell size={18} />, text: "Alerts" }
+  ];
 
-                            {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="m-auto custom-navbar">
-                                    <NavLink exact to="/profile" activeClassName="active">HOME</NavLink>
-                                    <NavLink exact to="/search-filters" activeClassName="active">SEARCH</NavLink>
-                                    <NavDropdown title="CONNECTIONS" id="basic-nav-dropdown" className="all-drop-down">
-                                        <NavDropdown.Item><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></NavDropdown.Item>
-                                        <NavDropdown.Item><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></NavDropdown.Item>
-                                        <NavDropdown.Item><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></NavDropdown.Item>
-                                        <NavDropdown.Item><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></NavDropdown.Item>
-                                        <NavDropdown.Item><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></NavDropdown.Item>
-                                    </NavDropdown>
-                                    
+  return (
+    <>
+      <Navbar expand="lg" className="premium-navbar" variant="dark">
+        <Container fluid>
+          {/* Brand Logo */}
+          <Navbar.Brand as={NavLink} to="/" className="navbar-brand">
+            <img src={logo} alt="Premium Brand" className="brand-logo" />
+          </Navbar.Brand>
 
-                                    <NavLink exact to="/notifications" activeClassName="active">NOTIFICATIONS</NavLink>
-                                    <NavLink exact to="/mailbox" activeClassName="active">MESSAGES</NavLink>
-                                   <NavDropdown title="SETTINGS" id="basic-nav-dropdown" className="all-drop-down setting-nav">
-                                    <Dropdown.Item><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></Dropdown.Item>
-                                    <Dropdown.Item><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></Dropdown.Item>
-                                    <Dropdown.Item><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></Dropdown.Item>
-                                    <Dropdown.Item><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></Dropdown.Item>
-                                        <Dropdown.Item> <NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></Dropdown.Item>
-                                        <Dropdown.Item><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></Dropdown.Item>
-                                        <Dropdown.Item> <NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></Dropdown.Item>
-                                    </NavDropdown>
-                                </Nav>
-                            </Navbar.Collapse> */}
-                        </Col>
-                        <Col md={1}  className="nav-grid-cutom">
-                            <Dropdown className="useravatar-dropdown setting-drop-down">
-                                <Dropdown.Toggle id="dropdown-basic">
-                                    <div className="useravatar">
-                                        <img src={useravatar} alt="useravatar" />
-                                    </div>
-                                </Dropdown.Toggle>
-                                
-                            </Dropdown>
-                            
+          {/* Mobile Controls */}
+          <div className="d-flex d-lg-none align-items-center gap-2">
+            <Button 
+              variant="link" 
+              className="mobile-search-toggle p-0"
+              onClick={() => setShowSearch(!showSearch)}
+            >
+              <FiSearch size={20} className="text-white" />
+            </Button>
+            <Navbar.Toggle 
+              aria-controls="main-navigation" 
+              className="navbar-toggler border-0 p-0"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? <FiX size={24} /> : <FiMenu size={24} />}
+            </Navbar.Toggle>
+          </div>
 
-                        </Col>
-                    </Row>
+          {/* Desktop Navigation */}
+          <Navbar.Collapse id="main-navigation" className="justify-content-between">
+            {/* Main Nav Items */}
+            <Nav className="mx-auto main-navigation">
+              {navItems.map((item, index) => (
+                <Nav.Link
+                  key={index}
+                  as={NavLink}
+                  to={item.path}
+                  className="nav-item"
+                  activeClassName="active"
+                >
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-text d-none d-lg-inline">{item.text}</span>
+                </Nav.Link>
+              ))}
+            </Nav>
 
+            {/* User Controls */}
+            <div className="d-flex align-items-center user-controls">
+              <Button variant="primary" className="create-btn rounded-pill">
+                <FiPlus size={18} className="me-lg-1" />
+                <span className="d-none d-lg-inline">Create</span>
+              </Button>
+              
+              <Dropdown align="end" className="ms-3">
+                <Dropdown.Toggle variant="link" className="user-dropdown-toggle">
+                  <div className="user-avatar">
+                    <img src={useravatar} alt="User Profile" />
+                  </div>
+                </Dropdown.Toggle>
 
-                </Container>
-            </Navbar>
+                <Dropdown.Menu className="dropdown-menu-end premium-dropdown shadow-lg">
+                  <Dropdown.Item as={NavLink} to="/profile" className="dropdown-item">
+                    <FiUser className="me-2" /> My Profile
+                  </Dropdown.Item>
+                  <Dropdown.Item as={NavLink} to="/settings" className="dropdown-item">
+                    <BsGrid3X3Gap className="me-2" /> Dashboard
+                  </Dropdown.Item>
+                  <Dropdown.Divider className="my-2" />
+                  <Dropdown.Item as={NavLink} to="/logout" className="dropdown-item text-danger">
+                    Sign Out
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      {/* Mobile Search Bar */}
+      {showSearch && (
+        <div className="mobile-search-bar">
+          <Container fluid>
+            <InputGroup>
+              <Form.Control
+                type="search"
+                placeholder="Search people, places, tags..."
+                className="search-input"
+              />
+              <Button variant="primary" className="search-btn">
+                <FiSearch size={18} />
+              </Button>
+            </InputGroup>
+          </Container>
         </div>
-    );
+      )}
+    </>
+  );
 };
 
 export default NavHeader;

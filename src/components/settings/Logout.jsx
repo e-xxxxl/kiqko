@@ -26,6 +26,7 @@ import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
 import './Setting.css';
+import './logout.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -70,20 +71,31 @@ const Logout = () => {
                             <Row>
                                 <Col md={3}>
                                     <div className="left-panel-allpages mar-top-left">
-                                        <div className="top-user-id text-center">
-                                            <div className="online-user-all">
-                                                <h5 className="border-h5">Users Online Now</h5>
-                                                <div className="online-user-status border-right-online">
-                                                    <h6>Women</h6>
-                                                    <h4>1234</h4>
-                                                </div>
-                                                <div className="online-user-status">
-                                                    <h6>men</h6>
-                                                    <h4>1565</h4>
+                                        <div className="online-users-widget bg-white rounded-3 shadow-sm p-3 mb-4 mb-md-5">
+                                            <div className="text-center mb-3">
+                                                <h5 className="fw-semibold text-dark mb-3 pb-2 border-bottom">Users Online Now</h5>
+                                                <div className="d-flex justify-content-around">
+                                                    <div className="online-count-card px-3 py-2">
+                                                        <div className="text-primary mb-1">
+                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                                                            </svg>
+                                                        </div>
+                                                        <h6 className="text-muted text-uppercase small mb-1">Women</h6>
+                                                        <h4 className="fw-bold mb-0">1,234</h4>
+                                                    </div>
+
+                                                    <div className="online-count-card px-3 py-2">
+                                                        <div className="text-info mb-1">
+                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                                                            </svg>
+                                                        </div>
+                                                        <h6 className="text-muted text-uppercase small mb-1">Men</h6>
+                                                        <h4 className="fw-bold mb-0">1,565</h4>
+                                                    </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
 
 
@@ -119,44 +131,66 @@ const Logout = () => {
                                     </div>
                                 </Col>
                                 <Col md={9}>
-                                    <div className="profile-main-part-area-inner bg-all-pages mb-0-see">
-                                        <Col md={12} className="all-title-top mb-4 text-center">
-                                            <h4>Logout</h4>
-                                        </Col>
-                                        <div className="all-seting-area-pass">
-                                            <Row>
-                                                <Col md={12}>
-                                                    <p className="p-up-loc text-center">Are you sure you want to logout?</p>
-                                                </Col>
-                                            </Row>
-                                            <Col md={12} className="text-center mt-5 mb-2">
-                                                <img className="change-icon" src={hideicon} alt="hideicon" />
+                                    {/* Logout Confirmation - with adjusted spacing */}
+                                    <div className="profile-main-part-area-inner bg-all-pages">
+                                        <div className="logout-container bg-white shadow-sm rounded p-4 p-md-5 mx-auto mt-0" style={{ maxWidth: '1000px' }}>
+                                            <Col md={12} className="text-center mb-4">
+                                                <h4 className="fw-bold text-primary">Sign Out</h4>
+                                                <div className="divider-custom mx-auto my-3">
+                                                    <div className="divider-custom-line bg-light"></div>
+                                                </div>
                                             </Col>
 
-                                            <Row>
-                                                <Col md={6} className="pr-1 up-field">
-                                                    <Button
-                                                        className="btn-upgrade btn-later font-segoeui"
-                                                        variant="primary"
-                                                        onClick={handleCancel}
-                                                        disabled={isLoggingOut}
-                                                    >
-                                                        Cancel
-                                                    </Button>
-                                                </Col>
-                                                <Col md={6} className="pl-0 up-field">
-                                                    <Button
-                                                        className="btn-upgrade btn-upgrade-now font-segoeui"
-                                                        variant="primary"
-                                                        onClick={handleLogout}
-                                                        disabled={isLoggingOut}
-                                                    >
-                                                        {isLoggingOut ? 'Logging out...' : 'Yes'}
-                                                    </Button>
-                                                </Col>
-                                            </Row>
+                                            <div className="all-seting-area-pass py-3">
+                                                <Row className="justify-content-center">
+                                                    <Col md={12} className="text-center mb-4">
+                                                        <div className="logout-icon-container mb-4">
+                                                            <div className="icon-wrapper d-flex justify-content-center align-items-center mx-auto rounded-circle"
+                                                                style={{ width: '80px', height: '80px', backgroundColor: '#f8f9fa' }}>
+                                                                <img
+                                                                    className="change-icon"
+                                                                    src={hideicon}
+                                                                    alt="logout icon"
+                                                                    style={{ maxWidth: '40px', opacity: '0.7' }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <h5 className="text-dark mb-1">Ready to leave?</h5>
+                                                        <p className="text-muted mb-4">Are you sure you want to end your current session?</p>
+                                                    </Col>
+                                                </Row>
+
+                                                <Row className="gx-3 justify-content-center mb-3">
+                                                    <Col xs={12} md={5} className="mb-2 mb-md-0">
+                                                        <Button
+                                                            className="w-100 py-2 rounded-pill shadow-sm"
+                                                            variant="light"
+                                                            onClick={handleCancel}
+                                                            disabled={isLoggingOut}
+                                                        >
+                                                            <span className="fw-medium">Cancel</span>
+                                                        </Button>
+                                                    </Col>
+                                                    <Col xs={12} md={5}>
+                                                        <Button
+                                                            className="w-100 py-2 rounded-pill shadow-sm"
+                                                            variant="btn btn-danger"
+                                                            onClick={handleLogout}
+                                                            disabled={isLoggingOut}
+                                                        >
+                                                            <div className="d-flex align-items-center justify-content-center">
+                                                                {isLoggingOut && (
+                                                                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                                )}
+                                                                <span className="fw-medium">{isLoggingOut ? 'Signing out...' : 'Sign Out'}</span>
+                                                            </div>
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </Col>
                             </Row>
                         </Container>
@@ -164,7 +198,7 @@ const Logout = () => {
 
                 </div>
             </div>
-        </CommonLayout>
+        </CommonLayout >
 
 
     );

@@ -2,7 +2,8 @@
 .landing-section {
     background: linear-gradient(135deg, #5c3cda 0%, #8d46ff 100%);
     min-height: 100vh;
-    padding: 2rem 0;
+    padding: 6rem 0;
+    padding-bottom: 30px;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -27,7 +28,7 @@
 /* Brand Logo */
 .brand-logo {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
 }
 
 .logo-img {
