@@ -89,34 +89,87 @@ import editIcon from '../../assets/images/edit.png';
 import Button from 'react-bootstrap/Button'
 import serr from '../../assets/images/serr.png';
 import utils from '../utils';
-
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 const EditProfile = () => {
   const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
   const [isShowBlockUser, setIsBlockUser] = useState(false);
-  const [user, setUser] = useState(null);
+   const [user, setUser] = useState(null);
+    const [profileDetails, setProfileDetails] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [userLocation, setUserLocation] = useState(null);
+
+useEffect(() => {
+  const fetchLocation = async () => {
+    try {
+      const userId = localStorage.getItem('userId');
+      const res = await fetch(`https://kiqko-backend.onrender.com/api/users/location/${userId}`);
+      const data = await res.json();
+      setUserLocation(data); // data will be { city, state, country }
+    } catch (err) {
+      console.error('Failed to fetch location:', err);
+    }
+  };
+
+  fetchLocation();
+}, []);
 
 
-     useEffect(() => {
+ useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (!userId) return;
 
-    const fetchUser = async () => {
-      try {
-        const res = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
-        const data = await res.json();
+    const fetchProfileDetails = async () => {
+    const userId = localStorage.getItem('userId');
 
-        if (res.ok) {
-          setUser(data);
+    try {
+      const detailsRes = await fetch(`https://kiqko-backend.onrender.com/api/users/profilee/${userId}`);
+      const detailsData = await detailsRes.json();
+      console.log(detailsData);
+      
+
+      if (detailsRes.ok) {
+        setProfileDetails(detailsData); // this will be the user's profile
+         // setDe(detailsData);
+      } else {
+        console.error('Error fetching profile:', detailsData.message);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  };
+
+
+    const fetchData = async () => {
+      try {
+        // Fetch basic user data
+        const userRes = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
+        const userData = await userRes.json();
+        console.log(userData);
+        
+
+        if (userRes.ok) {
+          setUser(userData);
+          
+         //  // Fetch additional profile details
+         //  const detailsRes = await fetch(`https://kiqko-backend.onrender.com/api/users/${userId}`);
+         //  const detailsData = await detailsRes.json();
+          
+         //  if (detailsRes.ok) {
+         //    setProfileDetails(detailsData);
+         //  }
         } else {
-          console.error(data.message);
+          console.error(userData.message);
         }
       } catch (err) {
-        console.error('Error fetching user profile:', err);
+        console.error('Error fetching data:', err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchUser();
+    fetchData(); fetchProfileDetails();
   }, []);
+
    // Gallary Image View Start
    const gallaryImgList = [
       { imgUrl: profile, caption: 'BeBold 2022 BeBless' },
@@ -335,8 +388,14 @@ const EditProfile = () => {
   </span>
 </h1>
                     <p className="address-p">
-                      <span className="location-icon"><img src={location} alt="location" /></span>
-                      Bangkok, Thailand
+                                 {userLocation?.city && userLocation?.country ? (
+                        <span className="location-icon">
+                          <img src={location} alt="location" /> {userLocation.city}, {userLocation.country}
+                        </span>
+                      ) : (
+                        <span>No location set</span>
+                      )}
+                      
                       <Accordion className="acc-wrapper-custom" defaultActiveKey={['0']} alwaysOpen>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header> <img src={threedots} alt="threedots" /></Accordion.Header>
@@ -379,36 +438,61 @@ const EditProfile = () => {
                         </Dropdown> */}
                       </p>
                   <div className="profile-user-details-inner">
-                     {/* edit-user-profile */}
-                <div className="edit-user-profile">
-                <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <img className="edit-icon-user" src={editIcon} alt="editIcon" />
-                </Dropdown.Toggle>
+                        {profileDetails ? (
+                          <>
+                            <h2>
+                    {profileDetails.gender === 'Woman' ? 'Woman seeking Man' : 
+                     profileDetails.gender === 'Man' ? 'Man seeking Woman' : 
+                     'Not specified'}
+                     
+                    {profileDetails.age && ` age(${profileDetails.age}) +`}
+                  </h2>
+                  <h3>
+                    <span className="pro-icon-all">
+                      {profileDetails.age && `${profileDetails.age}, `}
+                      {profileDetails.maritalStatus && `${profileDetails.maritalStatus}, `}
+                      {profileDetails.ethnicity && `${profileDetails.ethnicity}, `}
+                      {profileDetails.height && profileDetails.height}
+                    </span>
+                  </h3>
+                            <h3>
+                              <span className="pro-icon-all">
+                                <img src={bodytype2} alt="body type" />
+                              </span>
+                              {profileDetails.bodyType || 'Not specified'}
+                            </h3>
+                            <h3>
+                              <span className="pro-icon-all">
+                                <img src={kids2} alt="kids status" />
+                              </span>
+                              {profileDetails.hasKids || 'Not specified'}
+                            </h3>
+                            <h3>
+                              <span className="pro-icon-all">
+                                <img src={wantkids2} alt="wants kids" />
+                              </span>
+                              {profileDetails.wantsKids || 'Not specified'}
+                            </h3>
+                            <h3>
+                              <span className="pro-icon-all">
+                                <img src={herefor2} alt="relationship goal" />
+                              </span>
+                              {profileDetails.hereFor || 'Not specified'}
+                            </h3>
+                         {/* Edit button for existing info */}
+                            <Link to="/edit-basics" className="btn btn-outline-primary mt-3">
+                              Edit Information
+                            </Link>
+                          </>
+                        ) : (
+                          <Link to="/edit-profile" className="btn btn-primary">
+                            Add Your Information
+                          </Link>
+                        )}
+                      </div>
+                </div>
 
-                <Dropdown.Menu>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-               
-                <Form.Control as="textarea" rows={7} value ="Woman seeking a Man, 24-34
-26, Single, Asian, 5’ 7”
-Body type: Slim
-Have kids: Yes, they sometimes live at home
-Want kids: No
-Here for: Long-tern
-" />
-                </Form.Group>
-                </Dropdown.Menu>
-                </Dropdown>
-                </div>
-                {/* end edit-user-profile */}
-                <h2>Woman seeking a Man, 24-34</h2>
-                              <h3> <span className="pro-icon-all">26, Single, Asian, 5’ 7”</span></h3>
-                              <h3><span className="pro-icon-all"> <img src={bodytype2} alt="reporticon" /> </span> Slim</h3>
-                              <h3><span className="pro-icon-all"> <img src={kids2} alt="reporticon" /> </span>Yes, they sometimes live at home </h3>
-                              <h3><span className="pro-icon-all"> <img src={wantkids2} alt="reporticon" /> </span>No </h3>
-                              <h3><span className="pro-icon-all"> <img src={herefor2} alt="reporticon" /> </span> Long-tern</h3>
-                  </div>
-                </div>
+                
                 <div className="all-user-btn"> 
                   <button className="btn mes-btn"> 
                   <img src={icon1profile} alt="icon1profile" />
@@ -418,15 +502,17 @@ Here for: Long-tern
                   <NavLink exact to=""><button className="btn online-btn"> <img src={icon4profile} alt="icon4profile" /> <span>Video Call</span> </button> </NavLink>
                   </div>
               </div>
-          
+           <NavLink exact to="/headline">
+     <Button variant="outline-primary" size="sm" className="ms-3">Edit Personal Info</Button>
+   </NavLink>
               <Row className="flex-direction-custom">
 
-
+                        
               <Col md={12} className="text-start ps-5 profile-all-info mt-4">
-                        <h2>
-                           Headline:
-              
-                        </h2>
+                       <h2 className="d-flex justify-content-between align-items-center">
+   Headline:
+  
+</h2>
                         <p>
                            Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
                         </p>
@@ -540,7 +626,7 @@ Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh
                 </Col>
               </Row>
               
-              <h3 className="text-start h3-all-title mt-3 mb-3">Say Hello to Anna1234</h3>
+              <h3 className="text-start h3-all-title mt-3 mb-3">Say Hello to  {user?.username}</h3>
                <div className="search-user-profile">
                   <Form>
                   <Form.Group className="mb-2">
