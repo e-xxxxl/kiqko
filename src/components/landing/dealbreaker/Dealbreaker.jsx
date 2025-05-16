@@ -25,7 +25,7 @@ const Dealbreaker = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`http://localhost:5000/api/users/dealbreaker/${userId}`, {
+      await axios.post(`https://kiqko-backend.onrender.com/api/users/dealbreaker/${userId}`, {
         dealbreakers,
       });
       history.push('/about-you');

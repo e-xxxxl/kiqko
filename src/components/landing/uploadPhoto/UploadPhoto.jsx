@@ -14,90 +14,65 @@ import downloadApp from '../../../assets/images/downloadApp.png';
 import './UploadPhoto.css';
 
 const UploadPhoto = () => {
-  const [files, setFiles] = useState([]);
-  const [captions, setCaptions] = useState({});
-  const [mainPhotoIndex, setMainPhotoIndex] = useState(null);
+  const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const userId = localStorage.getItem("userId");
   const history = useHistory();
 
   const handleFileChange = (e) => {
-    const newFiles = Array.from(e.target.files);
-    setFiles(prev => [...prev, ...newFiles]);
-    
-    // Initialize captions for new files
-    const newCaptions = {...captions};
-    newFiles.forEach((file, index) => {
-      newCaptions[file.name] = '';
-    });
-    setCaptions(newCaptions);
-  };
-
-  const handleCaptionChange = (fileName, value) => {
-    setCaptions(prev => ({
-      ...prev,
-      [fileName]: value
-    }));
-  };
-
-  const handleSetMainPhoto = (index) => {
-    setMainPhotoIndex(index);
-  };
-
-  const handleRemovePhoto = (index) => {
-    const newFiles = [...files];
-    const removedFile = newFiles.splice(index, 1)[0];
-    setFiles(newFiles);
-    
-    // Remove caption for deleted file
-    const newCaptions = {...captions};
-    delete newCaptions[removedFile.name];
-    setCaptions(newCaptions);
-    
-    // Adjust main photo index if needed
-    if (mainPhotoIndex === index) {
-      setMainPhotoIndex(null);
-    } else if (mainPhotoIndex > index) {
-      setMainPhotoIndex(mainPhotoIndex - 1);
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (!file) {
+    alert('Please select a photo to upload');
+    return;
+  }
+  
+  setIsLoading(true);
+  
+  try {
+    const formData = new FormData();
+    formData.append('profilePhoto', file);
     
-    try {
-      const formData = new FormData();
-      
-      // Append files
-      files.forEach((file, index) => {
-        formData.append('photos', file);
-        formData.append(`captions[${index}]`, captions[file.name] || '');
-        if (index === mainPhotoIndex) {
-          formData.append('mainPhotoIndex', index);
-        }
-      });
-      
-      const response = await fetch(
-        `https://kiqko-backend.onrender.com/api/users/${userId}/photos`,
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
-      
-      if (response.ok) {
-        history.push('/manage-media');
-      } else {
-        console.error('Failed to upload photos');
+    const response = await fetch(
+      `http://localhost:5000/api/users/upload-photo/${userId}`,
+      {
+        method: 'POST',
+        body: formData,
       }
-    } catch (error) {
-      console.error('Error uploading photos:', error);
-    } finally {
-      setIsLoading(false);
+    );
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+      // Optional: Save to localStorage
+      localStorage.setItem('profilePhoto', data.photoUrl);
+      
+      // Verify the photo was saved by fetching user data
+      const userResponse = await fetch(
+        `https://kiqko-backend.onrender.com/api/users/profilee/${userId}`
+      );
+      const userData = await userResponse.json();
+      
+      console.log("User data after upload:", userData);
+      
+      history.push('/manage-media');
+    } else {
+      console.error('Upload failed:', data);
+      alert(data.message || 'Upload failed. Please try again.');
     }
-  };
-
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
   return (
     <section>
       <section className="all-top-shape all-shape-inner">
@@ -109,10 +84,9 @@ const UploadPhoto = () => {
             <Col md={12}>
               <div className="profile-main-part-area-inner mb-0 bg-all-pages mt-0 pb-0">
                 <Col md={12} className="all-title-top mb-4 text-center">
-                  <h4>Upload Photos</h4>
+                  <h4>Upload Profile Photo</h4>
                   <p className="sub-p">
-                    To continue you need to add a photo.<br />
-                    To be a verified member you need to add a minimum of four photos.
+                    To continue you need to add a profile photo.<br />
                   </p>
                 </Col>
                 
@@ -124,57 +98,28 @@ const UploadPhoto = () => {
                           <input 
                             type="file" 
                             onChange={handleFileChange}
-                            multiple
                             accept="image/*"
                           />
-                          <p className="upload-hint">Click to upload photos (JPEG, PNG)</p>
+                          <p className="upload-hint">Click to upload profile photo (JPEG, PNG)</p>
                         </div>
 
-                        {files.length > 0 && (
+                        {file && (
                           <div className="uploaded-photos-container">
-                            {files.map((file, index) => (
-                              <div key={index} className="uploaded-photo-item">
-                                <div className="photo-preview">
-                                  <img 
-                                    src={URL.createObjectURL(file)} 
-                                    alt={`Preview ${index + 1}`} 
-                                  />
-                                  <button 
-                                    type="button" 
-                                    className="remove-photo-btn"
-                                    onClick={() => handleRemovePhoto(index)}
-                                  >
-                                    ×
-                                  </button>
-                                </div>
-                                
-                                <div className="caption-field">
-                                  <div className="form-field-row caption-area">
-                                    <Form.Group className="mb-2">
-                                      <Form.Control 
-                                        className="form-custom upload-field-photo" 
-                                        type="text" 
-                                        placeholder="Add Caption (Max 99 characters)"
-                                        value={captions[file.name] || ''}
-                                        onChange={(e) => handleCaptionChange(file.name, e.target.value)}
-                                        maxLength={99}
-                                      />
-                                    </Form.Group>
-                                  </div>
-
-                                  <div className="check-upload">
-                                    <Form.Group className="mb-3 check-form check-long">
-                                      <Form.Check 
-                                        type="checkbox" 
-                                        label="Make this my main picture"
-                                        checked={mainPhotoIndex === index}
-                                        onChange={() => handleSetMainPhoto(index)}
-                                      />
-                                    </Form.Group>
-                                  </div>
-                                </div>
+                            <div className="uploaded-photo-item">
+                              <div className="photo-preview">
+                                <img 
+                                  src={URL.createObjectURL(file)} 
+                                  alt="Profile Preview" 
+                                />
+                                <button 
+                                  type="button" 
+                                  className="remove-photo-btn"
+                                  onClick={() => setFile(null)}
+                                >
+                                  ×
+                                </button>
                               </div>
-                            ))}
+                            </div>
                           </div>
                         )}
                       </Col>
@@ -186,7 +131,7 @@ const UploadPhoto = () => {
                           type="submit" 
                           className="all-btn-round mt-4" 
                           variant="primary"
-                          disabled={isLoading || files.length === 0}
+                          disabled={isLoading || !file}
                         >
                           {isLoading ? 'Uploading...' : 'Continue'}
                           <MdOutlineArrowForward className="arrow-sign arrowba" />

@@ -21,7 +21,7 @@ const Headline = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post(`http://localhost:5000/api/users/headline/${userId}`, {
+            await axios.post(`https://kiqko-backend.onrender.com/api/users/headline/${userId}`, {
                 headline
             });
             history.push('/compliment');

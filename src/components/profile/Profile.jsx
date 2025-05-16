@@ -392,8 +392,14 @@ return (
                            <div className="last-online"> <img src={calendar} alt="calendar" />Last online 1 Day 14 Hours</div>
                         </div>
                         <div className="profile-pic-user">
-                           <div className="profile-pic-avater"> <img onClick={viewProfileImg} src={profile} alt="profile" /> 
-                           </div>
+                          <div className="profile-pic-avater"> 
+  <img 
+    onClick={viewProfileImg} 
+    src={profileDetails?.photo || profile} 
+    alt="profile" 
+    className="profile-image"
+  />
+</div>
                            <div className="profile-next-prev">
                               {/* <Button className="btn-next-prev me-2"><img src={previcon} alt="prev" /></Button>
                               <Button className="btn-next-prev ms-2"><img src={nexticon} alt="next" /></Button> */}

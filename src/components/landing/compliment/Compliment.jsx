@@ -19,7 +19,7 @@ const Compliment = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`http://localhost:5000/api/users/compliment/${userId}`, { compliment });
+      await axios.post(`https://kiqko-backend.onrender.com/api/users/compliment/${userId}`, { compliment });
       history.push('/dealbreaker');
     } catch (error) {
       console.error('Failed to update compliment:', error);

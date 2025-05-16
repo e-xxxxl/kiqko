@@ -20,8 +20,8 @@ const AboutYou = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`http://localhost:5000/api/users/about/${userId}`, { about });
-      history.push('/basics');
+      await axios.post(`https://kiqko-backend.onrender.com/api/users/about/${userId}`, { about });
+     history.push("/upload-photo");
     } catch (error) {
       console.error('Failed to update about info:', error);
     }
