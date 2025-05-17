@@ -105,47 +105,7 @@ const Profile = () => {
 
 
 
-   //    useEffect(() => {
-   //     const userId = localStorage.getItem('userId');
-   //     if (!userId) return;
-
-   //     const fetchUser = async () => {
-   //       try {
-   //         const res = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
-   //         const data = await res.json();
-
-   //         if (res.ok) {
-   //           setUser(data);
-   //         } else {
-   //           console.error(data.message);
-   //         }
-   //       } catch (err) {
-   //         console.error('Error fetching user profile:', err);
-   //       }
-   //     };
-
-   //     fetchUser();
-   //   }, []);
-   //   useEffect(() => {
-   //     const fetchOnlineCounts = async () => {
-   //       try {
-   //         const res = await fetch('/api/users/online-counts');
-   //         const data = await res.json();
-   //         setCounts(data);
-   //       } catch (err) {
-   //         console.error("Failed to fetch online counts:", err);
-   //       } finally {
-   //         setLoading(false);
-   //       }
-   //     };
-
-   //     fetchOnlineCounts();
-
-   //     // Refresh every 30 seconds
-   //     const interval = setInterval(fetchOnlineCounts, 30000);
-   //     return () => clearInterval(interval);
-   //   }, []);
-
+  
    useEffect(() => {
       const fetchLocation = async () => {
          try {
