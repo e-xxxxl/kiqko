@@ -11,7 +11,7 @@ const OnlineUsers = () => {
   useEffect(() => {
     const fetchOnlineUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/users/online-count');
+        const response = await fetch('https://kiqko-backend.onrender.com/api/users/online-count');
         
         if (!response.ok) {
           throw new Error('Failed to fetch online users');

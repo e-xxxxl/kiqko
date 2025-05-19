@@ -106,7 +106,7 @@ const useOnlineStatus = (userId) => {
     // Function to update online status
     const updateOnlineStatus = async (isOnline) => {
       try {
-        await fetch(`http://localhost:5000/api/users/online-status/${userId}`, {
+        await fetch(`https://kiqko-backend.onrender.com/api/users/online-status/${userId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

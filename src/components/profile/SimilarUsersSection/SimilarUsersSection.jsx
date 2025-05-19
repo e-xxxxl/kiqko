@@ -13,8 +13,8 @@ const SimilarUsersSection = () => {
         if (!userId) {
           throw new Error('User ID not found');
         }
-
-        const response = await fetch(`http://localhost:5000/api/users/similar/${userId}`);
+// http://localhost:5000
+        const response = await fetch(`https://kiqko-backend.onrender.com/api/users/similar/${userId}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch similar users');
