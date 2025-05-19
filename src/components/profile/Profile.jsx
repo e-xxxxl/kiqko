@@ -94,8 +94,80 @@ import serr from '../../assets/images/serr.png';
 
 import utils from '../utils';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import SimilarUsersSection from './SimilarUsersSection/SimilarUsersSection';
+import OnlineUsers from './OnlineUsers/OnlineUsers';
+import OnlineStatusUpdater from './OnlineUsers/OnlineStatusUpdater';
+
+
+const useOnlineStatus = (userId) => {
+  useEffect(() => {
+    if (!userId) return;
+
+    // Function to update online status
+    const updateOnlineStatus = async (isOnline) => {
+      try {
+        await fetch(`http://localhost:5000/api/users/online-status/${userId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ isOnline })
+        });
+      } catch (error) {
+        console.error('Error updating online status:', error);
+      }
+    };
+
+    // Initial update when component mounts
+    updateOnlineStatus(true);
+
+    // Set up interval for periodic updates (every 5 minutes)
+    const intervalId = setInterval(() => {
+      if (navigator.onLine) {
+        updateOnlineStatus(true);
+      }
+    }, 5 * 60 * 1000); // 5 minutes
+
+    // Update status when window gets focus
+    const handleFocus = () => {
+      if (navigator.onLine) {
+        updateOnlineStatus(true);
+      }
+    };
+
+    // Update status when connection is restored
+    const handleOnline = () => {
+      updateOnlineStatus(true);
+    };
+
+    // Update status when connection is lost
+    const handleOffline = () => {
+      updateOnlineStatus(false);
+    };
+
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Cleanup function
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+      // Set offline when component unmounts
+      updateOnlineStatus(false);
+    };
+  }, [userId]);
+};
+
 
 const Profile = () => {
+
+    const userId = localStorage.getItem('userId');
+  
+  // Add this hook call
+  useOnlineStatus(userId);
    const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
    const [isShowBlockUser, setIsBlockUser] = useState(false);
    const [user, setUser] = useState(null);
@@ -177,6 +249,9 @@ const Profile = () => {
 
       fetchData(); fetchProfileDetails();
    }, []);
+
+
+   
 
 
    //   if (!user) return <p>Loading...</p>;
@@ -270,20 +345,7 @@ const Profile = () => {
                   <div className="flex flex-col md:flex-row gap-6">
                      {/* Left Panel */}
                      <div className="w-full md:w-1/4 space-y-6">
-                        {/* Online Users */}
-                        <div className="bg-white rounded-lg shadow-md p-4 text-center">
-                           <h5 className="font-bold border-b pb-2 mb-3">Users Online Now</h5>
-                           <div className="flex justify-between">
-                              <div className="w-1/2 pr-2 border-r">
-                                 <h6 className="text-sm text-gray-600">Women</h6>
-                                 <h4 className="text-xl font-bold">1234</h4>
-                              </div>
-                              <div className="w-1/2 pl-2">
-                                 <h6 className="text-sm text-gray-600">Men</h6>
-                                 <h4 className="text-xl font-bold">1565</h4>
-                              </div>
-                           </div>
-                        </div>
+                        <OnlineUsers/>
 
                         {/* Navigation */}
                         <div className="bg-white rounded-lg shadow-md p-4">
@@ -551,37 +613,47 @@ const Profile = () => {
                            {/* Profile Sections */}
                            <div className="space-y-6">
                               {/* Headline */}
-                              <div className="text-left">
-                                 <h2 className="text-xl font-semibold mb-2">Headline:</h2>
-                                 <p className="text-gray-700">
-                                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                                 </p>
-                              </div>
+<div className="text-left relative group">
+  <div className="flex justify-between items-start">
+    <h2 className="text-xl font-semibold mb-2">Headline:</h2>
+    <NavLink 
+      to="/headline" 
+      className="flex items-center px-3 py-1 text-sm rounded-full bg-[#9B72FE] bg-opacity-10 text-white hover:bg-opacity-20 transition-all"
+    >
+      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+      </svg>
+      Edit Profile Info
+    </NavLink>
+  </div>
+  <p className="text-gray-700">
+     {profileDetails?.headline || 'Not specified'}
+  </p>
+</div>
 
                               {/* Compliment */}
                               <div className="text-left">
                                  <h2 className="text-xl font-semibold mb-2">Best compliment you've ever received:</h2>
                                  <p className="text-gray-700">
-                                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                                     {profileDetails?.compliment || 'Not specified'}
                                  </p>
                               </div>
 
-                              {/* Dealbreakers */}
-                              <div className="text-left">
-                                 <h2 className="text-xl font-semibold mb-2">What are your dealbreakers?</h2>
-                                 <div className="space-y-2">
-                                    <p className="text-gray-700">
-                                       <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
-                                    </p>
-                                    <p className="text-gray-700">
-                                       <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
-                                    </p>
-                                    <p className="text-gray-700">
-                                       <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
-                                    </p>
-                                 </div>
-                              </div>
-
+     {/* Dealbreakers */}
+<div className="text-left">
+  <h2 className="text-xl font-semibold mb-2">What are your dealbreakers?</h2>
+  <div className="space-y-2">
+    {profileDetails?.dealbreakers?.length > 0 ? (
+      profileDetails.dealbreakers.map((dealbreaker, index) => (
+        <p key={index} className="text-gray-700">
+          <span className="font-medium">We're not a match if...</span> {dealbreaker}
+        </p>
+      ))
+    ) : (
+      <p className="text-gray-700">Not specified</p>
+    )}
+  </div>
+</div>
                               {/* Ads */}
                               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                                  <img src={adda} alt="ad" className="w-full rounded" />
@@ -613,8 +685,7 @@ const Profile = () => {
                               <div className="text-left mt-8">
                                  <h3 className="text-xl font-semibold mb-3">About Me</h3>
                                  <p className="text-gray-700">
-                                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                    Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet  Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                                     {profileDetails?.about || 'Not specified'}
                                  </p>
                               </div>
 
@@ -683,7 +754,9 @@ const Profile = () => {
                         </div>
 
                         {/* Similar Users */}
-                        <div className="mt-8">
+
+                        <SimilarUsersSection/>
+                        {/* <div className="mt-8">
                            <h5 className="text-xl font-semibold mb-4">Similar Users</h5>
                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                               <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -727,12 +800,14 @@ const Profile = () => {
                                  </NavLink>
                               </div>
                            </div>
-                        </div>
+                        </div> */}
                      </div>
                   </div>
                </div>
             </div>
          </div>
+         <OnlineStatusUpdater userId={localStorage.getItem('userId')} />
+
       </CommonLayout>
    );
 };
