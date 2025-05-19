@@ -32,6 +32,7 @@ import liveicon from '../../assets/images/liveicon.png';
 import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
+import OnlineUsers from '../profile/OnlineUsers/OnlineUsers';
 const ManageMedia = () => {
     return (
         <CommonLayout>
@@ -48,19 +49,7 @@ const ManageMedia = () => {
                                 {/* Navigation sidebar - full width on mobile, 1/4 on desktop */}
                                 <div className="w-full lg:w-1/4 space-y-6">
                                     {/* Online Users */}
-                                    <div className="bg-white rounded-lg shadow-md p-4 text-center">
-                                        <h5 className="font-bold border-b pb-2 mb-3">Users Online Now</h5>
-                                        <div className="flex justify-between">
-                                            <div className="w-1/2 pr-2 border-r">
-                                                <h6 className="text-sm text-gray-600">Women</h6>
-                                                <h4 className="text-xl font-bold">1234</h4>
-                                            </div>
-                                            <div className="w-1/2 pl-2">
-                                                <h6 className="text-sm text-gray-600">Men</h6>
-                                                <h4 className="text-xl font-bold">1565</h4>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <OnlineUsers/>
 
                                     {/* Navigation */}
                                     <div className="bg-white rounded-lg shadow-md p-4">

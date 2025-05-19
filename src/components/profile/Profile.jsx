@@ -457,7 +457,7 @@ const Profile = () => {
                               <div className="relative mb-4">
                                  <img
                                     onClick={viewProfileImg}
-                                    src={profileDetails?.photo || profile}
+                                    src={profileDetails?.profilephoto || profile}
                                     alt="profile"
                                     className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
                                  />

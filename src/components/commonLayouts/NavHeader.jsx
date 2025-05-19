@@ -27,6 +27,7 @@ const NavHeader = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   useEffect(() => {
+    
     const fetchProfileDetails = async () => {
       const userId = localStorage.getItem('userId');
       try {
@@ -41,7 +42,36 @@ const NavHeader = () => {
         console.error('Error:', err);
       }
     };
-    fetchProfileDetails();
+
+    const fetchData = async () => {
+       const userId = localStorage.getItem('userId');
+         try {
+            // Fetch basic user data
+            const userRes = await fetch(`https://kiqko-backend.onrender.com/api/users/profile/${userId}`);
+            const userData = await userRes.json();
+            console.log(userData);
+
+
+            if (userRes.ok) {
+               setUser(userData);
+
+               //  // Fetch additional profile details
+               //  const detailsRes = await fetch(`https://kiqko-backend.onrender.com/api/users/${userId}`);
+               //  const detailsData = await detailsRes.json();
+
+               //  if (detailsRes.ok) {
+               //    setProfileDetails(detailsData);
+               //  }
+            } else {
+               console.error(userData.message);
+            }
+         } catch (err) {
+            console.error('Error fetching data:', err);
+         } finally {
+            setIsLoading(false);
+         }
+      }
+    fetchProfileDetails(), fetchData();
   }, []);
 
   // Professional purple theme palette with enhanced shades
@@ -222,10 +252,10 @@ const NavHeader = () => {
                 >
                   <div className="flex items-center">
                     <span className="mr-2 text-sm font-medium hidden lg:block">
-                      {profileDetails?.firstName || "User"}
+                      {user?.username || "User"}
                     </span>
                     <img 
-                      src={profileDetails?.photo || useravatar} 
+                      src={profileDetails?.profilephoto || useravatar} 
                       alt="User Profile" 
                       className="h-10 w-10 rounded-full object-cover border-2 shadow-sm transition-transform"
                       style={{ 
@@ -249,14 +279,14 @@ const NavHeader = () => {
                     <div className="px-4 py-3 border-b" style={{ borderColor: colors.grayMedium }}>
                       <div className="flex items-center">
                         <img 
-                          src={profileDetails?.photo || useravatar}
+                          src={profileDetails?.profilephoto || useravatar}
                           alt="User" 
                           className="h-14 w-14 rounded-full mr-3 object-cover border-2"
                           style={{ borderColor: colors.primaryLight }}
                         />
                         <div>
-                          <h4 className="font-semibold text-gray-800">{profileDetails?.firstName} {profileDetails?.lastName}</h4>
-                          <p className="text-sm text-gray-500">{profileDetails?.email || "user@example.com"}</p>
+                          <h4 className="font-semibold text-gray-800">  {user?.username}</h4>
+                          <p className="text-sm text-gray-500">{user?.email || "user@example.com"}</p>
                           <button 
                             className="text-xs text-primary mt-1 hover:underline"
                             style={{ color: colors.primary }}
