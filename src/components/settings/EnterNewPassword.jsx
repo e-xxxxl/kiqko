@@ -209,7 +209,7 @@ const EnterNewPassword = () => {
 
                                     <div className="flex-1">
 
-                                        <div className="bg-white rounded-xl shadow-lg p-6 mx-auto">
+                                        <div className="bg-white rounded-xl shadow-lg p-3 mx-auto">
                                             {/* Header */}
                                             <div className="text-center mb-8">
                                                 <h2 className="text-2xl font-bold text-gray-800">Reset Password</h2>
