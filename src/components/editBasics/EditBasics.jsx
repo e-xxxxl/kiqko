@@ -105,336 +105,349 @@ const EditBasics = () => {
       <section className="all-top-shape">
         <img src={shape} alt="shape" />
       </section>
+
       <div className="all-container">
         <div className="pr pb-5 mb-5">
           <div className="page-wrapper-all">
             <Container>
-              <Row>
-                <Col md={3}>
-                  <div className="left-panel-allpages mar-top-left">
-                    <div className="top-user-id text-center">
-                      <div className="online-user-all">
-                        <h5 className="border-h5">Users Online Now</h5>
-                        <div className="online-user-status border-right-online">
-                          <h6>Women</h6>
-                          <h4>1234</h4>
-                        </div>
-                        <div className="online-user-status">
-                          <h6>men</h6>
-                          <h4>1565</h4>
-                        </div>
+              {/* Flex container for nav and content */}
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Navigation sidebar - takes full width on mobile, 1/4 on desktop */}
+                <div className="w-full md:w-1/4 space-y-6">
+                  {/* Online Users */}
+                  <div className="bg-white rounded-lg shadow-md p-4 text-center">
+                    <h5 className="font-bold border-b pb-2 mb-3">Users Online Now</h5>
+                    <div className="flex justify-between">
+                      <div className="w-1/2 pr-2 border-r">
+                        <h6 className="text-sm text-gray-600">Women</h6>
+                        <h4 className="text-xl font-bold">1234</h4>
+                      </div>
+                      <div className="w-1/2 pl-2">
+                        <h6 className="text-sm text-gray-600">Men</h6>
+                        <h4 className="text-xl font-bold">1565</h4>
                       </div>
                     </div>
-
-                    <div className="user-type-left">
-                      <ul className="list-user-type left-nav">
-                        <li>
-                          <NavLink exact to="/profile" activeClassName="active">
-                            <img src={homea} alt="homea" />
-                            Home
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/search-results"
-                            activeClassName="active"
-                          >
-                            <img src={serr} alt="liveicon" />
-                            Search Results
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/live-users"
-                            activeClassName="active"
-                          >
-                            <img src={liveicon} alt="liveicon" />
-                            Live Users
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/who-viewed-you"
-                            activeClassName="active"
-                          >
-                            <img src={viewedMe} alt="viewedMe" />
-                            Who Viewed Me
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/who-likes-you"
-                            activeClassName="active"
-                          >
-                            <img src={myLikes} alt="myLikes" />
-                            Who Likes Me
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/my-likes"
-                            activeClassName="active"
-                          >
-                            <img src={likesMe} alt="likesMe" />
-                            My Likes
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/your-matches"
-                            activeClassName="active"
-                          >
-                            <img src={yourm} alt="likesMe" />
-                            Your Matches
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/blocked-users"
-                            activeClassName="active"
-                          >
-                            <img src={blockedUsers} alt="blockedUsers" />
-                            Blocked Users
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink exact to="/profile" activeClassName="active">
-                            {" "}
-                            <img src={settingView} alt="settingView" />
-                            View Profile
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/edit-basics"
-                            activeClassName="active"
-                          >
-                            {" "}
-                            <img src={settingEdit} alt="settingEdit" />
-                            Edit Profile{" "}
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            exact
-                            to="/manage-media"
-                            activeClassName="active"
-                          >
-                            <img src={manageMedia} alt="manageMedia" />
-                            Manage Media
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink exact to="/reset-password">
-                            <img src={settingReset} alt="settingReset" />
-                            Reset Password
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink exact to="/update-location">
-                            <img src={settingUpload} alt="settingUpload" />
-                            Update Location
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink exact to="/hide-profile">
-                            <img src={settingHide} alt="settingHide" />
-                            Hide Profile
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink exact to="/delete-account">
-                            <img src={settingDelete} alt="settingDelete" />
-                            Delete Account
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink exact to="/logout">
-                            <img src={settingLogout} alt="settingLogout" />
-                            Logout
-                          </NavLink>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
-                </Col>
-                <Col md={9}>
-             
 
+                  {/* Navigation */}
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <ul className="space-y-2">
+                      <li>
+                        <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={homea} alt="home" className="w-5 h-5" /> Home
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/search-results" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={serr} alt="search" className="w-5 h-5" /> Search Results
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/live-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={liveicon} alt="live" className="w-5 h-5" /> Live Users
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/who-viewed-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={viewedMe} alt="viewed" className="w-5 h-5" /> Who Viewed Me
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/who-likes-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={myLikes} alt="likes" className="w-5 h-5" /> Who Likes Me
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/my-likes" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={likesMe} alt="my likes" className="w-5 h-5" /> My Likes
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/your-matches" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={yourm} alt="matches" className="w-5 h-5" /> Your Matches
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/blocked-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={blockedUsers} alt="blocked" className="w-5 h-5" /> Blocked Users
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingView} alt="profile" className="w-5 h-5" /> View Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/edit-basics" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingEdit} alt="edit" className="w-5 h-5" /> Edit Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/manage-media" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={manageMedia} alt="media" className="w-5 h-5" /> Manage Media
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/reset-password" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingReset} alt="reset" className="w-5 h-5" /> Reset Password
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/update-location" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingUpload} alt="location" className="w-5 h-5" /> Update Location
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/hide-profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingHide} alt="hide" className="w-5 h-5" /> Hide Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/delete-account" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingDelete} alt="delete" className="w-5 h-5" /> Delete Account
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink exact to="/logout" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                          <img src={settingLogout} alt="logout" className="w-5 h-5" /> Logout
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
-                  <div className="profile-main-part-area-inner bg-all-pages p-4">
-                    <Col xs={12} className="mb-4 text-center">
-                      <h4 className="text-primary fw-bold">
+                {/* Main content area - takes full width on mobile, 3/4 on desktop */}
+                <div className="w-full md:w-3/4">
+                  <div className="bg-white rounded-xl shadow-md p-6">
+                    <div className="mb-6 text-center">
+                      <h4 className="text-[#9b72fe] text-2xl font-bold">
                         Edit Profile Details
                       </h4>
-                      <p className="text-muted">
+                      <p className="text-gray-500 mt-2">
                         Complete your profile to improve your matches
                       </p>
-                    </Col>
+                    </div>
 
-                    <div className="page-wrapper-all">
-                      <div className="pageWrapper-inner mt-3 mt-md-4 basic-page basic-page-full">
-                        <form
-                          onSubmit={handleSubmit}
-                          className="needs-validation"
-                          noValidate
-                        >
-                          {/* Personal Information Section */}
-                          <div className="card mb-4 border-0 shadow-sm">
-                            <div className="card-header bg-light">
-                              <h5 className="mb-0 text-primary">
-                                Personal Information
-                              </h5>
+                    <div className="space-y-6">
+                      <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+                        {/* Personal Information Section */}
+                        <div className="card bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm">
+                          <div className="card-header bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] p-4">
+                            <h5 className="mb-0 text-white text-lg font-semibold">
+                              Personal Information
+                            </h5>
+                          </div>
+                          <div className="card-body p-6 space-y-6">
+                            {/* Gender Selection */}
+                            <div>
+                              <label className="block text-gray-700 font-medium mb-3">
+                                I am a
+                              </label>
+                              <div className="flex flex-wrap gap-4">
+                                {["Woman", "Man"].map((gender) => (
+                                  <div key={gender} className="flex items-center">
+                                    <input
+                                      className="h-5 w-5 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
+                                      type="radio"
+                                      id={gender}
+                                      checked={formData.gender === gender}
+                                      onChange={() => handleChange("gender", gender)}
+                                    />
+                                    <label className="ml-2 text-gray-700" htmlFor={gender}>
+                                      {gender}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                            <div className="card-body">
-                              {/* Gender Selection */}
-                              <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                  I am a
-                                </label>
-                                <div className="d-flex flex-wrap gap-3">
-                                  {["Woman", "Man"].map((gender) => (
-                                    <div
-                                      key={gender}
-                                      className="form-check form-check-inline"
-                                    >
-                                      <input
-                                        className="form-check-input"
-                                        type="radio"
-                                        id={gender}
-                                        checked={formData.gender === gender}
-                                        onChange={() =>
-                                          handleChange("gender", gender)
-                                        }
-                                      />
-                                      <label
-                                        className="form-check-label"
-                                        htmlFor={gender}
-                                      >
-                                        {gender}
-                                      </label>
-                                    </div>
-                                  ))}
+
+                            {/* Birthday Selection */}
+                            <div>
+                              <label className="block text-gray-700 font-medium mb-3">
+                                Birthday
+                              </label>
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                  <select
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
+                                    value={formData.birthDate.month}
+                                    onChange={(e) => handleBirthdayChange("month", e.target.value)}
+                                    required
+                                  >
+                                    <option value="">Month</option>
+                                    {Array.from({ length: 12 }, (_, i) => (
+                                      <option key={i + 1} value={i + 1}>
+                                        {new Date(0, i).toLocaleString("default", { month: "long" })}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <div>
+                                  <select
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
+                                    value={formData.birthDate.day}
+                                    onChange={(e) => handleBirthdayChange("day", e.target.value)}
+                                    required
+                                  >
+                                    <option value="">Day</option>
+                                    {Array.from({ length: 31 }, (_, i) => (
+                                      <option key={i + 1} value={i + 1}>
+                                        {i + 1}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <div>
+                                  <select
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
+                                    value={formData.birthDate.year}
+                                    onChange={(e) => handleBirthdayChange("year", e.target.value)}
+                                    required
+                                  >
+                                    <option value="">Year</option>
+                                    {Array.from({ length: 100 }, (_, i) => {
+                                      const year = new Date().getFullYear() - i;
+                                      return (
+                                        <option key={year} value={year}>
+                                          {year}
+                                        </option>
+                                      );
+                                    })}
+                                  </select>
                                 </div>
                               </div>
+                            </div>
 
-                              {/* Birthday Selection */}
-                              <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                  Birthday
-                                </label>
-                                <div className="row g-3">
-                                  <div className="col-md-4">
-                                    <Form.Select
-                                      className="form-select-lg"
-                                      value={formData.birthDate.month}
-                                      onChange={(e) =>
-                                        handleBirthdayChange(
-                                          "month",
-                                          e.target.value
-                                        )
-                                      }
-                                      required
-                                    >
-                                      <option value="">Month</option>
-                                      {Array.from({ length: 12 }, (_, i) => (
-                                        <option key={i + 1} value={i + 1}>
-                                          {new Date(0, i).toLocaleString(
-                                            "default",
-                                            { month: "long" }
-                                          )}
-                                        </option>
-                                      ))}
-                                    </Form.Select>
+                            {/* Ethnicity Selection */}
+                            <div>
+                              <label className="block text-gray-700 font-medium mb-3">
+                                Ethnicity
+                              </label>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                {[
+                                  "White / Caucasian",
+                                  "Asian",
+                                  "Black / African Descent",
+                                  "Latino / Hispanic",
+                                  "North American",
+                                  "East Indian",
+                                  "Pacific Islander",
+                                  "Middle Eastern",
+                                  "Mixed Race",
+                                  "Other Race",
+                                ].map((race) => (
+                                  <div key={race} className="flex items-center">
+                                    <input
+                                      className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
+                                      type="radio"
+                                      id={race.replace(/\s+/g, "")}
+                                      checked={formData.ethnicity === race}
+                                      onChange={() => handleChange("ethnicity", race)}
+                                    />
+                                    <label className="ml-2 text-gray-700 text-sm" htmlFor={race.replace(/\s+/g, "")}>
+                                      {race}
+                                    </label>
                                   </div>
-                                  <div className="col-md-4">
-                                    <Form.Select
-                                      className="form-select-lg"
-                                      value={formData.birthDate.day}
-                                      onChange={(e) =>
-                                        handleBirthdayChange(
-                                          "day",
-                                          e.target.value
-                                        )
-                                      }
-                                      required
-                                    >
-                                      <option value="">Day</option>
-                                      {Array.from({ length: 31 }, (_, i) => (
-                                        <option key={i + 1} value={i + 1}>
-                                          {i + 1}
-                                        </option>
-                                      ))}
-                                    </Form.Select>
-                                  </div>
-                                  <div className="col-md-4">
-                                    <Form.Select
-                                      className="form-select-lg"
-                                      value={formData.birthDate.year}
-                                      onChange={(e) =>
-                                        handleBirthdayChange(
-                                          "year",
-                                          e.target.value
-                                        )
-                                      }
-                                      required
-                                    >
-                                      <option value="">Year</option>
-                                      {Array.from({ length: 100 }, (_, i) => {
-                                        const year =
-                                          new Date().getFullYear() - i;
-                                        return (
-                                          <option key={year} value={year}>
-                                            {year}
-                                          </option>
-                                        );
-                                      })}
-                                    </Form.Select>
-                                  </div>
-                                </div>
+                                ))}
                               </div>
+                            </div>
+                          </div>
+                        </div>
 
-                              {/* Ethnicity Selection */}
-                              <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                  Ethnicity
+                        {/* Physical Attributes Section */}
+                        <div className="card bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm">
+                          <div className="card-header bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] p-4">
+                            <h5 className="mb-0 text-white text-lg font-semibold">
+                              Physical Attributes
+                            </h5>
+                          </div>
+                          <div className="card-body p-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              {/* Height */}
+                              <div>
+                                <label className="block text-gray-700 font-medium mb-3">
+                                  Height
                                 </label>
-                                <div className="d-flex flex-wrap gap-2">
+                                <select
+                                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
+                                  value={formData.height}
+                                  onChange={(e) => handleChange("height", e.target.value)}
+                                >
                                   {[
-                                    "White / Caucasian",
-                                    "Asian",
-                                    "Black / African Descent",
-                                    "Latino / Hispanic",
-                                    "North American",
-                                    "East Indian",
-                                    "Pacific Islander",
-                                    "Middle Eastern",
-                                    "Mixed Race",
-                                    "Other Race",
-                                  ].map((race) => (
-                                    <div key={race} className="form-check">
+                                    "150cm - (4'11\")",
+                                    "152cm - (5'0\")",
+                                    "155cm - (5'1\")",
+                                    "157cm - (5'2\")",
+                                    "160cm - (5'3\")",
+                                    "163cm - (5'4\")",
+                                    "165cm - (5'5\")",
+                                    "168cm - (5'6\")",
+                                    "170cm - (5'7\")",
+                                    "173cm - (5'8\")",
+                                    "175cm - (5'9\")",
+                                    "178cm - (5'10\")",
+                                    "180cm - (5'11\")",
+                                    "183cm - (6'0\")",
+                                    "185cm - (6'1\")",
+                                    "188cm - (6'2\")",
+                                    "191cm - (6'3\")",
+                                    "193cm - (6'4\")",
+                                    "195cm - (6'5\")",
+                                    "198cm - (6'6\")",
+                                    "201cm - (6'7\")",
+                                    "203cm - (6'8\")",
+                                    "205cm - (6'9\")",
+                                    "208cm - (6'10\")",
+                                    "210cm - (6'11\")",
+                                    "213cm - (7'0\")",
+                                    // ... other height options
+                                  ].map((height) => (
+                                    <option key={height} value={height}>
+                                      {height}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+
+                              {/* Age */}
+                              <div>
+                                <label className="block text-gray-700 font-medium mb-3">
+                                  Age
+                                </label>
+                                <select
+                                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
+                                  value={formData.age}
+                                  onChange={(e) => handleChange("age", e.target.value)}
+                                >
+                                  {Array.from({ length: 82 }, (_, i) => i + 19).map((age) => (
+                                    <option key={age} value={age.toString()}>
+                                      {age}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+
+                              {/* Body Type */}
+                              <div className="col-span-full">
+                                <label className="block text-gray-700 font-medium mb-3">
+                                  Body Type
+                                </label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                                  {[
+                                    "Slim / Slender",
+                                    "Athletic / Fit",
+                                    // ... other body types
+                                  ].map((type) => (
+                                    <div key={type} className="flex items-center">
                                       <input
-                                        className="form-check-input"
+                                        className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                         type="radio"
-                                        id={race.replace(/\s+/g, "")}
-                                        checked={formData.ethnicity === race}
-                                        onChange={() =>
-                                          handleChange("ethnicity", race)
-                                        }
+                                        id={type.replace(/\s+/g, "")}
+                                        checked={formData.bodyType === type}
+                                        onChange={() => handleChange("bodyType", type)}
                                       />
-                                      <label
-                                        className="form-check-label"
-                                        htmlFor={race.replace(/\s+/g, "")}
-                                      >
-                                        {race}
+                                      <label className="ml-2 text-gray-700 text-sm" htmlFor={type.replace(/\s+/g, "")}>
+                                        {type}
                                       </label>
                                     </div>
                                   ))}
@@ -442,274 +455,61 @@ const EditBasics = () => {
                               </div>
                             </div>
                           </div>
+                        </div>
 
-                          {/* Physical Attributes Section */}
-                          <div className="card mb-4 border-0 shadow-sm">
-                            <div className="card-header bg-light">
-                              <h5 className="mb-0 text-primary">
-                                Physical Attributes
-                              </h5>
-                            </div>
-                            <div className="card-body">
-                              <div className="row g-4">
-                                {/* Height */}
-                                <div className="col-md-6">
-                                  <label className="form-label fw-semibold">
-                                    Height
-                                  </label>
-                                  <Form.Select
-                                    className="form-select-lg"
-                                    value={formData.height}
-                                    onChange={(e) =>
-                                      handleChange("height", e.target.value)
-                                    }
-                                  >
-                                    {[
-                                      "150cm - (4'11\")",
-                                      "152cm - (5'0\")",
-                                      "155cm - (5'1\")",
-                                      "157cm - (5'2\")",
-                                      "160cm - (5'3\")",
-                                      "163cm - (5'4\")",
-                                      "165cm - (5'5\")",
-                                      "168cm - (5'6\")",
-                                      "170cm - (5'7\")",
-                                      "173cm - (5'8\")",
-                                      "175cm - (5'9\")",
-                                      "178cm - (5'10\")",
-                                      "180cm - (5'11\")",
-                                      "183cm - (6'0\")",
-                                      "185cm - (6'1\")",
-                                      "188cm - (6'2\")",
-                                      "191cm - (6'3\")",
-                                      "193cm - (6'4\")",
-                                      "195cm - (6'5\")",
-                                      "198cm - (6'6\")",
-                                      "201cm - (6'7\")",
-                                      "203cm - (6'8\")",
-                                      "205cm - (6'9\")",
-                                      "208cm - (6'10\")",
-                                      "210cm - (6'11\")",
-                                      "213cm - (7'0\")",
-                                    ].map((height) => (
-                                      <option key={height} value={height}>
-                                        {height}
-                                      </option>
-                                    ))}
-                                  </Form.Select>
-                                </div>
-
-                                {/* Age */}
-                                <div className="col-md-6">
-                                  <label className="form-label fw-semibold">
-                                    Age
-                                  </label>
-                                  <Form.Select
-                                    className="form-select-lg"
-                                    value={formData.age}
-                                    onChange={(e) =>
-                                      handleChange("age", e.target.value)
-                                    }
-                                  >
-                                    {Array.from(
-                                      { length: 82 },
-                                      (_, i) => i + 19
-                                    ).map((age) => (
-                                      <option key={age} value={age.toString()}>
-                                        {age}
-                                      </option>
-                                    ))}
-                                  </Form.Select>
-                                </div>
-
-                                {/* Body Type */}
-                                <div className="col-12">
-                                  <label className="form-label fw-semibold">
-                                    Body Type
-                                  </label>
-                                  <div className="d-flex flex-wrap gap-3">
-                                    {[
-                                      "Slim / Slender",
-                                      "Athletic / Fit",
-                                      "Average",
-                                      "Curvy",
-                                      "Muscular",
-                                      "A few extra pounds",
-                                      "Big and Beautiful",
-                                      "Heavy",
-                                    ].map((type) => (
-                                      <div key={type} className="form-check">
-                                        <input
-                                          className="form-check-input"
-                                          type="radio"
-                                          id={type.replace(/\s+/g, "")}
-                                          checked={formData.bodyType === type}
-                                          onChange={() =>
-                                            handleChange("bodyType", type)
-                                          }
-                                        />
-                                        <label
-                                          className="form-check-label"
-                                          htmlFor={type.replace(/\s+/g, "")}
-                                        >
-                                          {type}
-                                        </label>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                        {/* Lifestyle Section */}
+                        <div className="card bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm">
+                          <div className="card-header bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] p-4">
+                            <h5 className="mb-0 text-white text-lg font-semibold">Lifestyle</h5>
                           </div>
-
-                          {/* Lifestyle Section */}
-                          <div className="card mb-4 border-0 shadow-sm">
-                            <div className="card-header bg-light">
-                              <h5 className="mb-0 text-primary">Lifestyle</h5>
-                            </div>
-                            <div className="card-body">
-                              {/* Marital Status */}
-                              <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                  Marital Status
-                                </label>
-                                <div className="d-flex flex-wrap gap-3">
-                                  {[
-                                    "Single",
-                                    "Divorced",
-                                    "Separated",
-                                    "Widowed",
-                                    "Attached",
-                                  ].map((status) => (
-                                    <div key={status} className="form-check">
+                          <div className="card-body p-6 space-y-6">
+                            {/* Marital Status */}
+                            <div>
+                              <label className="block text-gray-700 font-medium mb-3">
+                                Marital Status
+                              </label>
+                              <div className="flex flex-wrap gap-4">
+                                {["Single", "Divorced", "Separated", "Widowed", "Attached"].map(
+                                  (status) => (
+                                    <div key={status} className="flex items-center">
                                       <input
-                                        className="form-check-input"
+                                        className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                         type="radio"
                                         id={status}
-                                        checked={
-                                          formData.maritalStatus === status
-                                        }
-                                        onChange={() =>
-                                          handleChange("maritalStatus", status)
-                                        }
+                                        checked={formData.maritalStatus === status}
+                                        onChange={() => handleChange("maritalStatus", status)}
                                       />
-                                      <label
-                                        className="form-check-label"
-                                        htmlFor={status}
-                                      >
+                                      <label className="ml-2 text-gray-700" htmlFor={status}>
                                         {status}
                                       </label>
                                     </div>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Children */}
-                              <div className="row g-4">
-                                <div className="col-md-6">
-                                  <label className="form-label fw-semibold">
-                                    Have Kids
-                                  </label>
-                                  <div className="d-flex flex-column gap-2">
-                                    {[
-                                      "No",
-                                      "Yes, they live at home",
-                                      "Yes, they sometimes live at home",
-                                      "Yes, they live away from home",
-                                    ].map((option) => (
-                                      <div key={option} className="form-check">
-                                        <input
-                                          className="form-check-input"
-                                          type="radio"
-                                          id={option.replace(/\s+/g, "")}
-                                          checked={formData.hasKids === option}
-                                          onChange={() =>
-                                            handleChange("hasKids", option)
-                                          }
-                                        />
-                                        <label
-                                          className="form-check-label"
-                                          htmlFor={option.replace(/\s+/g, "")}
-                                        >
-                                          {option}
-                                        </label>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                  <label className="form-label fw-semibold">
-                                    Want Kids
-                                  </label>
-                                  <div className="d-flex flex-column gap-2">
-                                    {["Yes", "No", "Maybe", "Undecided"].map(
-                                      (option) => (
-                                        <div
-                                          key={option}
-                                          className="form-check"
-                                        >
-                                          <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id={`w${option}`}
-                                            checked={
-                                              formData.wantsKids === option
-                                            }
-                                            onChange={() =>
-                                              handleChange("wantsKids", option)
-                                            }
-                                          />
-                                          <label
-                                            className="form-check-label"
-                                            htmlFor={`w${option}`}
-                                          >
-                                            {option}
-                                          </label>
-                                        </div>
-                                      )
-                                    )}
-                                  </div>
-                                </div>
+                                  )
+                                )}
                               </div>
                             </div>
-                          </div>
 
-                          {/* Relationship Preferences Section */}
-                          <div className="card mb-4 border-0 shadow-sm">
-                            <div className="card-header bg-light">
-                              <h5 className="mb-0 text-primary">
-                                Relationship Preferences
-                              </h5>
-                            </div>
-                            <div className="card-body">
-                              {/* Here For */}
-                              <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                  Looking For
+                            {/* Children */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div>
+                                <label className="block text-gray-700 font-medium mb-3">
+                                  Have Kids
                                 </label>
-                                <div className="d-flex flex-wrap gap-3">
+                                <div className="space-y-2">
                                   {[
-                                    "Long-term",
-                                    "Short-term",
-                                    "Dating",
-                                    "Friendship",
-                                    "Hangout Buddy",
+                                    "No",
+                                    "Yes, they live at home",
+                                    "Yes, they sometimes live at home",
+                                    "Yes, they live away from home",
                                   ].map((option) => (
-                                    <div key={option} className="form-check">
+                                    <div key={option} className="flex items-center">
                                       <input
-                                        className="form-check-input"
+                                        className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                         type="radio"
                                         id={option.replace(/\s+/g, "")}
-                                        checked={formData.hereFor === option}
-                                        onChange={() =>
-                                          handleChange("hereFor", option)
-                                        }
+                                        checked={formData.hasKids === option}
+                                        onChange={() => handleChange("hasKids", option)}
                                       />
-                                      <label
-                                        className="form-check-label"
-                                        htmlFor={option.replace(/\s+/g, "")}
-                                      >
+                                      <label className="ml-2 text-gray-700 text-sm" htmlFor={option.replace(/\s+/g, "")}>
                                         {option}
                                       </label>
                                     </div>
@@ -717,29 +517,21 @@ const EditBasics = () => {
                                 </div>
                               </div>
 
-                              {/* Relocate */}
-                              <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                  Willing to Relocate
+                              <div>
+                                <label className="block text-gray-700 font-medium mb-3">
+                                  Want Kids
                                 </label>
-                                <div className="d-flex flex-wrap gap-3">
-                                  {["No", "Yes", "Undecided"].map((option) => (
-                                    <div key={option} className="form-check">
+                                <div className="space-y-2">
+                                  {["Yes", "No", "Maybe", "Undecided"].map((option) => (
+                                    <div key={option} className="flex items-center">
                                       <input
-                                        className="form-check-input"
+                                        className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                         type="radio"
-                                        id={`${option}r`}
-                                        checked={
-                                          formData.wouldRelocate === option
-                                        }
-                                        onChange={() =>
-                                          handleChange("wouldRelocate", option)
-                                        }
+                                        id={`w${option}`}
+                                        checked={formData.wantsKids === option}
+                                        onChange={() => handleChange("wantsKids", option)}
                                       />
-                                      <label
-                                        className="form-check-label"
-                                        htmlFor={`${option}r`}
-                                      >
+                                      <label className="ml-2 text-gray-700 text-sm" htmlFor={`w${option}`}>
                                         {option}
                                       </label>
                                     </div>
@@ -748,25 +540,84 @@ const EditBasics = () => {
                               </div>
                             </div>
                           </div>
+                        </div>
 
-                          {/* Submit Button */}
-                          <div className="text-center mt-4">
-                            <Button
-                              type="submit"
-                              className="btn-primary px-5 py-3 fw-bold"
-                              size="lg"
-                            >
-                              Save Profile Changes
-                            </Button>
+                        {/* Relationship Preferences Section */}
+                        <div className="card bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm">
+                          <div className="card-header bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] p-4">
+                            <h5 className="mb-0 text-white text-lg font-semibold">
+                              Relationship Preferences
+                            </h5>
                           </div>
-                        </form>
-                      </div>
+                          <div className="card-body p-6 space-y-6">
+                            {/* Here For */}
+                            <div>
+                              <label className="block text-gray-700 font-medium mb-3">
+                                Looking For
+                              </label>
+                              <div className="flex flex-wrap gap-4">
+                                {[
+                                  "Long-term",
+                                  "Short-term",
+                                  "Dating",
+                                  "Friendship",
+                                  "Hangout Buddy",
+                                ].map((option) => (
+                                  <div key={option} className="flex items-center">
+                                    <input
+                                      className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
+                                      type="radio"
+                                      id={option.replace(/\s+/g, "")}
+                                      checked={formData.hereFor === option}
+                                      onChange={() => handleChange("hereFor", option)}
+                                    />
+                                    <label className="ml-2 text-gray-700" htmlFor={option.replace(/\s+/g, "")}>
+                                      {option}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Relocate */}
+                            <div>
+                              <label className="block text-gray-700 font-medium mb-3">
+                                Willing to Relocate
+                              </label>
+                              <div className="flex flex-wrap gap-4">
+                                {["No", "Yes", "Undecided"].map((option) => (
+                                  <div key={option} className="flex items-center">
+                                    <input
+                                      className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
+                                      type="radio"
+                                      id={`${option}r`}
+                                      checked={formData.wouldRelocate === option}
+                                      onChange={() => handleChange("wouldRelocate", option)}
+                                    />
+                                    <label className="ml-2 text-gray-700" htmlFor={`${option}r`}>
+                                      {option}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="text-center mt-8">
+                          <button
+                            type="submit"
+                            className="bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] hover:from-[#8a63f7] hover:to-[#6d4cf5] text-white font-bold py-3 px-8 rounded-full shadow-md transition duration-200 transform hover:scale-105"
+                          >
+                            Save Profile Changes
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                  {/* );
-}; */}
-                </Col>
-              </Row>
+                </div>
+              </div>
             </Container>
           </div>
         </div>

@@ -105,7 +105,7 @@ const Profile = () => {
 
 
 
-  
+
    useEffect(() => {
       const fetchLocation = async () => {
          try {
@@ -258,482 +258,482 @@ const Profile = () => {
    }
    // Profile Image View End
    return (
-   <CommonLayout>
-  <ImgViewer />
-  <section className="relative w-full overflow-hidden">
-    <img src={shape} alt="shape" className="w-full" />
-  </section>
-  
-  <div className="container mx-auto px-4 py-5 mb-5">
-    <div className="relative">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Left Panel */}
-          <div className="w-full md:w-1/4 space-y-6">
-            {/* Online Users */}
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
-              <h5 className="font-bold border-b pb-2 mb-3">Users Online Now</h5>
-              <div className="flex justify-between">
-                <div className="w-1/2 pr-2 border-r">
-                  <h6 className="text-sm text-gray-600">Women</h6>
-                  <h4 className="text-xl font-bold">1234</h4>
-                </div>
-                <div className="w-1/2 pl-2">
-                  <h6 className="text-sm text-gray-600">Men</h6>
-                  <h4 className="text-xl font-bold">1565</h4>
-                </div>
-              </div>
-            </div>
+      <CommonLayout>
+         <ImgViewer />
+         <section className="relative w-full overflow-hidden">
+            <img src={shape} alt="shape" className="w-full" />
+         </section>
 
-            {/* Navigation */}
-            <div className="bg-white rounded-lg shadow-md p-4">
-              <ul className="space-y-2">
-                <li>
-                  <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={homea} alt="home" className="w-5 h-5" /> Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/search-results" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={serr} alt="search" className="w-5 h-5" /> Search Results
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/live-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={liveicon} alt="live" className="w-5 h-5" /> Live Users
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/who-viewed-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={viewedMe} alt="viewed" className="w-5 h-5" /> Who Viewed Me
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/who-likes-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={myLikes} alt="likes" className="w-5 h-5" /> Who Likes Me
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/my-likes" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={likesMe} alt="my likes" className="w-5 h-5" /> My Likes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/your-matches" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={yourm} alt="matches" className="w-5 h-5" /> Your Matches
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/blocked-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={blockedUsers} alt="blocked" className="w-5 h-5" /> Blocked Users
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingView} alt="profile" className="w-5 h-5" /> View Profile
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/edit-basics" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingEdit} alt="edit" className="w-5 h-5" /> Edit Profile
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/manage-media" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={manageMedia} alt="media" className="w-5 h-5" /> Manage Media
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/reset-password" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingReset} alt="reset" className="w-5 h-5" /> Reset Password
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/update-location" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingUpload} alt="location" className="w-5 h-5" /> Update Location
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/hide-profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingHide} alt="hide" className="w-5 h-5" /> Hide Profile
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/delete-account" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingDelete} alt="delete" className="w-5 h-5" /> Delete Account
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink exact to="/logout" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                    <img src={settingLogout} alt="logout" className="w-5 h-5" /> Logout
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-
-            {/* Ads */}
-            <div className="space-y-5">
-              <img src={adda} alt="ad" className="w-full rounded-lg" />
-              <img src={adda} alt="ad" className="w-full rounded-lg" />
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="w-full md:w-3/4">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              {/* Profile Header */}
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-gray-600">Member since May 29, 2021</p>
-                <div className="flex items-center text-gray-600">
-                  <img src={calendar} alt="calendar" className="w-4 h-4 mr-1" />
-                  Last online 1 Day 14 Hours
-                </div>
-              </div>
-
-              {/* Profile Picture */}
-              <div className="flex flex-col items-center mb-6">
-                <div className="relative mb-4">
-                  <img
-                    onClick={viewProfileImg}
-                    src={profileDetails?.photo || profile}
-                    alt="profile"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
-                  />
-                </div>
-                <div className="flex gap-4">
-                  <span>
-                    <img src={profilicon1} alt="icon" className="w-6 h-6" />
-                  </span>
-                  <span>
-                    <img src={profilicon2} alt="icon" className="w-6 h-6" />
-                  </span>
-                  <span>
-                    <img src={profilicon3} alt="icon" className="w-6 h-6" />
-                  </span>
-                  <span>
-                    <img src={profilicon4} alt="icon" className="w-6 h-6" />
-                  </span>
-                </div>
-              </div>
-
-              {/* Profile Details */}
-              <div className="text-center mb-6">
-                <h1 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
-                  {user?.username}
-                  <span className="relative group">
-                    <img src={proficon} alt="verified" className="w-5 h-5" />
-                    <span className="absolute hidden group-hover:block bg-white p-2 rounded shadow-lg text-xs w-32 left-1/2 transform -translate-x-1/2 mt-2">
-                      Verified! <img src={verifiedvac} alt="verified" className="inline ml-1" />
-                    </span>
-                  </span>
-                  <span className="relative group">
-                    <NavLink exact to="">
-                      <img src={vaccineIcon} alt="vaccine" className="w-5 h-5" />
-                      <span className="absolute hidden group-hover:block bg-white p-2 rounded shadow-lg text-xs w-48 left-1/2 transform -translate-x-1/2 mt-2">
-                        Yes, I'm Vaccinated <img src={likevac} alt="like" className="inline ml-1" />
-                      </span>
-                    </NavLink>
-                  </span>
-                </h1>
-
-                <p className="text-gray-600 mb-4 flex items-center justify-center gap-1">
-                  {userLocation?.city && userLocation?.country ? (
-                    <>
-                      <img src={location} alt="location" className="w-4 h-4" />
-                      {userLocation.city}, {userLocation.country}
-                    </>
-                  ) : (
-                    <span>No location set</span>
-                  )}
-                  
-                  <Accordion className="inline-block" defaultActiveKey={['0']} alwaysOpen>
-                    <Accordion.Item eventKey="0">
-                      <Accordion.Header className="p-0">
-                        <img src={threedots} alt="menu" className="w-4 h-4 cursor-pointer" />
-                      </Accordion.Header>
-                      <Accordion.Body className="absolute bg-white shadow-lg rounded-md p-2 z-10">
-                        <div className="space-y-2">
-                          <Dropdown.Item onClick={() => setIsShowHideFormSearch(true)} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                            <img src={hideicona} alt="hide" className="w-4 h-4" />
-                            Hide from search
-                          </Dropdown.Item>
-                          {isShowHideFormSearch && <HideFormSearch isShowHideFormSearch={isShowHideFormSearch} handleHideFormSearch={setIsShowHideFormSearch} />}
-                          <Dropdown.Item onClick={() => setIsBlockUser(true)} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                            <img src={blockusericon} alt="block" className="w-4 h-4" />
-                            Block user
-                          </Dropdown.Item>
-                          {isShowBlockUser && <BlockUserPro isShowBlockUser={isShowBlockUser} handleBlockUser={setIsBlockUser} />}
-                          <Dropdown.Item className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                            <NavLink exact to="/report" className="flex items-center gap-2">
-                              <img src={reporticon} alt="report" className="w-4 h-4" />
-                              Report
-                            </NavLink>
-                          </Dropdown.Item>
+         <div className="container mx-auto px-4 py-5 mb-5">
+            <div className="relative">
+               <div className="max-w-7xl mx-auto">
+                  <div className="flex flex-col md:flex-row gap-6">
+                     {/* Left Panel */}
+                     <div className="w-full md:w-1/4 space-y-6">
+                        {/* Online Users */}
+                        <div className="bg-white rounded-lg shadow-md p-4 text-center">
+                           <h5 className="font-bold border-b pb-2 mb-3">Users Online Now</h5>
+                           <div className="flex justify-between">
+                              <div className="w-1/2 pr-2 border-r">
+                                 <h6 className="text-sm text-gray-600">Women</h6>
+                                 <h4 className="text-xl font-bold">1234</h4>
+                              </div>
+                              <div className="w-1/2 pl-2">
+                                 <h6 className="text-sm text-gray-600">Men</h6>
+                                 <h4 className="text-xl font-bold">1565</h4>
+                              </div>
+                           </div>
                         </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-                </p>
 
-                <div className="text-left max-w-2xl mx-auto">
-                  {profileDetails ? (
-                    <>
-                      <h2 className="font-semibold mb-2">
-                        {profileDetails.gender === 'Woman' ? 'Woman seeking Man' :
-                         profileDetails.gender === 'Man' ? 'Man seeking Woman' :
-                         'Not specified'}
-                        {profileDetails.age && ` age(${profileDetails.age}) +`}
-                      </h2>
-                      <div className="space-y-2">
-                        <p className="flex items-center gap-2">
-                          <span className="inline-flex items-center">
-                            {profileDetails.age && `${profileDetails.age}, `}
-                            {profileDetails.maritalStatus && `${profileDetails.maritalStatus}, `}
-                            {profileDetails.ethnicity && `${profileDetails.ethnicity}, `}
-                            {profileDetails.height && profileDetails.height}
-                          </span>
-                        </p>
-                        <p className="flex items-center gap-2">
-                          <img src={bodytype2} alt="body type" className="w-4 h-4" />
-                          {profileDetails.bodyType || 'Not specified'}
-                        </p>
-                        <p className="flex items-center gap-2">
-                          <img src={kids2} alt="kids" className="w-4 h-4" />
-                          {profileDetails.hasKids || 'Not specified'}
-                        </p>
-                        <p className="flex items-center gap-2">
-                          <img src={wantkids2} alt="wants kids" className="w-4 h-4" />
-                          {profileDetails.wantsKids || 'Not specified'}
-                        </p>
-                        <p className="flex items-center gap-2">
-                          <img src={herefor2} alt="relationship" className="w-4 h-4" />
-                          {profileDetails.hereFor || 'Not specified'}
-                        </p>
-                      </div>
-                      <Link to="/edit-basics" className="inline-block mt-4 px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50">
-                        Edit Information
-                      </Link>
-                    </>
-                  ) : (
-                    <Link to="/edit-profile" className="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                      Add Your Information
-                    </Link>
-                  )}
-                </div>
-              </div>
+                        {/* Navigation */}
+                        <div className="bg-white rounded-lg shadow-md p-4">
+                           <ul className="space-y-2">
+                              <li>
+                                 <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={homea} alt="home" className="w-5 h-5" /> Home
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/search-results" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={serr} alt="search" className="w-5 h-5" /> Search Results
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/live-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={liveicon} alt="live" className="w-5 h-5" /> Live Users
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/who-viewed-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={viewedMe} alt="viewed" className="w-5 h-5" /> Who Viewed Me
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/who-likes-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={myLikes} alt="likes" className="w-5 h-5" /> Who Likes Me
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/my-likes" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={likesMe} alt="my likes" className="w-5 h-5" /> My Likes
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/your-matches" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={yourm} alt="matches" className="w-5 h-5" /> Your Matches
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/blocked-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={blockedUsers} alt="blocked" className="w-5 h-5" /> Blocked Users
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingView} alt="profile" className="w-5 h-5" /> View Profile
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/edit-basics" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingEdit} alt="edit" className="w-5 h-5" /> Edit Profile
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/manage-media" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={manageMedia} alt="media" className="w-5 h-5" /> Manage Media
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/reset-password" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingReset} alt="reset" className="w-5 h-5" /> Reset Password
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/update-location" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingUpload} alt="location" className="w-5 h-5" /> Update Location
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/hide-profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingHide} alt="hide" className="w-5 h-5" /> Hide Profile
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/delete-account" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingDelete} alt="delete" className="w-5 h-5" /> Delete Account
+                                 </NavLink>
+                              </li>
+                              <li>
+                                 <NavLink exact to="/logout" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                    <img src={settingLogout} alt="logout" className="w-5 h-5" /> Logout
+                                 </NavLink>
+                              </li>
+                           </ul>
+                        </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <button className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-600 rounded hover:bg-blue-200">
-                  <img src={icon1profile} alt="message" className="w-5 h-5" />
-                  <span>Send Message</span>
-                </button>
-                <NavLink exact to="">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-600 rounded hover:bg-pink-200">
-                    <img src={icon2profile} alt="like" className="w-5 h-5" />
-                    <span>Like</span>
-                  </button>
-                </NavLink>
-                <NavLink exact to="">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-600 rounded hover:bg-green-200">
-                    <img src={icon3profile} alt="chat" className="w-5 h-5" />
-                    <span>Chat</span>
-                  </button>
-                </NavLink>
-                <NavLink exact to="">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-600 rounded hover:bg-purple-200">
-                    <img src={icon4profile} alt="video" className="w-5 h-5" />
-                    <span>Video Call</span>
-                  </button>
-                </NavLink>
-              </div>
+                        {/* Ads */}
+                        <div className="space-y-5">
+                           <img src={adda} alt="ad" className="w-full rounded-lg" />
+                           <img src={adda} alt="ad" className="w-full rounded-lg" />
+                        </div>
+                     </div>
 
-              {/* Profile Sections */}
-              <div className="space-y-6">
-                {/* Headline */}
-                <div className="text-left">
-                  <h2 className="text-xl font-semibold mb-2">Headline:</h2>
-                  <p className="text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                  </p>
-                </div>
+                     {/* Main Content */}
+                     <div className="w-full md:w-3/4">
+                        <div className="bg-white rounded-lg shadow-md p-6">
+                           {/* Profile Header */}
+                           <div className="flex justify-between items-center mb-4">
+                              <p className="text-gray-600">Member since May 29, 2021</p>
+                              <div className="flex items-center text-gray-600">
+                                 <img src={calendar} alt="calendar" className="w-4 h-4 mr-1" />
+                                 Last online 1 Day 14 Hours
+                              </div>
+                           </div>
 
-                {/* Compliment */}
-                <div className="text-left">
-                  <h2 className="text-xl font-semibold mb-2">Best compliment you've ever received:</h2>
-                  <p className="text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                  </p>
-                </div>
+                           {/* Profile Picture */}
+                           <div className="flex flex-col items-center mb-6">
+                              <div className="relative mb-4">
+                                 <img
+                                    onClick={viewProfileImg}
+                                    src={profileDetails?.photo || profile}
+                                    alt="profile"
+                                    className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
+                                 />
+                              </div>
+                              <div className="flex gap-4">
+                                 <span>
+                                    <img src={profilicon1} alt="icon" className="w-6 h-6" />
+                                 </span>
+                                 <span>
+                                    <img src={profilicon2} alt="icon" className="w-6 h-6" />
+                                 </span>
+                                 <span>
+                                    <img src={profilicon3} alt="icon" className="w-6 h-6" />
+                                 </span>
+                                 <span>
+                                    <img src={profilicon4} alt="icon" className="w-6 h-6" />
+                                 </span>
+                              </div>
+                           </div>
 
-                {/* Dealbreakers */}
-                <div className="text-left">
-                  <h2 className="text-xl font-semibold mb-2">What are your dealbreakers?</h2>
-                  <div className="space-y-2">
-                    <p className="text-gray-700">
-                      <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
-                    </p>
-                    <p className="text-gray-700">
-                      <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
-                    </p>
-                    <p className="text-gray-700">
-                      <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
-                    </p>
+                           {/* Profile Details */}
+                           <div className="text-center mb-6">
+                              <h1 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                                 {user?.username}
+                                 <span className="relative group">
+                                    <img src={proficon} alt="verified" className="w-5 h-5" />
+                                    <span className="absolute hidden group-hover:block bg-white p-2 rounded shadow-lg text-xs w-32 left-1/2 transform -translate-x-1/2 mt-2">
+                                       Verified! <img src={verifiedvac} alt="verified" className="inline ml-1" />
+                                    </span>
+                                 </span>
+                                 <span className="relative group">
+                                    <NavLink exact to="">
+                                       <img src={vaccineIcon} alt="vaccine" className="w-5 h-5" />
+                                       <span className="absolute hidden group-hover:block bg-white p-2 rounded shadow-lg text-xs w-48 left-1/2 transform -translate-x-1/2 mt-2">
+                                          Yes, I'm Vaccinated <img src={likevac} alt="like" className="inline ml-1" />
+                                       </span>
+                                    </NavLink>
+                                 </span>
+                              </h1>
+
+                              <p className="text-gray-600 mb-4 flex items-center justify-center gap-1">
+                                 {userLocation?.city && userLocation?.country ? (
+                                    <>
+                                       <img src={location} alt="location" className="w-4 h-4" />
+                                       {userLocation.city}, {userLocation.country}
+                                    </>
+                                 ) : (
+                                    <span>No location set</span>
+                                 )}
+
+                                 <Accordion className="inline-block" defaultActiveKey={['0']} alwaysOpen>
+                                    <Accordion.Item eventKey="0">
+                                       <Accordion.Header className="p-0">
+                                          <img src={threedots} alt="menu" className="w-4 h-4 cursor-pointer" />
+                                       </Accordion.Header>
+                                       <Accordion.Body className="absolute bg-white shadow-lg rounded-md p-2 z-10">
+                                          <div className="space-y-2">
+                                             <Dropdown.Item onClick={() => setIsShowHideFormSearch(true)} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                                <img src={hideicona} alt="hide" className="w-4 h-4" />
+                                                Hide from search
+                                             </Dropdown.Item>
+                                             {isShowHideFormSearch && <HideFormSearch isShowHideFormSearch={isShowHideFormSearch} handleHideFormSearch={setIsShowHideFormSearch} />}
+                                             <Dropdown.Item onClick={() => setIsBlockUser(true)} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                                <img src={blockusericon} alt="block" className="w-4 h-4" />
+                                                Block user
+                                             </Dropdown.Item>
+                                             {isShowBlockUser && <BlockUserPro isShowBlockUser={isShowBlockUser} handleBlockUser={setIsBlockUser} />}
+                                             <Dropdown.Item className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                                                <NavLink exact to="/report" className="flex items-center gap-2">
+                                                   <img src={reporticon} alt="report" className="w-4 h-4" />
+                                                   Report
+                                                </NavLink>
+                                             </Dropdown.Item>
+                                          </div>
+                                       </Accordion.Body>
+                                    </Accordion.Item>
+                                 </Accordion>
+                              </p>
+
+                              <div className="text-left max-w-2xl mx-auto">
+                                 {profileDetails ? (
+                                    <>
+                                       <h2 className="font-semibold mb-2">
+                                          {profileDetails.gender === 'Woman' ? 'Woman seeking Man' :
+                                             profileDetails.gender === 'Man' ? 'Man seeking Woman' :
+                                                'Not specified'}
+                                          {profileDetails.age && ` age(${profileDetails.age}) +`}
+                                       </h2>
+                                       <div className="space-y-2">
+                                          <p className="flex items-center gap-2">
+                                             <span className="inline-flex items-center">
+                                                {profileDetails.age && `${profileDetails.age}, `}
+                                                {profileDetails.maritalStatus && `${profileDetails.maritalStatus}, `}
+                                                {profileDetails.ethnicity && `${profileDetails.ethnicity}, `}
+                                                {profileDetails.height && profileDetails.height}
+                                             </span>
+                                          </p>
+                                          <p className="flex items-center gap-2">
+                                             <img src={bodytype2} alt="body type" className="w-4 h-4" />
+                                             {profileDetails.bodyType || 'Not specified'}
+                                          </p>
+                                          <p className="flex items-center gap-2">
+                                             <img src={kids2} alt="kids" className="w-4 h-4" />
+                                             {profileDetails.hasKids || 'Not specified'}
+                                          </p>
+                                          <p className="flex items-center gap-2">
+                                             <img src={wantkids2} alt="wants kids" className="w-4 h-4" />
+                                             {profileDetails.wantsKids || 'Not specified'}
+                                          </p>
+                                          <p className="flex items-center gap-2">
+                                             <img src={herefor2} alt="relationship" className="w-4 h-4" />
+                                             {profileDetails.hereFor || 'Not specified'}
+                                          </p>
+                                       </div>
+                                       <Link to="/edit-basics" className="inline-block mt-4 px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50">
+                                          Edit Information
+                                       </Link>
+                                    </>
+                                 ) : (
+                                    <Link to="/edit-profile" className="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                                       Add Your Information
+                                    </Link>
+                                 )}
+                              </div>
+                           </div>
+
+                           {/* Action Buttons */}
+                           <div className="flex flex-wrap justify-center gap-4 mb-8">
+                              <button className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-600 rounded hover:bg-blue-200">
+                                 <img src={icon1profile} alt="message" className="w-5 h-5" />
+                                 <span>Send Message</span>
+                              </button>
+                              <NavLink exact to="">
+                                 <button className="flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-600 rounded hover:bg-pink-200">
+                                    <img src={icon2profile} alt="like" className="w-5 h-5" />
+                                    <span>Like</span>
+                                 </button>
+                              </NavLink>
+                              <NavLink exact to="">
+                                 <button className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-600 rounded hover:bg-green-200">
+                                    <img src={icon3profile} alt="chat" className="w-5 h-5" />
+                                    <span>Chat</span>
+                                 </button>
+                              </NavLink>
+                              <NavLink exact to="">
+                                 <button className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-600 rounded hover:bg-purple-200">
+                                    <img src={icon4profile} alt="video" className="w-5 h-5" />
+                                    <span>Video Call</span>
+                                 </button>
+                              </NavLink>
+                           </div>
+
+                           {/* Profile Sections */}
+                           <div className="space-y-6">
+                              {/* Headline */}
+                              <div className="text-left">
+                                 <h2 className="text-xl font-semibold mb-2">Headline:</h2>
+                                 <p className="text-gray-700">
+                                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                                 </p>
+                              </div>
+
+                              {/* Compliment */}
+                              <div className="text-left">
+                                 <h2 className="text-xl font-semibold mb-2">Best compliment you've ever received:</h2>
+                                 <p className="text-gray-700">
+                                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                                 </p>
+                              </div>
+
+                              {/* Dealbreakers */}
+                              <div className="text-left">
+                                 <h2 className="text-xl font-semibold mb-2">What are your dealbreakers?</h2>
+                                 <div className="space-y-2">
+                                    <p className="text-gray-700">
+                                       <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
+                                    </p>
+                                    <p className="text-gray-700">
+                                       <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
+                                    </p>
+                                    <p className="text-gray-700">
+                                       <span className="font-medium">We're not a match if...</span> Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy
+                                    </p>
+                                 </div>
+                              </div>
+
+                              {/* Ads */}
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                                 <img src={adda} alt="ad" className="w-full rounded" />
+                                 <img src={adda} alt="ad" className="w-full rounded" />
+                                 <img src={adda} alt="ad" className="w-full rounded" />
+                              </div>
+
+                              {/* Photos */}
+                              <div className="text-left mt-8">
+                                 <h3 className="text-xl font-semibold mb-4">My Photos <span className="text-gray-500">9</span></h3>
+                                 <div className="my-photo-block">
+                                    <ImageGallary imgList={gallaryImgList} />
+                                 </div>
+                              </div>
+
+                              {/* Video */}
+                              <div className="text-left mt-8">
+                                 <h3 className="text-xl font-semibold mb-4">Video <span className="text-gray-500">1</span></h3>
+                                 <div className="video-block">
+                                    <ul>
+                                       <li>
+                                          <img src={profilevid} alt="video" className="w-full rounded" />
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+
+                              {/* About Me */}
+                              <div className="text-left mt-8">
+                                 <h3 className="text-xl font-semibold mb-3">About Me</h3>
+                                 <p className="text-gray-700">
+                                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                                    Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet  Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                                 </p>
+                              </div>
+
+                              {/* Looking For */}
+                              <div className="text-left mt-8">
+                                 <h3 className="text-xl font-semibold mb-4">I'm looking for...</h3>
+                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <ul className="space-y-3">
+                                       <li className="flex items-center gap-2">
+                                          <img src={gender} alt="gender" className="w-4 h-4" />
+                                          <span>Man</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={ages} alt="age" className="w-4 h-4" />
+                                          <span>24-34</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={race} alt="race" className="w-4 h-4" />
+                                          <span>White, Asian, Black, Middle Eastern</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={maritalstatus} alt="status" className="w-4 h-4" />
+                                          <span>Any</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={bodytype} alt="body" className="w-4 h-4" />
+                                          <span>Any</span>
+                                       </li>
+                                    </ul>
+                                    <ul className="space-y-3">
+                                       <li className="flex items-center gap-2">
+                                          <img src={havekids} alt="kids" className="w-4 h-4" />
+                                          <span>No</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={wantkids} alt="want kids" className="w-4 h-4" />
+                                          <span>No</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={herefor} alt="purpose" className="w-4 h-4" />
+                                          <span>Long-term</span>
+                                       </li>
+                                       <li className="flex items-center gap-2">
+                                          <img src={relocate} alt="relocate" className="w-4 h-4" />
+                                          <span>No</span>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+
+                              {/* Message Form */}
+                              <div className="text-left mt-8">
+                                 <h3 className="text-xl font-semibold mb-4">Say Hello to {user?.username}</h3>
+                                 <div className="relative">
+                                    <input
+                                       type="text"
+                                       placeholder="Type your message here"
+                                       className="w-full p-3 border rounded-lg pr-10"
+                                    />
+                                    <span className="absolute right-3 top-3 text-blue-500 cursor-pointer">
+                                       <MdNearMe className="text-xl" />
+                                    </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* Similar Users */}
+                        <div className="mt-8">
+                           <h5 className="text-xl font-semibold mb-4">Similar Users</h5>
+                           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                                 <NavLink exact to="">
+                                    <img src={sm1} alt="user" className="w-full h-48 object-cover" />
+                                    <div className="p-4">
+                                       <h6 className="font-bold">Mary123</h6>
+                                       <p className="text-sm text-gray-600">31, Female, Single</p>
+                                       <p className="text-sm text-gray-600">Lomita, CA</p>
+                                    </div>
+                                 </NavLink>
+                              </div>
+                              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                                 <NavLink exact to="">
+                                    <img src={sm2} alt="user" className="w-full h-48 object-cover" />
+                                    <div className="p-4">
+                                       <h6 className="font-bold">Suzy</h6>
+                                       <p className="text-sm text-gray-600">Mary123</p>
+                                       <p className="text-sm text-gray-600">Lomita, CA</p>
+                                    </div>
+                                 </NavLink>
+                              </div>
+                              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                                 <NavLink exact to="">
+                                    <img src={sm3} alt="user" className="w-full h-48 object-cover" />
+                                    <div className="p-4">
+                                       <h6 className="font-bold">Mary123</h6>
+                                       <p className="text-sm text-gray-600">31, Female, Single</p>
+                                       <p className="text-sm text-gray-600">Lomita, CA</p>
+                                    </div>
+                                 </NavLink>
+                              </div>
+                              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                                 <NavLink exact to="">
+                                    <img src={sm4} alt="user" className="w-full h-48 object-cover" />
+                                    <div className="p-4">
+                                       <h6 className="font-bold">Suzy</h6>
+                                       <p className="text-sm text-gray-600">31, Female, Single</p>
+                                       <p className="text-sm text-gray-600">Lomita, CA</p>
+                                    </div>
+                                 </NavLink>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                </div>
-
-                {/* Ads */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                  <img src={adda} alt="ad" className="w-full rounded" />
-                  <img src={adda} alt="ad" className="w-full rounded" />
-                  <img src={adda} alt="ad" className="w-full rounded" />
-                </div>
-
-                {/* Photos */}
-                <div className="text-left mt-8">
-                  <h3 className="text-xl font-semibold mb-4">My Photos <span className="text-gray-500">9</span></h3>
-                  <div className="my-photo-block">
-                    <ImageGallary imgList={gallaryImgList} />
-                  </div>
-                </div>
-
-                {/* Video */}
-                <div className="text-left mt-8">
-                  <h3 className="text-xl font-semibold mb-4">Video <span className="text-gray-500">1</span></h3>
-                  <div className="video-block">
-                    <ul>
-                      <li>
-                        <img src={profilevid} alt="video" className="w-full rounded" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* About Me */}
-                <div className="text-left mt-8">
-                  <h3 className="text-xl font-semibold mb-3">About Me</h3>
-                  <p className="text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetuer adipuiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet  Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                  </p>
-                </div>
-
-                {/* Looking For */}
-                <div className="text-left mt-8">
-                  <h3 className="text-xl font-semibold mb-4">I'm looking for...</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-2">
-                        <img src={gender} alt="gender" className="w-4 h-4" />
-                        <span>Man</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={ages} alt="age" className="w-4 h-4" />
-                        <span>24-34</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={race} alt="race" className="w-4 h-4" />
-                        <span>White, Asian, Black, Middle Eastern</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={maritalstatus} alt="status" className="w-4 h-4" />
-                        <span>Any</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={bodytype} alt="body" className="w-4 h-4" />
-                        <span>Any</span>
-                      </li>
-                    </ul>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-2">
-                        <img src={havekids} alt="kids" className="w-4 h-4" />
-                        <span>No</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={wantkids} alt="want kids" className="w-4 h-4" />
-                        <span>No</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={herefor} alt="purpose" className="w-4 h-4" />
-                        <span>Long-term</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <img src={relocate} alt="relocate" className="w-4 h-4" />
-                        <span>No</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Message Form */}
-                <div className="text-left mt-8">
-                  <h3 className="text-xl font-semibold mb-4">Say Hello to {user?.username}</h3>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Type your message here"
-                      className="w-full p-3 border rounded-lg pr-10"
-                    />
-                    <span className="absolute right-3 top-3 text-blue-500 cursor-pointer">
-                      <MdNearMe className="text-xl" />
-                    </span>
-                  </div>
-                </div>
-              </div>
+               </div>
             </div>
-
-            {/* Similar Users */}
-            <div className="mt-8">
-              <h5 className="text-xl font-semibold mb-4">Similar Users</h5>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <NavLink exact to="">
-                    <img src={sm1} alt="user" className="w-full h-48 object-cover" />
-                    <div className="p-4">
-                      <h6 className="font-bold">Mary123</h6>
-                      <p className="text-sm text-gray-600">31, Female, Single</p>
-                      <p className="text-sm text-gray-600">Lomita, CA</p>
-                    </div>
-                  </NavLink>
-                </div>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <NavLink exact to="">
-                    <img src={sm2} alt="user" className="w-full h-48 object-cover" />
-                    <div className="p-4">
-                      <h6 className="font-bold">Suzy</h6>
-                      <p className="text-sm text-gray-600">Mary123</p>
-                      <p className="text-sm text-gray-600">Lomita, CA</p>
-                    </div>
-                  </NavLink>
-                </div>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <NavLink exact to="">
-                    <img src={sm3} alt="user" className="w-full h-48 object-cover" />
-                    <div className="p-4">
-                      <h6 className="font-bold">Mary123</h6>
-                      <p className="text-sm text-gray-600">31, Female, Single</p>
-                      <p className="text-sm text-gray-600">Lomita, CA</p>
-                    </div>
-                  </NavLink>
-                </div>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <NavLink exact to="">
-                    <img src={sm4} alt="user" className="w-full h-48 object-cover" />
-                    <div className="p-4">
-                      <h6 className="font-bold">Suzy</h6>
-                      <p className="text-sm text-gray-600">31, Female, Single</p>
-                      <p className="text-sm text-gray-600">Lomita, CA</p>
-                    </div>
-                  </NavLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</CommonLayout>
+         </div>
+      </CommonLayout>
    );
 };
 export default Profile; 
