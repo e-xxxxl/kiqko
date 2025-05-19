@@ -24,6 +24,7 @@ import liveicon from '../../assets/images/liveicon.png';
 import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
+import OnlineUsers from "../profile/OnlineUsers/OnlineUsers";
 // import './Setting.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -87,155 +88,161 @@ const DeleteAccount = () => {
     };
     return (
         <CommonLayout>
-            <section className="all-top-shape">
-                <img src={shape} alt="shape" />
-            </section>
-            <div className="all-container">
-                <div className="pr pb-5 mb-5">
-                    <div className="page-wrapper-all">
-                        <Container>
-                            <Row>
-                                <Col md={3}>
-                                    <div className="left-panel-allpages mar-top-left">
-                                        <div className="top-user-id text-center">
-                                            <div className="online-user-all">
-                                                <h5 className="border-h5">Users Online Now</h5>
-                                                <div className="online-user-status border-right-online">
-                                                    <h6>Women</h6>
-                                                    <h4>1234</h4>
-                                                </div>
-                                                <div className="online-user-status">
-                                                    <h6>men</h6>
-                                                    <h4>1565</h4>
-                                                </div>
-                                            </div>
-                                        </div>
+  {/* Top decorative shape - hidden on mobile */}
+  <section className="hidden md:block">
+    <img src={shape} alt="shape" className="w-full" />
+  </section>
 
-                                        <div className="user-type-left">
-                                            <ul className="list-user-type left-nav">
-                                                <li>
-                                                    <NavLink exact to="/profile" activeClassName="active"><img src={homea} alt="homea" />Home</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink exact to="/search-results" activeClassName="active"><img src={serr} alt="liveicon" />Search Results</NavLink>
-                                                </li>
-                                                <li><NavLink exact to="/live-users" activeClassName="active"><img src={liveicon} alt="liveicon" />Live Users</NavLink></li>
-                                                <li><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></li>
-                                                <li><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></li>
-                                                <li><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></li>
-                                                <li><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></li>
-                                                <li><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></li>
-                                                <li><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></li>
-                                                <li><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></li>
-                                                <li><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></li>
-                                                <li><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></li>
-                                                <li><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></li>
-                                                <li><NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></li>
-                                                <li><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></li>
-                                                <li><NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </Col>
+  {/* Main container */}
+  <div className="container mx-auto px-4 py-6">
+    <div className="flex flex-col lg:flex-row gap-6">
+      {/* Sidebar */}
+      <div className="w-full lg:w-1/4">
+        {/* Online users widget */}
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+                <OnlineUsers />
+        </div>
 
-                                <Col md={9}>
-                                    <div className="profile-main-part-area-inner bg-all-pages mb-0-see">
-                                        <Col md={12} className="all-title-top mb-4 text-center">
-                                            <h4>Delete Account </h4>
-                                        </Col>
+        {/* Navigation menu */}
+        <nav className="bg-white rounded-lg shadow-sm p-4">
+          <ul className="space-y-1">
+            {[
+              { to: "/profile", icon: homea, text: "Home" },
+              { to: "/search-results", icon: serr, text: "Search Results" },
+              { to: "/live-users", icon: liveicon, text: "Live Users" },
+              { to: "/who-viewed-you", icon: viewedMe, text: "Who Viewed Me" },
+              { to: "/who-likes-you", icon: myLikes, text: "Who Likes Me" },
+              { to: "/my-likes", icon: likesMe, text: "My Likes" },
+              { to: "/your-matches", icon: yourm, text: "Your Matches" },
+              { to: "/blocked-users", icon: blockedUsers, text: "Blocked Users" },
+              { to: "/profile", icon: settingView, text: "View Profile" },
+              { to: "/edit-basics", icon: settingEdit, text: "Edit Profile" },
+              { to: "/manage-media", icon: manageMedia, text: "Manage Media" },
+              { to: "/reset-password", icon: settingReset, text: "Reset Password" },
+              { to: "/update-location", icon: settingUpload, text: "Update Location" },
+              { to: "/hide-profile", icon: settingHide, text: "Hide Profile" },
+              { to: "/delete-account", icon: settingDelete, text: "Delete Account" },
+              { to: "/logout", icon: settingLogout, text: "Logout" },
+            ].map((item, index) => (
+              <li key={index}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) => 
+                    `flex items-center gap-3 p-3 rounded-lg transition-colors
+                    ${isActive ? 'bg-blue-50 text-blue-600 font-medium' : 'hover:bg-gray-50 text-gray-700'}`
+                  }
+                >
+                  <img src={item.icon} alt={item.text} className="w-5 h-5" />
+                  <span>{item.text}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
 
-                                        <div className="all-seting-area-pass">
-                                            <Row>
-                                                <Col md={12}>
-                                                    <p className="p-update-premium text-start">
-                                                        Deleting your account will permanently remove all your data from our system.
-                                                        This action cannot be undone.
-                                                    </p>
-                                                    <p className="p-update-premium mt-4 click-delete text-start">
-                                                        Consider <NavLink to="/hide-profile">hiding your profile</NavLink> instead if you want to take a break.
-                                                    </p>
-                                                </Col>
-                                            </Row>
-
-                                            <Row>
-                                                <Col md={6} className="pr-1 up-field">
-                                                    <Button
-                                                        className="btn-upgrade btn-later"
-                                                        variant="primary"
-                                                        onClick={() => history.push('/profile')}
-                                                    >
-                                                        Cancel
-                                                    </Button>
-                                                </Col>
-                                                <Col md={6} className="pl-0 up-field">
-                                                    <Button
-                                                        className="btn-upgrade btn-upgrade-now"
-                                                        variant="danger"
-                                                        onClick={() => setShowModal(true)}
-                                                        disabled={isDeleting}
-                                                    >
-                                                        {isDeleting ? 'Deleting...' : 'Delete Account'}
-                                                    </Button>
-                                                </Col>
-                                            </Row>
-
-                                            {/* Confirmation Modal */}
-                                            {showModal && (
-                                                <div className="modal-overlay">
-                                                    <div className="modal-content animate__animated animate__fadeInUp">
-                                                        <div className="modal-header">
-                                                            <div className="warning-icon">
-                                                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M12 8V12M12 16H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                                                                        stroke="#DC3545" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                                </svg>
-                                                            </div>
-                                                            <h3 className="modal-title">Final Confirmation</h3>
-                                                        </div>
-
-                                                        <div className="modal-body">
-                                                            <p className="warning-text">
-                                                                This will <span className="highlight">permanently delete</span> your account and all associated data.
-                                                            </p>
-                                                            <p className="warning-subtext">
-                                                                This action cannot be undone. All your matches, messages, and profile information will be lost forever.
-                                                            </p>
-                                                        </div>
-
-                                                        <div className="modal-footer">
-                                                            <button
-                                                                className="btn btn-secondary text-dark"
-                                                                onClick={() => setShowModal(false)}
-                                                            >
-                                                                Cancel
-                                                            </button>
-                                                            <button
-                                                                className="btn btn-danger text-dark"
-                                                                onClick={handleDeleteAccount}
-                                                                disabled={isDeleting}
-                                                            >
-                                                                {isDeleting ? (
-                                                                    <>
-                                                                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                                                        Deleting...
-                                                                    </>
-                                                                ) : (
-                                                                    'Yes, Delete Permanently'
-                                                                )}
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </div>
-                </div>
+      {/* Main content area */}
+      <div className="w-full lg:w-3/4">
+        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          {/* Delete Account Section */}
+          <div className="p-6 md:p-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+                Delete Account
+              </h2>
+              <div className="w-16 h-1 bg-red-500 mx-auto mt-3 rounded-full"></div>
             </div>
-        </CommonLayout>
+
+            <div className="max-w-2xl mx-auto">
+              <div className="space-y-4 mb-8">
+                <p className="text-gray-600">
+                  Deleting your account will <span className="font-semibold">permanently remove</span> all your data from our system.
+                  This action cannot be undone.
+                </p>
+                <p className="text-gray-600">
+                  Consider <NavLink to="/hide-profile" className="text-blue-500 hover:underline">hiding your profile</NavLink> instead if you want to take a break.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  className="flex-1 px-6 py-3 border border-gray-300 hover:border-gray-400 bg-white text-gray-700 font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                  onClick={() => history.push('/profile')}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="flex-1 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2 shadow-sm hover:shadow-md"
+                  onClick={() => setShowModal(true)}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Deleting...
+                    </>
+                  ) : 'Delete Account'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Confirmation Modal */}
+  {showModal && (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-xl max-w-md w-full p-6 animate-fade-in-up">
+        <div className="text-center mb-4">
+          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+            <svg className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mt-3">Final Confirmation</h3>
+        </div>
+
+        <div className="text-center mb-6">
+          <p className="text-gray-600 mb-2">
+            This will <span className="font-bold text-red-500">permanently delete</span> your account and all associated data.
+          </p>
+          <p className="text-gray-500 text-sm">
+            This action cannot be undone. All your matches, messages, and profile information will be lost forever.
+          </p>
+        </div>
+
+        <div className="flex gap-3 justify-center">
+          <button
+            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            onClick={handleDeleteAccount}
+            disabled={isDeleting}
+          >
+            {isDeleting ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Deleting...
+              </>
+            ) : 'Yes, Delete Permanently'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+</CommonLayout>
     )
 };
 

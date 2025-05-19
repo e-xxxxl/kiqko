@@ -33,143 +33,157 @@ import blockedUsers from '../../../assets/images/blockedUsers.png';
 import serr from '../../../assets/images/serr.png';
 const WhoViewedYou = () => {
     return (
-        <CommonLayout>
-        <section className="all-top-shape"> 
-        <img src={shape} alt="shape" />
-        </section>
-        <div className="all-container"> 
-        <div className="pb-5 mb-5">
-            <div className="page-wrapper-all">
-            <Container>
-            <Row>
-            <Col md={3}>
-                <div className="left-panel-allpages mar-top-left">
-                   <div className="top-user-id text-center">
-                       <div className="online-user-all">
-                       <h5 className="border-h5">Users Online Now</h5>
-                       <div className="online-user-status border-right-online">
-                           <h6>Women</h6>
-                           <h4>1234</h4>
-                       </div>
-                       <div className="online-user-status">
-                           <h6>men</h6>
-                           <h4>1565</h4>
-                       </div>
-                       </div>
-                      
-                      
-                   </div>
-                   
-                   
-                   <div className="user-type-left">
-                       <ul className="list-user-type left-nav">
-                           <li>
-                           <NavLink exact to="/profile" activeClassName="active"><img src={homea} alt="homea" />Home</NavLink>
-                           </li>
-                           <li>
-                              <NavLink exact to="/search-results" activeClassName="active"><img src={serr} alt="liveicon" />Search Results</NavLink>
-                           </li>
-                           <li><NavLink exact to="/live-users" activeClassName="active"><img src={liveicon} alt="liveicon" />Live Users</NavLink></li>
-                           <li><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></li>
-                           <li><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></li>
-                           <li><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></li>
-                           <li><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></li>
-                           <li><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></li>
-                           <li><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></li>
-                           <li><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></li>
-                           <li><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></li>
-                           <li><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></li>
-                           <li><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></li>
-                           <li><NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></li>
-                           <li><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></li>
-                           <li><NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></li>
-                               
-                        
-                       </ul> 
-                    </div>
+       <CommonLayout>
+  {/* Top decorative shape - hidden on mobile */}
+  <section className="hidden md:block">
+    <img src={shape} alt="shape" className="w-full" />
+  </section>
 
-             
-                    
-                </div>
-            </Col>
-            <Col md={9}>
-                <div className="profile-main-part-area-inner bg-all-pages con-width-all">
-                    <Col md={12} className="all-title-top mb-4 text-center">
-                        <h4>Who Viewed You</h4>
-                    </Col>
-                    <Col className="photo-list-all all-margin-connection all-user-pic width-cons" md={12}>
-                                        <ul>
-                                        <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={myphoto} alt="myphoto" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={fev1} alt="fev1" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo2} alt="photo2" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo3} alt="photo3" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo4} alt="photo4" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo5} alt="photo5" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo6} alt="photo6" />
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo7} alt="photo7" />
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </Col>
-                </div>
-            </Col>
-            </Row>
-            </Container>
+  {/* Main container */}
+  <div className="container mx-auto px-4 py-6">
+    <div className="flex flex-col lg:flex-row gap-6">
+      {/* Sidebar */}
+      <div className="w-full lg:w-1/4">
+        {/* Online users widget */}
+        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+          <h5 className="font-semibold text-gray-800 border-b pb-3 mb-4 text-center">
+            Users Online Now
+          </h5>
+          <div className="flex justify-around">
+            <div className="text-center p-3">
+              <div className="text-pink-500 mb-2">
+                <svg className="w-5 h-5 mx-auto" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                </svg>
+              </div>
+              <h6 className="text-xs text-gray-500 uppercase tracking-wider mb-1">Women</h6>
+              <h4 className="text-xl font-bold text-gray-800">1,234</h4>
             </div>
-        
+            <div className="text-center p-3">
+              <div className="text-blue-500 mb-2">
+                <svg className="w-5 h-5 mx-auto" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                </svg>
+              </div>
+              <h6 className="text-xs text-gray-500 uppercase tracking-wider mb-1">Men</h6>
+              <h4 className="text-xl font-bold text-gray-800">1,565</h4>
+            </div>
+          </div>
         </div>
+
+        {/* Navigation menu */}
+        <nav className="bg-white rounded-xl shadow-sm p-4">
+          <ul className="space-y-1">
+            {[
+              { to: "/profile", icon: homea, text: "Home" },
+              { to: "/search-results", icon: serr, text: "Search Results" },
+              { to: "/live-users", icon: liveicon, text: "Live Users" },
+              { to: "/who-viewed-you", icon: viewedMe, text: "Who Viewed Me", active: true },
+              { to: "/who-likes-you", icon: myLikes, text: "Who Likes Me" },
+              { to: "/my-likes", icon: likesMe, text: "My Likes" },
+              { to: "/your-matches", icon: yourm, text: "Your Matches" },
+              { to: "/blocked-users", icon: blockedUsers, text: "Blocked Users" },
+              { to: "/profile", icon: settingView, text: "View Profile" },
+              { to: "/edit-basics", icon: settingEdit, text: "Edit Profile" },
+              { to: "/manage-media", icon: manageMedia, text: "Manage Media" },
+              { to: "/reset-password", icon: settingReset, text: "Reset Password" },
+              { to: "/update-location", icon: settingUpload, text: "Update Location" },
+              { to: "/hide-profile", icon: settingHide, text: "Hide Profile" },
+              { to: "/delete-account", icon: settingDelete, text: "Delete Account" },
+              { to: "/logout", icon: settingLogout, text: "Logout" },
+            ].map((item, index) => (
+              <li key={index}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) => 
+                    `flex items-center gap-3 p-3 rounded-lg transition-colors
+                    ${isActive || item.active ? 'bg-blue-50 text-blue-600 font-medium' : 'hover:bg-gray-50 text-gray-700'}`
+                  }
+                >
+                  <img src={item.icon} alt={item.text} className="w-5 h-5" />
+                  <span>{item.text}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Main content area */}
+      <div className="w-full lg:w-3/4">
+        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          {/* Who Viewed You Section */}
+          <div className="p-6 md:p-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Who Viewed You</h2>
+              <div className="w-16 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
+              <p className="text-gray-500 mt-4">
+                These users have viewed your profile recently
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              {[
+                { id: 1, photo: myphoto, name: "User 1", time: "2 hours ago" },
+                { id: 2, photo: fev1, name: "User 2", time: "5 hours ago" },
+                { id: 3, photo: photo2, name: "User 3", time: "1 day ago" },
+                { id: 4, photo: photo3, name: "User 4", time: "1 day ago" },
+                { id: 5, photo: photo4, name: "User 5", time: "2 days ago" },
+                { id: 6, photo: photo5, name: "User 6", time: "3 days ago" },
+                { id: 7, photo: photo6, name: "User 7", time: "1 week ago" },
+                { id: 8, photo: photo7, name: "User 8", time: "1 week ago" },
+              ].map((user) => (
+                <div key={user.id} className="group relative text-center">
+                  <div className="aspect-square overflow-hidden rounded-xl bg-gray-100 mb-3 relative">
+                    <img 
+                      src={user.photo} 
+                      alt={`Profile of ${user.name}`} 
+                      className="w-full h-full object-cover group-hover:opacity-90 transition-opacity"
+                    />
+                    <button 
+                      className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:bg-gray-100 transition-colors"
+                      onClick={() => handleRemoveViewer(user.id)}
+                    >
+                      <MdClear className="w-4 h-4 text-gray-600" />
+                    </button>
+                  </div>
+                  <h4 className="font-medium text-gray-800 truncate">{user.name}</h4>
+                  <p className="text-xs text-gray-500">{user.time}</p>
+                  <button 
+                    className="mt-2 text-sm text-blue-500 hover:text-blue-600 hover:underline"
+                    onClick={() => handleViewProfile(user.id)}
+                  >
+                    View Profile
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Empty state */}
+            {[].length === 0 && (
+              <div className="text-center py-12">
+                <div className="mx-auto max-w-md">
+                  <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <h3 className="mt-2 text-lg font-medium text-gray-900">No profile views yet</h3>
+                  <p className="mt-1 text-gray-500">Your profile hasn't been viewed by anyone recently.</p>
+                  <button 
+                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                    onClick={() => history.push('/edit-basics')}
+                  >
+                    Improve Your Profile
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        </CommonLayout>
+      </div>
+    </div>
+  </div>
+</CommonLayout>
     );
 };
 

@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import CommonLayout from '../../layouts/Common';
 import shape from '../../assets/images/shape2.png';
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import Container from 'react-bootstrap/esm/Container';
-import { Button, Dropdown } from 'react-bootstrap';
 import hideicon from '../../assets/images/hide.png';
 import { NavLink } from 'react-router-dom';
 
@@ -25,6 +21,7 @@ import liveicon from '../../assets/images/liveicon.png';
 import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
+import OnlineUsers from "../profile/OnlineUsers/OnlineUsers";
 import './Setting.css';
 import './logout.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -60,146 +57,106 @@ const Logout = () => {
     };
     return (
 
-        <CommonLayout>
-            <section className="all-top-shape">
-                <img src={shape} alt="shape" />
-            </section>
-            <div className="all-container">
-                <div className="pr pb-5 mb-5">
-                    <div className="page-wrapper-all">
-                        <Container>
-                            <Row>
-                                <Col md={3}>
-                                    <div className="left-panel-allpages mar-top-left">
-                                        <div className="online-users-widget bg-white rounded-3 shadow-sm p-3 mb-4 mb-md-5">
-                                            <div className="text-center mb-3">
-                                                <h5 className="fw-semibold text-dark mb-3 pb-2 border-bottom">Users Online Now</h5>
-                                                <div className="d-flex justify-content-around">
-                                                    <div className="online-count-card px-3 py-2">
-                                                        <div className="text-primary mb-1">
-                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                                                            </svg>
-                                                        </div>
-                                                        <h6 className="text-muted text-uppercase small mb-1">Women</h6>
-                                                        <h4 className="fw-bold mb-0">1,234</h4>
-                                                    </div>
+    <CommonLayout>
+  {/* Top decorative shape - hidden on mobile */}
+  <section className="hidden md:block">
+    <img src={shape} alt="shape" className="w-full" />
+  </section>
 
-                                                    <div className="online-count-card px-3 py-2">
-                                                        <div className="text-info mb-1">
-                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                                                            </svg>
-                                                        </div>
-                                                        <h6 className="text-muted text-uppercase small mb-1">Men</h6>
-                                                        <h4 className="fw-bold mb-0">1,565</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+  {/* Main container */}
+  <div className="container mx-auto px-4 py-6">
+    <div className="flex flex-col lg:flex-row gap-6">
+      {/* Sidebar */}
+      <div className="w-full lg:w-1/4">
+        {/* Online users widget */}
+        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+            <OnlineUsers />
+        </div>
 
+        {/* Navigation menu */}
+        <nav className="bg-white rounded-xl shadow-sm p-4">
+          <ul className="space-y-1">
+            {[
+              { to: "/profile", icon: homea, text: "Home" },
+              { to: "/search-results", icon: serr, text: "Search Results" },
+              { to: "/live-users", icon: liveicon, text: "Live Users" },
+              { to: "/who-viewed-you", icon: viewedMe, text: "Who Viewed Me" },
+              { to: "/who-likes-you", icon: myLikes, text: "Who Likes Me" },
+              { to: "/my-likes", icon: likesMe, text: "My Likes" },
+              { to: "/your-matches", icon: yourm, text: "Your Matches" },
+              { to: "/blocked-users", icon: blockedUsers, text: "Blocked Users" },
+              { to: "/profile", icon: settingView, text: "View Profile" },
+              { to: "/edit-basics", icon: settingEdit, text: "Edit Profile" },
+              { to: "/manage-media", icon: manageMedia, text: "Manage Media" },
+              { to: "/reset-password", icon: settingReset, text: "Reset Password" },
+              { to: "/update-location", icon: settingUpload, text: "Update Location" },
+              { to: "/hide-profile", icon: settingHide, text: "Hide Profile" },
+              { to: "/delete-account", icon: settingDelete, text: "Delete Account" },
+              { to: "/logout", icon: settingLogout, text: "Logout" },
+            ].map((item, index) => (
+              <li key={index}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) => 
+                    `flex items-center gap-3 p-3 rounded-lg transition-colors
+                    ${isActive ? 'bg-blue-50 text-blue-600 font-medium' : 'hover:bg-gray-50 text-gray-700'}`
+                  }
+                >
+                  <img src={item.icon} alt={item.text} className="w-5 h-5" />
+                  <span>{item.text}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
 
-                                        <div className="user-type-left">
-                                            <ul className="list-user-type left-nav">
-                                                <li>
-                                                    <NavLink exact to="/profile" activeClassName="active"><img src={homea} alt="homea" />Home</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink exact to="/search-results" activeClassName="active"><img src={serr} alt="liveicon" />Search Results</NavLink>
-                                                </li>
-                                                <li><NavLink exact to="/live-users" activeClassName="active"><img src={liveicon} alt="liveicon" />Live Users</NavLink></li>
-                                                <li><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></li>
-                                                <li><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></li>
-                                                <li><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></li>
-                                                <li><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></li>
-                                                <li><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></li>
-                                                <li><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></li>
-                                                <li><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></li>
-                                                <li><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></li>
-                                                <li><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></li>
-                                                <li><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></li>
-                                                <li><NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></li>
-                                                <li><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></li>
-                                                <li><NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></li>
-
-
-                                            </ul>
-                                        </div>
-
-
-
-                                    </div>
-                                </Col>
-                                <Col md={9}>
-                                    {/* Logout Confirmation - with adjusted spacing */}
-                                    <div className="profile-main-part-area-inner bg-all-pages">
-                                        <div className="logout-container bg-white shadow-sm rounded p-4 p-md-5 mx-auto mt-0" style={{ maxWidth: '1000px' }}>
-                                            <Col md={12} className="text-center mb-4">
-                                                <h4 className="fw-bold text-primary">Sign Out</h4>
-                                                <div className="divider-custom mx-auto my-3">
-                                                    <div className="divider-custom-line bg-light"></div>
-                                                </div>
-                                            </Col>
-
-                                            <div className="all-seting-area-pass py-3">
-                                                <Row className="justify-content-center">
-                                                    <Col md={12} className="text-center mb-4">
-                                                        <div className="logout-icon-container mb-4">
-                                                            <div className="icon-wrapper d-flex justify-content-center align-items-center mx-auto rounded-circle"
-                                                                style={{ width: '80px', height: '80px', backgroundColor: '#f8f9fa' }}>
-                                                                <img
-                                                                    className="change-icon"
-                                                                    src={hideicon}
-                                                                    alt="logout icon"
-                                                                    style={{ maxWidth: '40px', opacity: '0.7' }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <h5 className="text-dark mb-1">Ready to leave?</h5>
-                                                        <p className="text-muted mb-4">Are you sure you want to end your current session?</p>
-                                                    </Col>
-                                                </Row>
-
-                                                <Row className="gx-3 justify-content-center mb-3">
-                                                    <Col xs={12} md={5} className="mb-2 mb-md-0">
-                                                        <Button
-                                                            className="w-100 py-2 rounded-pill shadow-sm"
-                                                            variant="light"
-                                                            onClick={handleCancel}
-                                                            disabled={isLoggingOut}
-                                                        >
-                                                            <span className="fw-medium">Cancel</span>
-                                                        </Button>
-                                                    </Col>
-                                                    <Col xs={12} md={5}>
-                                                        <Button
-                                                            className="w-100 py-2 rounded-pill shadow-sm"
-                                                            variant="btn btn-danger"
-                                                            onClick={handleLogout}
-                                                            disabled={isLoggingOut}
-                                                        >
-                                                            <div className="d-flex align-items-center justify-content-center">
-                                                                {isLoggingOut && (
-                                                                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                                                )}
-                                                                <span className="fw-medium">{isLoggingOut ? 'Signing out...' : 'Sign Out'}</span>
-                                                            </div>
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </Col>
-                            </Row>
-                        </Container>
-                    </div>
-
+      {/* Main content area */}
+      <div className="w-full lg:w-3/4">
+        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          {/* Logout Confirmation Section */}
+          <div className="p-8 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="flex justify-center mb-6">
+                <div className="bg-gray-100 p-5 rounded-full">
+                  <img src={hideicon} alt="Logout" className="w-10 h-10 opacity-75" />
                 </div>
+              </div>
+              
+              <h2 className="text-2xl font-bold text-gray-800 mb-3">Ready to leave?</h2>
+              <p className="text-gray-600 mb-8">Are you sure you want to end your current session?</p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={handleCancel}
+                  disabled={isLoggingOut}
+                  className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2 flex items-center justify-center gap-2"
+                >
+                  {isLoggingOut ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Signing Out...
+                    </>
+                  ) : 'Sign Out'}
+                </button>
+              </div>
             </div>
-        </CommonLayout >
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</CommonLayout>
 
     );
 };
