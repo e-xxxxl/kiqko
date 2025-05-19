@@ -44,7 +44,7 @@ const SimilarUsersSection = () => {
             <div key={user._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <NavLink to={`/profile/${user._id}`}>
                 <img 
-                  src={user.profile?.photo || 'default-user.jpg'} 
+                  src={user.profile?.profilephoto || 'default-user.jpg'} 
                   alt={user.username} 
                   className="w-full h-48 object-cover"
                 />
