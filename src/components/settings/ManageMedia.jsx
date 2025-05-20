@@ -33,7 +33,104 @@ import yourm from '../../assets/images/yourm.png';
 import blockedUsers from '../../assets/images/blockedUsers.png';
 import serr from '../../assets/images/serr.png';
 import OnlineUsers from '../profile/OnlineUsers/OnlineUsers';
+import { useState, useRef } from 'react';
+import axios from 'axios'; // or your preferred HTTP client
 const ManageMedia = () => {
+// State for uploaded media
+const [media, setMedia] = useState([
+  { _id: 1, url: fev1 },  // Changed id to _id to match MongoDB
+  { _id: 2, url: photo2 },
+  { _id: 3, url: photo7 }
+]);
+
+// State for loading and errors
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState(null);
+const [success, setSuccess] = useState(null);
+const userId = localStorage.getItem('userId');
+
+// Ref for file input
+const fileInputRef = useRef(null);
+
+// Handle file selection
+const handleFileChange = async (e) => {
+  const files = Array.from(e.target.files);
+  if (files.length === 0) return;
+
+  setIsLoading(true);
+  setError(null);
+
+  const formData = new FormData();
+  files.forEach(file => {
+    formData.append('media', file); // Matches the multer configuration
+  });
+
+  try {
+     const response = await fetch(`https://kiqko-backend.onrender.com/api/users/${userId}/media`, {
+      method: 'POST',
+      body: formData,
+      credentials: 'include' // Only if using cookies
+    });
+
+    
+    const data = await response.json();
+    if (response.ok) {
+      // Update state with new media from backend
+      setMedia(prev => [...prev, ...data.media]);
+    } else {
+      throw new Error(data.message || 'Upload failed');
+    }
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setIsLoading(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // Reset file input
+    }
+  }
+};
+
+// Handle media deletion
+const handleDeleteMedia = async (mediaId) => { // Changed parameter name for clarity
+  if (window.confirm('Are you sure you want to delete this media?')) {
+    try {
+      setIsLoading(true);
+      await axios.delete(`https://kiqko-backend.onrender.com/api/users/${userId}/media/${mediaId}`); // Updated endpoint
+      
+      // Remove from state
+      setMedia(prev => prev.filter(item => item._id !== mediaId)); // Changed id to _id
+    } catch (err) {
+      setError('Failed to delete media. Please try again.');
+      console.error('Delete error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+};
+
+// Handle save changes (if you still need this)
+const handleSaveChanges = async () => {
+  try {
+    setIsLoading(true);
+    // If you need to save the order, use the updateMediaOrder endpoint
+    await axios.put(`https://kiqko-backend.onrender.com/api/users/${userId}/media/order`, { 
+      mediaIds: media.map(m => m._id) // Changed id to _id
+    });
+    
+    // Show success message
+    setSuccess('Changes saved successfully!');
+setTimeout(() => setSuccess(null), 3000);
+    setError(null);
+    alert('Media order saved successfully!');
+  } catch (err) {
+    setError('Failed to save changes. Please try again.');
+    console.error('Save error:', err);
+  } finally {
+    setIsLoading(false);
+  }
+
+  
+};
     return (
         <CommonLayout>
             <section className="all-top-shape">
@@ -168,68 +265,112 @@ const ManageMedia = () => {
                                                             className="w-full h-64 object-cover rounded-xl shadow-sm border border-gray-200 hover:border-purple-300 transition-all"
                                                         />
                                                     </div>
-
-                                                    <textarea
-                                                        className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all resize-none"
-                                                        rows={3}
-                                                        placeholder="Add a caption..."
-                                                    />
                                                 </div>
                                             </div>
 
                                             {/* Media Grid Section */}
-                                            <div className="w-full lg:w-2/3">
-                                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                                                    {/* Add Photo Button */}
-                                                    <label className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl hover:border-purple-400 bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer">
-                                                        <input type="file" className="hidden" multiple />
-                                                        <div className="text-purple-500 mb-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                                            </svg>
-                                                        </div>
-                                                        <span className="text-sm text-gray-600">Add Media</span>
-                                                    </label>
+                                           {/* Media Grid Section */}
+      <div className="w-full lg:w-2/3">
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+            {error}
+          </div>
+        )}
 
-                                                    {/* Existing Photos */}
-                                                    {[fev1, photo2, photo7].map((photo, index) => (
-                                                        <div key={index} className="relative group aspect-square">
-                                                            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all flex items-center justify-center">
-                                                                <button className="bg-white/90 hover:bg-white text-gray-800 rounded-full p-1.5 shadow-md transition-all transform translate-y-2 group-hover:translate-y-0">
-                                                                    <MdClear className="w-5 h-5" />
-                                                                </button>
-                                                            </div>
-                                                            <img
-                                                                src={photo}
-                                                                alt={`Media ${index + 1}`}
-                                                                className="w-full h-full object-cover rounded-xl shadow-sm border border-gray-200"
-                                                            />
-                                                        </div>
-                                                    ))}
+        {success && (
+  <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg">
+    {success}
+  </div>
+)}
+        
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {/* Add Photo Button */}
+          <label className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl hover:border-purple-400 bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer">
+            <input 
+              type="file" 
+              className="hidden" 
+              multiple 
+              onChange={handleFileChange}
+              ref={fileInputRef}
+              accept="image/*,video/*"
+              disabled={isLoading}
+            />
+            <div className="text-purple-500 mb-2">
+              {isLoading ? (
+                <svg className="animate-spin h-8 w-8 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              )}
+            </div>
+            <span className="text-sm text-gray-600">
+              {isLoading ? 'Uploading...' : 'Add Media'}
+            </span>
+          </label>
 
-                                                    {/* Empty Slots */}
-                                                    {[...Array(8)].map((_, index) => (
-                                                        <div key={`empty-${index}`} className="aspect-square bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center">
-                                                            <div className="text-gray-400">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
+          {/* Existing Media */}
+          {media.map((item) => (
+            <div key={item.id} className="relative group aspect-square">
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all flex items-center justify-center">
+                <button 
+                  onClick={() => handleDeleteMedia(item.id)}
+                  className="bg-white/90 hover:bg-white text-gray-800 rounded-full p-1.5 shadow-md transition-all transform translate-y-2 group-hover:translate-y-0"
+                  disabled={isLoading}
+                >
+                  <MdClear className="w-5 h-5" />
+                </button>
+              </div>
+              <img
+                src={item.url}
+                alt={`Media ${item.id}`}
+                className="w-full h-full object-cover rounded-xl shadow-sm border border-gray-200"
+              />
+            </div>
+          ))}
+
+          {/* Empty Slots - only show if less than 12 total items (including existing) */}
+          {media.length < 12 && (
+            [...Array(12 - media.length - 1)].map((_, index) => (
+              <div key={`empty-${index}`} className="aspect-square bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center">
+                <div className="text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
                                         </div>
 
-                                        {/* Save Button */}
-                                        <div className="mt-12 text-center">
-                                            <NavLink to="/profile">
-                                                <button className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-medium py-3 px-8 rounded-full inline-flex items-center shadow-md hover:shadow-lg transition-all">
-                                                    Save Changes
-                                                    <MdOutlineArrowForward className="ml-2" />
-                                                </button>
-                                            </NavLink>
-                                        </div>
+                                       {/* Save Button */}
+      <div className="mt-12 text-center">
+        <button 
+          onClick={handleSaveChanges}
+          disabled={isLoading}
+          className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-medium py-3 px-8 rounded-full inline-flex items-center shadow-md hover:shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <>
+              Saving...
+              <svg className="animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </>
+          ) : (
+            <>
+              Save Changes
+              <MdOutlineArrowForward className="ml-2" />
+            </>
+          )}
+        </button>
+      </div>
                                     </div>
                                 </div>
                             </div>

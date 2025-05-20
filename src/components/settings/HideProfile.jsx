@@ -24,7 +24,74 @@ import yourm from "../../assets/images/yourm.png";
 import blockedUsers from "../../assets/images/blockedUsers.png";
 import serr from "../../assets/images/serr.png";
 import OnlineUsers from "../profile/OnlineUsers/OnlineUsers";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 const HideProfile = () => {
+
+   const [isHidden, setIsHidden] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+   const userId = localStorage.getItem('userId');
+
+  // Fetch current profile visibility status
+  useEffect(() => {
+    const fetchProfileStatus = async () => {
+      try {
+        const response = await axios.get(`https://kiqko-backend.onrender.com/api/users/${userId}/profile-status`, {
+          withCredentials: true
+        });
+        setIsHidden(response.data.isHidden);
+      } catch (err) {
+        console.error('Error fetching profile status:', err);
+      }
+    };
+    
+    fetchProfileStatus();
+  }, [userId]);
+
+  const handleHideProfile = async () => {
+  try {
+    setLoading(true);
+    const response = await axios.put(
+      `https://kiqko-backend.onrender.com/api/users/${userId}/hide-profile`,
+      { isHidden: true },
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    );
+    setIsHidden(true);
+    setError(null);
+  } catch (err) {
+    setError(err.response?.data?.message || 'Failed to hide profile');
+    console.error('Hide profile error:', err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+  const handleUnhideProfile = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.put(
+        `https://kiqko-backend.onrender.com/api/users/${userId}/hide-profile`,
+        { isHidden: false },
+        { withCredentials: true }
+      );
+      setIsHidden(false);
+      setError(null);
+    } catch (err) {
+      setError('Failed to unhide profile');
+      console.error('Unhide profile error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <CommonLayout>
   {/* Hero section with decorative shape */}
@@ -83,39 +150,63 @@ const HideProfile = () => {
       </div>
 
       {/* Main content area */}
-      <div className="w-full lg:w-3/4">
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          {/* Hide Profile Section */}
-          <div className="p-6 md:p-8">
+            <div className="w-full lg:w-3/4">
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="p-6 md:p-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+              Hide Profile
+            </h2>
+            <div className="w-16 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
+          </div>
+
+          <div className="max-w-lg mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                Hide Profile
-              </h2>
-              <div className="w-16 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></div>
+              <p className="text-gray-600 text-lg mb-3">
+                {isHidden 
+                  ? "Your profile is currently hidden" 
+                  : "Do you want to hide your profile?"}
+              </p>
+              <p className="text-gray-500">
+                {isHidden
+                  ? "Other users can't see your profile while it's hidden."
+                  : "Hiding your profile keeps you from being noticed by other users."}
+              </p>
             </div>
 
-            <div className="max-w-lg mx-auto">
-              <div className="text-center mb-8">
-                <p className="text-gray-600 text-lg mb-3">
-                  Do you want to hide your profile?
-                </p>
-                <p className="text-gray-500">
-                  Hiding your profile keeps you from being noticed by other users.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="flex-1 sm:flex-none px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2 shadow-sm hover:shadow-md">
-                  Hide My Profile
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {!isHidden ? (
+                <button 
+                  onClick={handleHideProfile}
+                  disabled={loading}
+                  className={`flex-1 sm:flex-none px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2 shadow-sm hover:shadow-md ${
+                    loading ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {loading ? 'Processing...' : 'Hide My Profile'}
                 </button>
-                <button className="flex-1 sm:flex-none px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 shadow-sm hover:shadow-md">
-                  Unhide My Profile
+              ) : (
+                <button 
+                  onClick={handleUnhideProfile}
+                  disabled={loading}
+                  className={`flex-1 sm:flex-none px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 shadow-sm hover:shadow-md ${
+                    loading ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {loading ? 'Processing...' : 'Unhide My Profile'}
                 </button>
-              </div>
+              )}
             </div>
+            
+            {error && (
+              <div className="mt-4 text-center text-red-500">
+                {error}
+              </div>
+            )}
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </CommonLayout>
