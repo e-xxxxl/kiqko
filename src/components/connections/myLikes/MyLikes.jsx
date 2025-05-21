@@ -1,163 +1,194 @@
-import React from 'react';
+import React from "react";
 import CommonLayout from "../../../layouts/Common";
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import { NavLink } from 'react-router-dom';
-import Container from 'react-bootstrap/esm/Container';
-import shape from '../../../assets/images/shape2.png';
-import fev1 from '../../../assets/images/fev1.jpg';
-import photo2 from '../../../assets/images/photo2.jpg';
-import photo3 from '../../../assets/images/photo3.jpg';
-import photo4 from '../../../assets/images/photo4.png';
-import photo5 from '../../../assets/images/photo5.png';
-import myphoto from '../../../assets/images/myphoto.jpg';
-import { MdClear } from 'react-icons/md';
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
+import { NavLink } from "react-router-dom";
+import Container from "react-bootstrap/esm/Container";
+import shape from "../../../assets/images/shape2.png";
+import fev1 from "../../../assets/images/fev1.jpg";
+import photo2 from "../../../assets/images/photo2.jpg";
+import photo3 from "../../../assets/images/photo3.jpg";
+import photo4 from "../../../assets/images/photo4.png";
+import photo5 from "../../../assets/images/photo5.png";
+import myphoto from "../../../assets/images/myphoto.jpg";
+import { MdClear, MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-import settingView from '../../../assets/images/myProfile.png';
-import settingEdit from '../../../assets/images/editPofile.png';
-import settingUpload from '../../../assets/images/updateLocation.png';
-import settingReset from '../../../assets/images/resetPassword.png';
-import settingHide from '../../../assets/images/hideProfile.png';
-import settingDelete from '../../../assets/images/deleteAccount.png';
-import settingLogout from '../../../assets/images/logout.png';
-import manageMedia from '../../../assets/images/manageMedia.png';
-import viewedMe from '../../../assets/images/viewedMe.png';
-import myLikes from '../../../assets/images/myLikes.png';
-import likesMe from '../../../assets/images/likesMe.png';
-import homea from '../../../assets/images/homea.png';
-import liveicon from '../../../assets/images/liveicon.png';
-import yourm from '../../../assets/images/yourm.png';
-import blockedUsers from '../../../assets/images/blockedUsers.png';
-import serr from '../../../assets/images/serr.png';
+// Import all icons
+import settingView from "../../../assets/images/myProfile.png";
+import settingEdit from "../../../assets/images/editPofile.png";
+import settingUpload from "../../../assets/images/updateLocation.png";
+import settingReset from "../../../assets/images/resetPassword.png";
+import settingHide from "../../../assets/images/hideProfile.png";
+import settingDelete from "../../../assets/images/deleteAccount.png";
+import settingLogout from "../../../assets/images/logout.png";
+import manageMedia from "../../../assets/images/manageMedia.png";
+import viewedMe from "../../../assets/images/viewedMe.png";
+import myLikes from "../../../assets/images/myLikes.png";
+import likesMe from "../../../assets/images/likesMe.png";
+import homea from "../../../assets/images/homea.png";
+import liveicon from "../../../assets/images/liveicon.png";
+import yourm from "../../../assets/images/yourm.png";
+import blockedUsers from "../../../assets/images/blockedUsers.png";
+import serr from "../../../assets/images/serr.png";
+
 const MyLikes = () => {
-    return (
-        <CommonLayout>
-        <section className="all-top-shape"> 
-        <img src={shape} alt="shape" />
-        </section>
-        <div className="all-container"> 
-        <div className="pr pb-5 mb-5">
-            <div className="page-wrapper-all">
-            <Container>
-            <Row>
-            <Col md={3}>
-                <div className="left-panel-allpages mar-top-left">
-                   <div className="top-user-id text-center">
-                       <div className="online-user-all">
-                       <h5 className="border-h5">Users Online Now</h5>
-                       <div className="online-user-status border-right-online">
-                           <h6>Women</h6>
-                           <h4>1234</h4>
-                       </div>
-                       <div className="online-user-status">
-                           <h6>men</h6>
-                           <h4>1565</h4>
-                       </div>
-                       </div>
-                      
-                      
-                   </div>
-                   
-                   
-                   <div className="user-type-left">
-                       <ul className="list-user-type left-nav">
-                           <li>
-                           <NavLink exact to="/profile" activeClassName="active"><img src={homea} alt="homea" />Home</NavLink>
-                           </li>
-                           <li>
-                              <NavLink exact to="/search-results" activeClassName="active"><img src={serr} alt="liveicon" />Search Results</NavLink>
-                           </li>
-                           <li><NavLink exact to="/live-users" activeClassName="active"><img src={liveicon} alt="liveicon" />Live Users</NavLink></li>
-                          
-                           <li><NavLink exact to="/who-viewed-you" activeClassName="active"><img src={viewedMe} alt="viewedMe" />Who Viewed Me</NavLink></li>
-                           <li><NavLink exact to="/who-likes-you" activeClassName="active"><img src={myLikes} alt="myLikes" />Who Likes Me</NavLink></li>
-                           <li><NavLink exact to="/my-likes" activeClassName="active"><img src={likesMe} alt="likesMe" />My Likes</NavLink></li>
-                           <li><NavLink exact to="/your-matches" activeClassName="active"><img src={yourm} alt="likesMe" />Your Matches</NavLink></li>
-                           <li><NavLink exact to="/blocked-users" activeClassName="active"><img src={blockedUsers} alt="blockedUsers" />Blocked Users</NavLink></li>
-                           <li><NavLink exact to="/profile" activeClassName="active"> <img src={settingView} alt="settingView" />View Profile</NavLink></li>
-                           <li><NavLink exact to="/edit-basics" activeClassName="active"> <img src={settingEdit} alt="settingEdit" />Edit Profile </NavLink></li>
-                           <li><NavLink exact to="/manage-media" activeClassName="active"><img src={manageMedia} alt="manageMedia" />Manage Media</NavLink></li>
-                           <li><NavLink exact to="/reset-password"><img src={settingReset} alt="settingReset" />Reset Password</NavLink></li>
-                           <li><NavLink exact to="/update-location"><img src={settingUpload} alt="settingUpload" />Update Location</NavLink></li>
-                           <li><NavLink exact to="/hide-profile"><img src={settingHide} alt="settingHide" />Hide Profile</NavLink></li>
-                           <li><NavLink exact to="/delete-account"><img src={settingDelete} alt="settingDelete" />Delete Account</NavLink></li>
-                           <li><NavLink exact to="/logout"><img src={settingLogout} alt="settingLogout" />Logout</NavLink></li>
-                               
-                        
-                       </ul> 
-                    </div>
+  // Sample liked users data
+  const likedUsers = [
+    { id: 1, image: myphoto, name: "You", isFavorite: true },
+    { id: 2, image: fev1, name: "Alex", isFavorite: true },
+    { id: 3, image: photo2, name: "Jamie", isFavorite: true },
+    { id: 4, image: photo3, name: "Taylor", isFavorite: true },
+    { id: 5, image: photo4, name: "Morgan", isFavorite: true },
+    { id: 6, image: photo5, name: "Casey", isFavorite: true },
+  ];
 
-             
-                    
+  const toggleFavorite = (id) => {
+    // In a real app, you would update state here
+    console.log(`Toggled favorite for user ${id}`);
+  };
+
+  return (
+    <CommonLayout>
+      {/* Hero section with gradient background */}
+      <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 overflow-hidden relative">
+        <img 
+          src={shape} 
+          alt="shape" 
+          className="w-full h-full object-cover opacity-20 absolute inset-0" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-black/30"></div>
+      </section>
+
+      <div className="bg-gray-50 min-h-screen">
+        <Container className="py-8">
+          <Row className="flex flex-col lg:flex-row gap-6">
+            {/* Sidebar Navigation - 25% width on desktop, full width on mobile */}
+            <Col lg={3} className="w-full">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                {/* Online Users Card */}
+                <div className="p-4 border-b">
+                  <h5 className="font-bold text-lg text-center text-gray-800 pb-2 mb-3 border-b border-gray-200">
+                    Users Online Now
+                  </h5>
+                  <div className="flex justify-around">
+                    <div className="text-center px-4 py-2">
+                      <h6 className="text-sm text-gray-600">Women</h6>
+                      <h4 className="text-xl font-bold text-pink-600">1,234</h4>
+                    </div>
+                    <div className="text-center px-4 py-2">
+                      <h6 className="text-sm text-gray-600">Men</h6>
+                      <h4 className="text-xl font-bold text-blue-600">1,565</h4>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Navigation Menu */}
+                <nav className="p-4">
+                  <ul className="space-y-2">
+                    {[
+                      { to: "/profile", icon: homea, text: "Home" },
+                      { to: "/search-results", icon: serr, text: "Search Results" },
+                      { to: "/live-users", icon: liveicon, text: "Live Users" },
+                      { to: "/who-viewed-you", icon: viewedMe, text: "Who Viewed Me" },
+                      { to: "/who-likes-you", icon: myLikes, text: "Who Likes Me" },
+                      { to: "/my-likes", icon: likesMe, text: "My Likes" },
+                      { to: "/your-matches", icon: yourm, text: "Your Matches" },
+                      { to: "/blocked-users", icon: blockedUsers, text: "Blocked Users" },
+                      { to: "/profile", icon: settingView, text: "View Profile" },
+                      { to: "/edit-basics", icon: settingEdit, text: "Edit Profile" },
+                      { to: "/manage-media", icon: manageMedia, text: "Manage Media" },
+                      { to: "/reset-password", icon: settingReset, text: "Reset Password" },
+                      { to: "/update-location", icon: settingUpload, text: "Update Location" },
+                      { to: "/hide-profile", icon: settingHide, text: "Hide Profile" },
+                      { to: "/delete-account", icon: settingDelete, text: "Delete Account" },
+                      { to: "/logout", icon: settingLogout, text: "Logout" },
+                    ].map((item) => (
+                      <li key={item.text}>
+                        <NavLink
+                          to={item.to}
+                          className={({ isActive }) => 
+                            `flex items-center space-x-3 p-3 rounded-lg transition-all ${isActive 
+                              ? 'bg-purple-100 text-purple-700 font-medium' 
+                              : 'text-gray-700 hover:bg-gray-100'}`
+                          }
+                        >
+                          <img src={item.icon} alt={item.text} className="w-5 h-5" />
+                          <span>{item.text}</span>
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
             </Col>
-            <Col md={9}>
-                <div className="profile-main-part-area-inner bg-all-pages">
-                    <Col md={12} className="all-title-top mb-4 text-center">
-                        <h4>My Likes</h4>
-                    </Col>
-                    <Col className="photo-list-all all-margin-connection all-user-pic width-cons" md={12}>
-                                        <ul>
-                                        <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={myphoto} alt="myphoto" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={fev1} alt="fev1" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo2} alt="photo2" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo3} alt="photo3" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo4} alt="photo4" />
-                                                </div>
-                                            </li>
-        
-        
-                                            <li>
-                                                <div className="photo-list">
-                                                    <span className="close-photo"><MdClear /></span>
-                                                    <img src={photo5} alt="photo5" />
-                                                </div>
-                                            </li>
-        
-        
-                                        </ul>
-                                    </Col>
+
+            {/* Main Content - 75% width on desktop, full width on mobile */}
+            <Col lg={9} className="w-full">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                {/* Page Header */}
+                <div className="p-6 border-b border-gray-200">
+                  <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800">
+                    My Likes
+                  </h1>
+                  <p className="text-center text-gray-600 mt-2">
+                    People you've liked and matched with
+                  </p>
                 </div>
+
+                {/* Liked Users Grid */}
+                <div className="p-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                    {likedUsers.map((user) => (
+                      <div 
+                        key={user.id} 
+                        className="relative group rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                      >
+                        <div className="aspect-square overflow-hidden">
+                          <img
+                            src={user.image}
+                            alt={user.name}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+                          <h3 className="text-white font-medium text-lg">{user.name}</h3>
+                        </div>
+                        <button
+                          onClick={() => toggleFavorite(user.id)}
+                          className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white transition-all"
+                          aria-label={user.isFavorite ? "Remove like" : "Add like"}
+                        >
+                          {user.isFavorite ? (
+                            <MdFavorite className="text-red-500 text-xl" />
+                          ) : (
+                            <MdFavoriteBorder className="text-gray-400 text-xl" />
+                          )}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  {likedUsers.length === 0 && (
+                    <div className="text-center py-12">
+                      <div className="text-gray-400 mb-4">
+                        <MdFavoriteBorder className="text-5xl mx-auto" />
+                      </div>
+                      <h3 className="text-xl font-medium text-gray-600 mb-2">
+                        No likes yet
+                      </h3>
+                      <p className="text-gray-500">
+                        Start liking profiles to see them appear here
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </Col>
-            </Row>
-            </Container>
-            </div>
-        
-        </div>
-        </div>
-        </CommonLayout>
-    );
+          </Row>
+        </Container>
+      </div>
+    </CommonLayout>
+  );
 };
 
 export default MyLikes;

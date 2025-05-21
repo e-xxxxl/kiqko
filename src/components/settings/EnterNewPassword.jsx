@@ -102,9 +102,12 @@ const EnterNewPassword = () => {
 
 
         <CommonLayout>
-            <section className="all-top-shape">
-                <img src={shape} alt="shape" />
-            </section>
+  {/* Hero section with decorative shape */}
+  <div className="relative">
+    <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
+      <img src={shape} alt="shape" className="w-full h-full object-cover opacity-20" />
+    </section>
+  </div>
             <div className="all-container">
                 <div className="pr pb-5 mb-5">
                     <div className="page-wrapper-all">

@@ -248,7 +248,7 @@ useEffect(() => {
 
     return (
     <CommonLayout>
-          
+
           <ImgViewer/>
 
            <section className="all-top-shape"> 
