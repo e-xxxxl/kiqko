@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import Picker from 'emoji-picker-react';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://kiqko-backend.onrender.com');
 
 const ChatComponent = () => {
   const { userId } = useParams();
@@ -82,7 +82,7 @@ const ChatComponent = () => {
       try {
         setMessages([]); // Clear previous chat messages
 
-        const res = await fetch(`http://localhost:5000/api/messages/${currentUserId}/${userId}`);
+        const res = await fetch(`https://kiqko-backend.onrender.com/api/messages/${currentUserId}/${userId}`);
         const data = await res.json();
         const msgsWithStatus = data.map((msg) => ({
           ...msg,
