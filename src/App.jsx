@@ -59,6 +59,8 @@ import Report from './components/profile/Report';
 import Liveusers from './components/live-users/Liveusers';
 import Loginr from './components/landing/loginr/Loginr';
 import OtpReset from './components/settings/OtpReset';
+import UserProfilePage from './components/profile/UserProfilePage';
+import ChatComponent from './components/profile/ChatComponent';
 
 
 
@@ -133,7 +135,16 @@ function App() {
             <Route path="/edit-basics">
               <EditBasics />
             </Route>
-           
+            {/* <Route path="/omoo/:userId">
+              <UserProfilePage/>
+            </Route> */}
+
+<Route path="/userprofile/:userId">
+  <UserProfilePage />
+</Route>           
+<Route  path="/chat/:userId">
+  <ChatComponent />
+</Route>           
            
             <Route path="/search-filters">
               <SearchFilters />

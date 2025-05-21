@@ -42,7 +42,7 @@ const SimilarUsersSection = () => {
         {similarUsers.length > 0 ? (
           similarUsers.map(user => (
             <div key={user._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              <NavLink to={`/profile/${user._id}`}>
+              <NavLink to={`/userprofile/${user._id}`}>
                 <img 
                   src={user.profile?.profilephoto || 'default-user.jpg'} 
                   alt={user.username} 
