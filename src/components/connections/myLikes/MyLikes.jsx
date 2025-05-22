@@ -30,23 +30,37 @@ import liveicon from "../../../assets/images/liveicon.png";
 import yourm from "../../../assets/images/yourm.png";
 import blockedUsers from "../../../assets/images/blockedUsers.png";
 import serr from "../../../assets/images/serr.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { FaComment } from "react-icons/fa";
 
 const MyLikes = () => {
-  // Sample liked users data
-  const likedUsers = [
-    { id: 1, image: myphoto, name: "You", isFavorite: true },
-    { id: 2, image: fev1, name: "Alex", isFavorite: true },
-    { id: 3, image: photo2, name: "Jamie", isFavorite: true },
-    { id: 4, image: photo3, name: "Taylor", isFavorite: true },
-    { id: 5, image: photo4, name: "Morgan", isFavorite: true },
-    { id: 6, image: photo5, name: "Casey", isFavorite: true },
-  ];
+ 
+const [likedUsers, setLikedUsers] = useState([]);
+const [loading, setLoading] = useState(true);
 
-  const toggleFavorite = (id) => {
-    // In a real app, you would update state here
-    console.log(`Toggled favorite for user ${id}`);
+// Replace this with your actual auth context or storage method
+const currentUserId = localStorage.getItem("userId");
+
+useEffect(() => {
+  const fetchLikedUsers = async () => {
+    try {
+      const res = await axios.get(`https://kiqko-backend.onrender.com/api/users/likes/${currentUserId}`);
+      setLikedUsers(res.data); // Adjust if your backend returns a different structure
+    } catch (err) {
+      console.error("Failed to fetch liked users:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  fetchLikedUsers();
+}, [currentUserId]);
+
+const toggleFavorite = (id) => {
+  console.log(`Toggled favorite for user ${id}`);
+  // Optionally implement unliking functionality
+};
   return (
     <CommonLayout>
       {/* Hero section with gradient background */}
@@ -135,53 +149,66 @@ const MyLikes = () => {
                   </p>
                 </div>
 
-                {/* Liked Users Grid */}
-                <div className="p-6">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                    {likedUsers.map((user) => (
-                      <div 
-                        key={user.id} 
-                        className="relative group rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
-                      >
-                        <div className="aspect-square overflow-hidden">
-                          <img
-                            src={user.image}
-                            alt={user.name}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
-                          <h3 className="text-white font-medium text-lg">{user.name}</h3>
-                        </div>
-                        <button
-                          onClick={() => toggleFavorite(user.id)}
-                          className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white transition-all"
-                          aria-label={user.isFavorite ? "Remove like" : "Add like"}
-                        >
-                          {user.isFavorite ? (
-                            <MdFavorite className="text-red-500 text-xl" />
-                          ) : (
-                            <MdFavoriteBorder className="text-gray-400 text-xl" />
-                          )}
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+               {/* Liked Users Grid */}
+<div className="p-6">
+  {loading ? (
+    <div className="text-center py-12 text-gray-500">Loading liked users...</div>
+  ) : likedUsers.length > 0 ? (
+   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
+  {likedUsers.map((user) => (
+    <div 
+      key={user._id}
+      className="relative group rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+    >
+      <div className="aspect-square overflow-hidden">
+        <img
+          src={user.profile?.profilephoto || "/default-profile.jpg"}
+          alt={user.username}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+        <h3 className="text-white font-medium text-lg">{user.username}</h3>
+      </div>
+      <div className="absolute bottom-3 left-3">
+        <NavLink
+          to={`/chat/${user._id}`}
+          className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-600 rounded-full hover:bg-green-200 transition-colors"
+        >
+          <FaComment />
+          <span>Chat</span>
+        </NavLink>
+      </div>
+      <button
+        onClick={() => toggleFavorite(user._id)}
+        className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white transition-all"
+        aria-label={user.isFavorite ? "Remove like" : "Add like"}
+      >
+        {user.isFavorite ? (
+          <MdFavorite className="text-red-500 text-xl" />
+        ) : (
+          <MdFavoriteBorder className="text-gray-400 text-xl" />
+        )}
+      </button>
+    </div>
+  ))}
+</div>
 
-                  {likedUsers.length === 0 && (
-                    <div className="text-center py-12">
-                      <div className="text-gray-400 mb-4">
-                        <MdFavoriteBorder className="text-5xl mx-auto" />
-                      </div>
-                      <h3 className="text-xl font-medium text-gray-600 mb-2">
-                        No likes yet
-                      </h3>
-                      <p className="text-gray-500">
-                        Start liking profiles to see them appear here
-                      </p>
-                    </div>
-                  )}
-                </div>
+  ) : (
+    <div className="text-center py-12">
+      <div className="text-gray-400 mb-4">
+        <MdFavoriteBorder className="text-5xl mx-auto" />
+      </div>
+      <h3 className="text-xl font-medium text-gray-600 mb-2">
+        No likes yet
+      </h3>
+      <p className="text-gray-500">
+        Start liking profiles to see them appear here
+      </p>
+    </div>
+  )}
+</div>
+
               </div>
             </Col>
           </Row>

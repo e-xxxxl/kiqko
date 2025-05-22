@@ -18,8 +18,10 @@ import vaccineIcon from '../../assets/images/vaccineIcon.png';
 import { useHistory } from 'react-router-dom';
 import ImageGallary from '../imageGallary/ImageGallary';
 import SimilarUsersSection from './SimilarUsersSection/SimilarUsersSection';
+import axios from 'axios';
 
 const UserProfilePage = () => {
+    const currentUserId = localStorage.getItem('userId');
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [profileDetails, setProfileDetails] = useState(null);
@@ -94,6 +96,24 @@ const UserProfilePage = () => {
 
   if (!user) return <div className="text-center py-8">User not found</div>;
 
+
+
+const handleLike = async () => {
+  try {
+    const res = await axios.post('https://kiqko-backend.onrender.com/api/users/' + userId + '/like', {
+      userId: currentUserId,
+    });
+    alert(res.data.message);
+  } catch (err) {
+    console.error('Like error:', err.response?.data || err.message);
+    alert(err.response?.data?.message || 'Error');
+  }
+
+  console.log('currentUserId:', currentUserId);
+  console.log('targetUserId:', userId);
+};
+
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Profile Card */}
@@ -161,10 +181,13 @@ const UserProfilePage = () => {
               <IoMdSend />
               <span>Message</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-600 rounded-full hover:bg-pink-200 transition-colors">
-              <FaHeart />
-              <span>Like</span>
-            </button>
+              <button
+      onClick={handleLike}
+      className="flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-600 rounded-full hover:bg-pink-200 transition-colors"
+    >
+      <FaHeart />
+      <span>Like</span>
+    </button>
             <NavLink to={`/chat/${userId}`} className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-600 rounded-full hover:bg-green-200 transition-colors">
               <FaComment />
               <span>Chat</span>

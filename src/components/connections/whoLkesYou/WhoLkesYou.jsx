@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonLayout from "../../../layouts/Common";
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
@@ -32,8 +32,33 @@ import yourm from '../../../assets/images/yourm.png';
 import blockedUsers from '../../../assets/images/blockedUsers.png';
 
 import serr from '../../../assets/images/serr.png';
+import axios from 'axios';
+import { formatDistanceToNow } from 'date-fns';
+import { FaComment } from 'react-icons/fa';
+
+
 const WhoLkesYou = () => {
-    return (
+  
+  const [whoLikedMe, setWhoLikedMe] = useState([]);
+const [loading, setisLoading] = useState(true);
+const currentUserId = localStorage.getItem("userId");
+
+useEffect(() => {
+  const fetchWhoLikedMe = async () => {
+    try {
+      const res = await axios.get(`https://kiqko-backend.onrender.com/api/users/liked-by/${currentUserId}`);
+      setWhoLikedMe(res.data);
+    } catch (error) {
+      console.error("Error fetching who liked me:", error);
+    } finally {
+      setisLoading(false);
+    }
+  };
+
+  fetchWhoLikedMe();
+}, [currentUserId]);
+  
+  return (
 
 
 <CommonLayout>
@@ -112,95 +137,68 @@ const WhoLkesYou = () => {
         </nav>
       </div>
 
-      {/* Main content area */}
-      <div className="w-full lg:w-3/4">
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          {/* Who Likes You Section */}
-          <div className="p-6 md:p-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Who Likes You</h2>
-              <div className="w-16 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
-              <p className="text-gray-500 mt-4">
-                These users have liked your profile
-              </p>
+    {/* Main content area */}
+<div className="w-full">
+  {loading ? (
+    <div className="text-center py-20">
+      <p className="text-gray-500 text-lg animate-pulse">Loading who liked you...</p>
+    </div>
+  ) : whoLikedMe.length === 0 ? (
+    <div className="text-center py-20">
+      <p className="text-gray-400 text-lg">No one has liked your profile yet.</p>
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {whoLikedMe.map((user) => (
+        <div key={user._id} className="bg-white rounded-2xl shadow-md p-4 group hover:shadow-lg transition-shadow">
+          <div className="relative aspect-square rounded-xl overflow-hidden mb-4">
+            <img
+              src={user.profile?.profilephoto || "/default.jpg"}
+              alt={`Profile of ${user.username}`}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <button
+              className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1 shadow hover:bg-white transition-colors"
+              onClick={() => handleRemoveLike(user._id)}
+              title="Remove Like"
+            >
+              <MdClear className="w-4 h-4 text-gray-600" />
+            </button>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+              <span className="text-white text-xs font-medium">
+                {formatDistanceToNow(new Date(user.createdAt), { addSuffix: true })}
+              </span>
             </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-              {[
-                { id: 1, photo: myphoto, name: "User 1", time: "Recently" },
-                { id: 2, photo: fev1, name: "User 2", time: "2 days ago" },
-                { id: 3, photo: photo2, name: "User 3", time: "3 days ago" },
-                { id: 4, photo: photo3, name: "User 4", time: "1 week ago" },
-                { id: 5, photo: photo4, name: "User 5", time: "1 week ago" },
-                { id: 6, photo: photo5, name: "User 6", time: "2 weeks ago" },
-                { id: 7, photo: photo6, name: "User 7", time: "2 weeks ago" },
-                { id: 8, photo: photo7, name: "User 8", time: "3 weeks ago" },
-              ].map((user) => (
-                <div key={user.id} className="group relative text-center">
-                  <div className="aspect-square overflow-hidden rounded-xl bg-gray-100 mb-3 relative">
-                    <img 
-                      src={user.photo} 
-                      alt={`Profile of ${user.name}`} 
-                      className="w-full h-full object-cover group-hover:opacity-90 transition-opacity"
-                    />
-                    <button 
-                      className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:bg-gray-100 transition-colors"
-                      onClick={() => handleRemoveLike(user.id)}
-                    >
-                      <MdClear className="w-4 h-4 text-gray-600" />
-                    </button>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                      <span className="text-white text-sm font-medium">{user.time}</span>
-                    </div>
-                  </div>
-                  <h4 className="font-medium text-gray-800 truncate">{user.name}</h4>
-                  <div className="mt-3 flex gap-2 justify-center">
-                    <button 
-                      className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300 transition-colors"
-                      onClick={() => handleViewProfile(user.id)}
-                    >
-                      View
-                    </button>
-                    <button 
-                      className="px-3 py-1 bg-pink-500 text-white rounded-full text-sm hover:bg-pink-600 transition-colors"
-                      onClick={() => handleLikeBack(user.id)}
-                    >
-                      Like Back
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Empty state */}
-            {[].length === 0 && (
-              <div className="text-center py-12">
-                <div className="mx-auto max-w-md">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                  <h3 className="mt-2 text-lg font-medium text-gray-900">No likes yet</h3>
-                  <p className="mt-1 text-gray-500">Your profile hasn't received any likes yet.</p>
-                  <div className="mt-4 flex gap-3 justify-center">
-                    <button 
-                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                      onClick={() => history.push('/edit-basics')}
-                    >
-                      Improve Profile
-                    </button>
-                    <button 
-                      className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors"
-                      onClick={() => history.push('/search-results')}
-                    >
-                      Browse Users
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+          </div>
+          <h4 className="text-center font-semibold text-gray-800 text-sm truncate">{user.username}</h4>
+          <div className="mt-4 flex flex-wrap gap-2 justify-center">
+            <NavLink
+              to={`/profile/${user._id}`}
+              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs hover:bg-gray-200 transition-colors"
+            >
+              View
+            </NavLink>
+            <button
+              className="px-3 py-1 bg-pink-500 text-white rounded-full text-xs hover:bg-pink-600 transition-colors"
+              onClick={() => handleLikeBack(user._id)}
+            >
+              Like Back
+            </button>
+            <NavLink
+              to={`/chat/${user._id}`}
+              className="flex items-center gap-1 px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs hover:bg-green-200"
+            >
+              <FaComment className="w-4 h-4" />
+              Chat
+            </NavLink>
           </div>
         </div>
-      </div>
+      ))}
+    </div>
+  )}
+</div>
+
+
     </div>
   </div>
 </CommonLayout>
