@@ -284,6 +284,7 @@ const [user, setUser] = useState(null);
     return `Last seen: ${d.toLocaleString()}`;
   };
 
+
   return (
      <div className="flex flex-col h-screen max-w-2xl mx-auto bg-white shadow-2xl border border-[#eee] rounded-3xl overflow-hidden">
 
@@ -349,30 +350,30 @@ const [user, setUser] = useState(null);
             }`}
           >
             {msg.text && <p className="leading-relaxed">{msg.text}</p>}
-{msg.attachment && (
-  <div className="mt-3">
-    {msg.attachment.startsWith("http") && msg.attachment.match(/\.(jpeg|jpg|gif|png|webp)$/i) ? (
-      <div className="relative group">
-        <img
-          src={msg.attachment}
-          alt="Attachment"
-          className="rounded-xl max-w-full hover:scale-105 transition-transform"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 rounded-xl"></div>
-      </div>
-    ) : (
-      <a
-        href={msg.attachment}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 p-2 bg-gray-100 rounded-xl hover:bg-gray-200"
-      >
-        <FileText size={16} />
-        <span className="text-sm truncate">Download Attachment</span>
-      </a>
-    )}
-  </div>
-)}
+   {/* Attachment */}
+                {msg.attachment && (
+                  <div className="mt-3">
+                    {typeof msg.attachment === 'string' &&
+                    msg.attachment.match(/\.(jpeg|jpg|gif|png|webp)$/i) ? (
+                      <img
+                        src={msg.attachment}
+                        alt="Attachment"
+                        className="rounded-xl max-w-full hover:scale-105 transition-transform"
+                      />
+                    ) : (
+                      <a
+                        href={msg.attachment}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-2 bg-gray-100 rounded-xl hover:bg-gray-200"
+                      >
+                        <FileText size={16} />
+                        <span className="text-sm truncate">Download Attachment</span>
+                      </a>
+                    )}
+                  </div>
+                )}
+
 
             <div
               className={`flex items-center gap-1 mt-2 text-xs ${
