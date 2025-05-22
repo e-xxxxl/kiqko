@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
 import { MdOutlineArrowForward } from "react-icons/md";
-import Container from 'react-bootstrap/esm/Container';
 import shape from '../../../assets/images/shape2.png';
 import bgweball from '../../../assets/images/bgweball.png';
 import downloadApp from '../../../assets/images/downloadApp.png';
 import apps from '../../../assets/images/apps.png';
 import appg from '../../../assets/images/appg.png';
-import { Button, Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
-import axios from 'axios'; // make sure axios is installed
+import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Headline = () => {
@@ -31,76 +26,77 @@ const Headline = () => {
     };
 
     return (
-       <section>
+        <section className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 relative overflow-hidden">
             {/* Shape */}
-            <section className="all-top-shape all-shape-inner">
-                <img src={shape} alt="shape" />
-            </section>
+            <div className="absolute top-0 left-0 w-full overflow-hidden">
+                <img src={shape} alt="shape" className="w-full h-auto" />
+            </div>
 
-            {/* Container */}
-            <div className="all-container margin-bottom-step">
-                <div className="all-container-inner setting-area position-top-all">
-                    <Container>
-                        <div className="all-seting-area">
-                            <Row className="m-0-responsive">
-                                <Col md={12} className="all-title-top mb-1 text-center">
-                                    <h4 className="mb-1">Your Headline</h4>
-                                    <p className="sub-p">Tells people what you are seeking</p>
-                                </Col>
-                                <Row>
-                                    <Col md={12}>
-                                        <div className="about-field-style about-field-area">
-                                            <Form.Group className="mb-1">
-                                                <Form.Control
-                                                    className="input-head"
-                                                    type="text"
-                                                    placeholder="e.g (Quirky woman looking for mashed to my potatoes.)"
-                                                    value={headline}
-                                                    onChange={(e) => setHeadline(e.target.value)}
-                                                />
-                                                <span className="char-span">{100 - headline.length}</span>
-                                            </Form.Group>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Row>
+            {/* Main Content */}
+            <div className="container mx-auto px-4 py-20 relative z-10">
+                <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 sm:p-10">
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <h2 className="text-3xl font-bold text-purple-800 mb-2">Your Headline</h2>
+                        <p className="text-gray-600">Tell people what you're seeking</p>
+                    </div>
 
-                            {/* Submit button */}
-                            <Row className="m-0-responsive">
-                                <Col md={6} className="text-center offset-md-3 btn-modal-round margintop-170">
-                                    <Button
-                                        className="full-width btn-all-landing margin-all-modal-btn btn"
-                                        variant="link"
-                                        onClick={handleSubmit}
-                                    >
-                                        Continue <MdOutlineArrowForward className="arrow-sign" />
-                                    </Button>
-                                </Col>
-                            </Row>
-
-                            {/* App download */}
-                            <Row className="m-0-responsive">
-                                <hr className="hr-color mt-3" />
-                                <p className="text-center app-p mb-0">
-                                    <span><img src={downloadApp} alt="downloadApp" /></span>
-                                    Download our app for:
-                                </p>
-                                <div className="col-md-12 text-center">
-                                    <NavLink exact to="bout"><Button className="btn-app-link"> <img src={apps} alt="apps" /></Button></NavLink>
-                                    <NavLink exact to="bout"><Button className="btn-app-link"> <img src={appg} alt="appg" /></Button></NavLink>
-                                </div>
-                            </Row>
+                    {/* Form */}
+                    <div className="mb-10">
+                        <div className="relative">
+                            <input
+                                type="text"
+                                className="w-full p-4 border-2 border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                                placeholder="e.g. Quirky woman looking for mashed to my potatoes."
+                                value={headline}
+                                onChange={(e) => setHeadline(e.target.value)}
+                                maxLength={100}
+                            />
+                            <span className="absolute right-3 bottom-3 text-sm text-gray-500 bg-white px-2 rounded">
+                                {100 - headline.length}
+                            </span>
                         </div>
-                    </Container>
-                </div>
+                    </div>
 
-                {/* Footer Shape */}
-                <div className="shape-footer-all">
-                    <img src={bgweball} alt="bgweball" />
+                    {/* Submit Button */}
+                    <div className="flex justify-center mb-10">
+                        <button
+                            onClick={handleSubmit}
+                            className="flex items-center justify-center px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                        >
+                            Continue <MdOutlineArrowForward className="ml-2" />
+                        </button>
+                    </div>
+
+                    {/* App Download Section */}
+                    <div className="border-t border-gray-200 pt-6">
+                        <div className="flex flex-col items-center">
+                            <div className="flex items-center mb-4">
+                                <img src={downloadApp} alt="Download app" className="h-5 mr-2" />
+                                <span className="text-gray-700">Download our app for:</span>
+                            </div>
+                            <div className="flex space-x-4">
+                                <NavLink to="bout">
+                                    <button className="hover:opacity-80 transition-opacity">
+                                        <img src={apps} alt="App Store" className="h-12" />
+                                    </button>
+                                </NavLink>
+                                <NavLink to="bout">
+                                    <button className="hover:opacity-80 transition-opacity">
+                                        <img src={appg} alt="Google Play" className="h-12" />
+                                    </button>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
 
+            {/* Footer Shape */}
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+                <img src={bgweball} alt="background" className="w-full h-auto" />
+            </div>
+        </section>
     );
 };
 
