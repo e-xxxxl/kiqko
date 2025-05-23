@@ -112,7 +112,7 @@ const Profile = () => {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 const openModal = (index) => {
   setCurrentPhotoIndex(index);
@@ -263,6 +263,38 @@ const goToNext = () => {
     fetchUserMedia();
   }, [userId]);
 
+  // NavItem component for cleaner code
+// Mobile NavItem component
+function NavItemMobile({ to, icon, text }) {
+  return (
+    <NavLink
+      exact
+      to={to}
+      activeClassName="bg-blue-100 text-blue-600"
+      className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-100 min-w-[70px]"
+    >
+      <img src={icon} alt={text} className="w-5 h-5 mb-1" />
+      <span className="text-xs text-center">{text}</span>
+    </NavLink>
+  )
+}
+
+// Desktop NavItem component (unchanged from your original)
+function NavItem({ to, icon, text }) {
+  return (
+    <li>
+      <NavLink
+        exact
+        to={to}
+        activeClassName="bg-blue-50 text-blue-600 font-medium"
+        className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+      >
+        <img src={icon} alt={text} className="w-5 h-5 flex-shrink-0" />
+        <span>{text}</span>
+      </NavLink>
+    </li>
+  )
+}
 
   //   if (!user) return <p>Loading...</p>;
 
@@ -376,214 +408,82 @@ const goToNext = () => {
               <div className="w-full md:w-1/4 space-y-6">
                 <OnlineUsers />
 
-                {/* Navigation */}
-                <div className="bg-white rounded-lg shadow-md p-4">
-                  <ul className="space-y-2">
-                    <li>
-                      <NavLink
-                        exact
-                        to="/profile"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={homea} alt="home" className="w-5 h-5" /> Home
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/search-results"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={serr} alt="search" className="w-5 h-5" />{" "}
-                        Search Results
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/live-users"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={liveicon} alt="live" className="w-5 h-5" />{" "}
-                        Live Users
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/who-viewed-you"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={viewedMe} alt="viewed" className="w-5 h-5" />{" "}
-                        Who Viewed Me
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/who-likes-you"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={myLikes} alt="likes" className="w-5 h-5" />{" "}
-                        Who Likes Me
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/my-likes"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={likesMe} alt="my likes" className="w-5 h-5" />{" "}
-                        My Likes
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/your-matches"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={yourm} alt="matches" className="w-5 h-5" />{" "}
-                        Your Matches
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/blocked-users"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={blockedUsers}
-                          alt="blocked"
-                          className="w-5 h-5"
-                        />{" "}
-                        Blocked Users
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/profile"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={settingView}
-                          alt="profile"
-                          className="w-5 h-5"
-                        />{" "}
-                        View Profile
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/edit-basics"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={settingEdit} alt="edit" className="w-5 h-5" />{" "}
-                        Edit Profile
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/manage-media"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={manageMedia}
-                          alt="media"
-                          className="w-5 h-5"
-                        />{" "}
-                        Manage Media
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/reset-password"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={settingReset}
-                          alt="reset"
-                          className="w-5 h-5"
-                        />{" "}
-                        Reset Password
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/update-location"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={settingUpload}
-                          alt="location"
-                          className="w-5 h-5"
-                        />{" "}
-                        Update Location
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/hide-profile"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img src={settingHide} alt="hide" className="w-5 h-5" />{" "}
-                        Hide Profile
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/delete-account"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={settingDelete}
-                          alt="delete"
-                          className="w-5 h-5"
-                        />{" "}
-                        Delete Account
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        exact
-                        to="/logout"
-                        activeClassName="text-blue-600 font-medium"
-                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                      >
-                        <img
-                          src={settingLogout}
-                          alt="logout"
-                          className="w-5 h-5"
-                        />{" "}
-                        Logout
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
+{/* Navigation */}
+<div className="bg-white rounded-lg shadow-md p-4">
+  {/* Mobile Horizontal Navigation (shows on small screens) */}
+  <div className="md:hidden overflow-x-auto pb-3">
+    <div className="flex space-x-2 w-max">
+      {/* All navigation items in a single scrollable row */}
+      <NavItemMobile to="/profile" icon={homea} text="Home" />
+      <NavItemMobile to="/search-results" icon={serr} text="Search" />
+      <NavItemMobile to="/live-users" icon={liveicon} text="Live" />
+      <NavItemMobile to="/who-viewed-you" icon={viewedMe} text="Viewed Me" />
+      <NavItemMobile to="/who-likes-you" icon={myLikes} text="Likes Me" />
+      <NavItemMobile to="/my-likes" icon={likesMe} text="My Likes" />
+      <NavItemMobile to="/your-matches" icon={yourm} text="Matches" />
+      <NavItemMobile to="/blocked-users" icon={blockedUsers} text="Blocked" />
+      <NavItemMobile to="/edit-basics" icon={settingEdit} text="Edit" />
+      <NavItemMobile to="/manage-media" icon={manageMedia} text="Media" />
+      <NavItemMobile to="/reset-password" icon={settingReset} text="Password" />
+      <NavItemMobile to="/logout" icon={settingLogout} text="Logout" />
+    </div>
+  </div>
+
+  {/* Desktop Vertical Navigation (unchanged) */}
+  <ul className="hidden md:block space-y-2">
+    {/* Main Actions */}
+    <div className="mb-4">
+      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+        Discover
+      </h3>
+      <div className="space-y-1">
+        <NavItem to="/profile" icon={homea} text="Home" />
+        <NavItem to="/search-results" icon={serr} text="Search Results" />
+        <NavItem to="/live-users" icon={liveicon} text="Live Users" />
+      </div>
+    </div>
+
+    {/* Connections */}
+    <div className="mb-4">
+      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+        Connections
+      </h3>
+      <div className="space-y-1">
+        <NavItem to="/who-viewed-you" icon={viewedMe} text="Who Viewed Me" />
+        <NavItem to="/who-likes-you" icon={myLikes} text="Who Likes Me" />
+        <NavItem to="/my-likes" icon={likesMe} text="My Likes" />
+        <NavItem to="/your-matches" icon={yourm} text="Your Matches" />
+        <NavItem to="/blocked-users" icon={blockedUsers} text="Blocked Users" />
+      </div>
+    </div>
+
+    {/* Profile Management */}
+    <div className="mb-4">
+      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+        Profile
+      </h3>
+      <div className="space-y-1">
+        <NavItem to="/profile" icon={settingView} text="View Profile" />
+        <NavItem to="/edit-basics" icon={settingEdit} text="Edit Profile" />
+        <NavItem to="/manage-media" icon={manageMedia} text="Manage Media" />
+      </div>
+    </div>
+
+    {/* Account Settings */}
+    <div>
+      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+        Settings
+      </h3>
+      <div className="space-y-1">
+        <NavItem to="/reset-password" icon={settingReset} text="Reset Password" />
+        <NavItem to="/update-location" icon={settingUpload} text="Update Location" />
+        <NavItem to="/hide-profile" icon={settingHide} text="Hide Profile" />
+        <NavItem to="/delete-account" icon={settingDelete} text="Delete Account" />
+        <NavItem to="/logout" icon={settingLogout} text="Logout" />
+      </div>
+    </div>
+  </ul>
+</div>
 
                 {/* Ads */}
                 <div className="space-y-5">
@@ -826,7 +726,7 @@ const goToNext = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
+                  {/* Action Buttons
                   <div className="flex flex-wrap justify-center gap-4 mb-8">
                     <button className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-600 rounded hover:bg-blue-200">
                       <img
@@ -866,7 +766,7 @@ const goToNext = () => {
                         <span>Video Call</span>
                       </button>
                     </NavLink>
-                  </div>
+                  </div> */}
 
                   {/* Profile Sections */}
                   <div className="space-y-6">
