@@ -94,14 +94,13 @@ import SimilarUsersSection from "./SimilarUsersSection/SimilarUsersSection";
 import OnlineUsers from "./OnlineUsers/OnlineUsers";
 import OnlineStatusUpdater from "./OnlineUsers/OnlineStatusUpdater";
 import axios from "axios";
-import { MdClear, MdChevronLeft, MdChevronRight } from 'react-icons/md';
-
+import { MdClear, MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const Profile = () => {
   const userId = localStorage.getItem("userId");
 
   // Add this hook call
-  
+
   const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
   const [isShowBlockUser, setIsBlockUser] = useState(false);
   const [user, setUser] = useState(null);
@@ -111,25 +110,25 @@ const Profile = () => {
   const [media, setMedia] = useState([]);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-const openModal = (index) => {
-  setCurrentPhotoIndex(index);
-  setIsModalOpen(true);
-};
+  const openModal = (index) => {
+    setCurrentPhotoIndex(index);
+    setIsModalOpen(true);
+  };
 
-const closeModal = () => {
-  setIsModalOpen(false);
-};
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
-const goToPrev = () => {
-  setCurrentPhotoIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
-};
+  const goToPrev = () => {
+    setCurrentPhotoIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
+  };
 
-const goToNext = () => {
-  setCurrentPhotoIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
-};
+  const goToNext = () => {
+    setCurrentPhotoIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
+  };
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -220,36 +219,40 @@ const goToNext = () => {
           `https://kiqko-backend.onrender.com/api/users/${userId}/media`,
           { withCredentials: true } // Add this to include cookies
         );
-        
+
         console.log("API Response:", response.data); // Debug log
-        
+
         // Check response structure
         if (response.data && Array.isArray(response.data)) {
           // If the API returns an array directly
-          const normalizedMedia = response.data.map(item => ({
+          const normalizedMedia = response.data.map((item) => ({
             _id: item._id || item.id,
-            url: item.url
+            url: item.url,
           }));
           setMedia(normalizedMedia);
         } else if (response.data && Array.isArray(response.data.media)) {
           // If the API returns an object with media array
-          const normalizedMedia = response.data.media.map(item => ({
+          const normalizedMedia = response.data.media.map((item) => ({
             _id: item._id || item.id,
-            url: item.url
+            url: item.url,
           }));
           setMedia(normalizedMedia);
-        } else if (response.data && response.data.profile && Array.isArray(response.data.profile.media)) {
+        } else if (
+          response.data &&
+          response.data.profile &&
+          Array.isArray(response.data.profile.media)
+        ) {
           // If the API returns a nested structure
-          const normalizedMedia = response.data.profile.media.map(item => ({
+          const normalizedMedia = response.data.profile.media.map((item) => ({
             _id: item._id || item.id,
-            url: item.url
+            url: item.url,
           }));
           setMedia(normalizedMedia);
         } else {
           // Fallback for empty state
           setMedia([]);
         }
-        
+
         setError(null);
       } catch (err) {
         console.error("Failed to fetch media:", err);
@@ -264,37 +267,37 @@ const goToNext = () => {
   }, [userId]);
 
   // NavItem component for cleaner code
-// Mobile NavItem component
-function NavItemMobile({ to, icon, text }) {
-  return (
-    <NavLink
-      exact
-      to={to}
-      activeClassName="bg-blue-100 text-blue-600"
-      className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-100 min-w-[70px]"
-    >
-      <img src={icon} alt={text} className="w-5 h-5 mb-1" />
-      <span className="text-xs text-center">{text}</span>
-    </NavLink>
-  )
-}
-
-// Desktop NavItem component (unchanged from your original)
-function NavItem({ to, icon, text }) {
-  return (
-    <li>
+  // Mobile NavItem component
+  function NavItemMobile({ to, icon, text }) {
+    return (
       <NavLink
         exact
         to={to}
-        activeClassName="bg-blue-50 text-blue-600 font-medium"
-        className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        activeClassName="bg-blue-100 text-blue-600"
+        className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-100 min-w-[70px]"
       >
-        <img src={icon} alt={text} className="w-5 h-5 flex-shrink-0" />
-        <span>{text}</span>
+        <img src={icon} alt={text} className="w-5 h-5 mb-1" />
+        <span className="text-xs text-center">{text}</span>
       </NavLink>
-    </li>
-  )
-}
+    );
+  }
+
+  // Desktop NavItem component (unchanged from your original)
+  function NavItem({ to, icon, text }) {
+    return (
+      <li>
+        <NavLink
+          exact
+          to={to}
+          activeClassName="bg-blue-50 text-blue-600 font-medium"
+          className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <img src={icon} alt={text} className="w-5 h-5 flex-shrink-0" />
+          <span>{text}</span>
+        </NavLink>
+      </li>
+    );
+  }
 
   //   if (!user) return <p>Loading...</p>;
 
@@ -393,12 +396,16 @@ function NavItem({ to, icon, text }) {
   return (
     <CommonLayout>
       <ImgViewer />
-  {/* Hero section with decorative shape */}
-  <div className="relative">
-    <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
-      <img src={shape} alt="shape" className="w-full h-full object-cover opacity-20" />
-    </section>
-  </div>
+      {/* Hero section with decorative shape */}
+      <div className="relative">
+        <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
+          <img
+            src={shape}
+            alt="shape"
+            className="w-full h-full object-cover opacity-20"
+          />
+        </section>
+      </div>
 
       <div className="container mx-auto px-4 py-5 mb-5">
         <div className="relative">
@@ -408,82 +415,212 @@ function NavItem({ to, icon, text }) {
               <div className="w-full md:w-1/4 space-y-6">
                 <OnlineUsers />
 
-{/* Navigation */}
-<div className="bg-white rounded-lg shadow-md p-4">
-  {/* Mobile Horizontal Navigation (shows on small screens) */}
-  <div className="md:hidden overflow-x-auto pb-3">
-    <div className="flex space-x-2 w-max">
-      {/* All navigation items in a single scrollable row */}
-      <NavItemMobile to="/profile" icon={homea} text="Home" />
-      <NavItemMobile to="/search-results" icon={serr} text="Search" />
-      <NavItemMobile to="/live-users" icon={liveicon} text="Live" />
-      <NavItemMobile to="/who-viewed-you" icon={viewedMe} text="Viewed Me" />
-      <NavItemMobile to="/who-likes-you" icon={myLikes} text="Likes Me" />
-      <NavItemMobile to="/my-likes" icon={likesMe} text="My Likes" />
-      <NavItemMobile to="/your-matches" icon={yourm} text="Matches" />
-      <NavItemMobile to="/blocked-users" icon={blockedUsers} text="Blocked" />
-      <NavItemMobile to="/edit-basics" icon={settingEdit} text="Edit" />
-      <NavItemMobile to="/manage-media" icon={manageMedia} text="Media" />
-      <NavItemMobile to="/reset-password" icon={settingReset} text="Password" />
-      <NavItemMobile to="/logout" icon={settingLogout} text="Logout" />
-    </div>
-  </div>
+                {/* Navigation */}
+                <div className="bg-white rounded-lg shadow-md p-4">
+                  {/* Mobile Horizontal Navigation (shows on small screens) */}
+                  <div className="md:hidden overflow-x-auto pb-3">
+                    <div className="flex space-x-2 w-max">
+                      {/* All navigation items in a single scrollable row */}
+                      <NavItemMobile to="/profile" icon={homea} text="Home" />
+                      <NavItemMobile
+                        to="/search-results"
+                        icon={serr}
+                        text="Search"
+                      />
+                      <NavItemMobile
+                        to="/live-users"
+                        icon={liveicon}
+                        text="Live"
+                      />
+                      <NavItemMobile
+                        to="/who-viewed-you"
+                        icon={viewedMe}
+                        text="Viewed Me"
+                      />
+                      <NavItemMobile
+                        to="/who-likes-you"
+                        icon={myLikes}
+                        text="Likes Me"
+                      />
+                      <NavItemMobile
+                        to="/my-likes"
+                        icon={likesMe}
+                        text="My Likes"
+                      />
+                      <NavItemMobile
+                        to="/your-matches"
+                        icon={yourm}
+                        text="Matches"
+                      />
+                      <NavItemMobile
+                        to="/blocked-users"
+                        icon={blockedUsers}
+                        text="Blocked"
+                      />
 
-  {/* Desktop Vertical Navigation (unchanged) */}
-  <ul className="hidden md:block space-y-2">
-    {/* Main Actions */}
-    <div className="mb-4">
-      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
-        Discover
-      </h3>
-      <div className="space-y-1">
-        <NavItem to="/profile" icon={homea} text="Home" />
-        <NavItem to="/search-results" icon={serr} text="Search Results" />
-        <NavItem to="/live-users" icon={liveicon} text="Live Users" />
-      </div>
-    </div>
+                        <NavItemMobile
+                          to="/manage-media"
+                          icon={manageMedia}
+                          text="Manage Media"
+                        />
 
-    {/* Connections */}
-    <div className="mb-4">
-      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
-        Connections
-      </h3>
-      <div className="space-y-1">
-        <NavItem to="/who-viewed-you" icon={viewedMe} text="Who Viewed Me" />
-        <NavItem to="/who-likes-you" icon={myLikes} text="Who Likes Me" />
-        <NavItem to="/my-likes" icon={likesMe} text="My Likes" />
-        <NavItem to="/your-matches" icon={yourm} text="Your Matches" />
-        <NavItem to="/blocked-users" icon={blockedUsers} text="Blocked Users" />
-      </div>
-    </div>
+                      <NavItemMobile
+                        to="/edit-basics"
+                        icon={settingEdit}
+                        text="Edit"
+                      />
 
-    {/* Profile Management */}
-    <div className="mb-4">
-      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
-        Profile
-      </h3>
-      <div className="space-y-1">
-        <NavItem to="/profile" icon={settingView} text="View Profile" />
-        <NavItem to="/edit-basics" icon={settingEdit} text="Edit Profile" />
-        <NavItem to="/manage-media" icon={manageMedia} text="Manage Media" />
-      </div>
-    </div>
+                        <NavItemMobile
+                          to="/hide-profile"
+                          icon={settingHide}
+                          text="Hide Profile"
+                        />
 
-    {/* Account Settings */}
-    <div>
-      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
-        Settings
-      </h3>
-      <div className="space-y-1">
-        <NavItem to="/reset-password" icon={settingReset} text="Reset Password" />
-        <NavItem to="/update-location" icon={settingUpload} text="Update Location" />
-        <NavItem to="/hide-profile" icon={settingHide} text="Hide Profile" />
-        <NavItem to="/delete-account" icon={settingDelete} text="Delete Account" />
-        <NavItem to="/logout" icon={settingLogout} text="Logout" />
-      </div>
-    </div>
-  </ul>
-</div>
+                         <NavItemMobile
+                          to="/delete-account"
+                          icon={settingDelete}
+                          text="Delete Account"
+                        />
+
+                        <NavItemMobile
+                          to="/update-location"
+                          icon={settingUpload}
+                          text="Update Location"
+                        />
+
+                      <NavItemMobile
+                        to="/manage-media"
+                        icon={manageMedia}
+                        text="Media"
+                      />
+                      <NavItemMobile
+                        to="/reset-password"
+                        icon={settingReset}
+                        text="Password"
+                      />
+                      <NavItemMobile
+                        to="/logout"
+                        icon={settingLogout}
+                        text="Logout"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Desktop Vertical Navigation (unchanged) */}
+                  <ul className="hidden md:block space-y-2">
+                    {/* Main Actions */}
+                    <div className="mb-4">
+                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                        Discover
+                      </h3>
+                      <div className="space-y-1">
+                        <NavItem to="/profile" icon={homea} text="Home" />
+                        <NavItem
+                          to="/search-results"
+                          icon={serr}
+                          text="Search Results"
+                        />
+                        <NavItem
+                          to="/live-users"
+                          icon={liveicon}
+                          text="Live Users"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Connections */}
+                    <div className="mb-4">
+                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                        Connections
+                      </h3>
+                      <div className="space-y-1">
+                        <NavItem
+                          to="/who-viewed-you"
+                          icon={viewedMe}
+                          text="Who Viewed Me"
+                        />
+                        <NavItem
+                          to="/who-likes-you"
+                          icon={myLikes}
+                          text="Who Likes Me"
+                        />
+                        <NavItem
+                          to="/my-likes"
+                          icon={likesMe}
+                          text="My Likes"
+                        />
+                        <NavItem
+                          to="/your-matches"
+                          icon={yourm}
+                          text="Your Matches"
+                        />
+                        <NavItem
+                          to="/blocked-users"
+                          icon={blockedUsers}
+                          text="Blocked Users"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Profile Management */}
+                    <div className="mb-4">
+                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                        Profile
+                      </h3>
+                      <div className="space-y-1">
+                        <NavItem
+                          to="/profile"
+                          icon={settingView}
+                          text="View Profile"
+                        />
+                        <NavItem
+                          to="/edit-basics"
+                          icon={settingEdit}
+                          text="Edit Profile"
+                        />
+                        <NavItem
+                          to="/manage-media"
+                          icon={manageMedia}
+                          text="Manage Media"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Account Settings */}
+                    <div>
+                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                        Settings
+                      </h3>
+                      <div className="space-y-1">
+                        <NavItem
+                          to="/reset-password"
+                          icon={settingReset}
+                          text="Reset Password"
+                        />
+                        <NavItem
+                          to="/update-location"
+                          icon={settingUpload}
+                          text="Update Location"
+                        />
+                        <NavItem
+                          to="/hide-profile"
+                          icon={settingHide}
+                          text="Hide Profile"
+                        />
+                        <NavItem
+                          to="/delete-account"
+                          icon={settingDelete}
+                          text="Delete Account"
+                        />
+                        <NavItem
+                          to="/logout"
+                          icon={settingLogout}
+                          text="Logout"
+                        />
+                      </div>
+                    </div>
+                  </ul>
+                </div>
 
                 {/* Ads */}
                 <div className="space-y-5">
@@ -840,102 +977,114 @@ function NavItem({ to, icon, text }) {
                       <img src={adda} alt="ad" className="w-full rounded" />
                     </div>
 
-                   {/* Photos Section */}
-  {/* Photos Section */}
-    <div className="mt-10">
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-          My Photos 
-          <span className="ml-2 text-gray-500 dark:text-gray-400 font-medium">{media.length}</span>
-        </h3>
-      </div>
+                    {/* Photos Section */}
+                    {/* Photos Section */}
+                    <div className="mt-10">
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+                          My Photos
+                          <span className="ml-2 text-gray-500 dark:text-gray-400 font-medium">
+                            {media.length}
+                          </span>
+                        </h3>
+                      </div>
 
-      {/* Photo Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {media.map((item, index) => (
-          <div 
-            key={item._id} 
-            className="relative group aspect-square rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
-            onClick={() => openModal(index)}
-          >
-            {/* Hover Overlay with Delete Button */}
-            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteMedia(item._id);
-                }}
-                className="bg-white/90 hover:bg-white text-red-500 rounded-full p-2 shadow-lg transition-all transform translate-y-3 group-hover:translate-y-0 hover:scale-110"
-                disabled={isLoading}
-                aria-label="Delete photo"
-              >
-                <MdClear className="w-5 h-5" />
-              </button>
-            </div>
-            
-            {/* Image */}
-            <img
-              src={item.url}
-              alt={`User upload ${item._id}`}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/300?text=Photo+Not+Available';
-              }}
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
+                      {/* Photo Grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {media.map((item, index) => (
+                          <div
+                            key={item._id}
+                            className="relative group aspect-square rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+                            onClick={() => openModal(index)}
+                          >
+                            {/* Hover Overlay with Delete Button */}
+                            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteMedia(item._id);
+                                }}
+                                className="bg-white/90 hover:bg-white text-red-500 rounded-full p-2 shadow-lg transition-all transform translate-y-3 group-hover:translate-y-0 hover:scale-110"
+                                disabled={isLoading}
+                                aria-label="Delete photo"
+                              >
+                                <MdClear className="w-5 h-5" />
+                              </button>
+                            </div>
 
-    {/* Photo Modal */}
-    {isModalOpen && (
-      <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-        <button 
-          onClick={closeModal}
-          className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
-          aria-label="Close gallery"
-        >
-          <MdClear className="w-8 h-8" />
-        </button>
+                            {/* Image */}
+                            <img
+                              src={item.url}
+                              alt={`User upload ${item._id}`}
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src =
+                                  "https://via.placeholder.com/300?text=Photo+Not+Available";
+                              }}
+                              loading="lazy"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
 
-        <div className="relative w-full max-w-4xl max-h-[90vh]">
-          {/* Navigation Arrows */}
-          <button
-            onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10 transition-all"
-            aria-label="Previous photo"
-          >
-            <MdChevronLeft className="w-8 h-8" />
-          </button>
+                    {/* Photo Modal */}
+                    {isModalOpen && (
+                      <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+                        <button
+                          onClick={closeModal}
+                          className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+                          aria-label="Close gallery"
+                        >
+                          <MdClear className="w-8 h-8" />
+                        </button>
 
-          {/* Current Photo */}
-          <img
-            src={media[currentPhotoIndex]?.url}
-            alt={`Gallery view ${currentPhotoIndex + 1} of ${media.length}`}
-            className="w-full h-full max-h-[80vh] object-contain rounded-lg"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = 'https://via.placeholder.com/800?text=Photo+Not+Available';
-            }}
-          />
+                        <div className="relative w-full max-w-4xl max-h-[90vh]">
+                          {/* Navigation Arrows */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              goToPrev();
+                            }}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10 transition-all"
+                            aria-label="Previous photo"
+                          >
+                            <MdChevronLeft className="w-8 h-8" />
+                          </button>
 
-          <button
-            onClick={(e) => { e.stopPropagation(); goToNext(); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10 transition-all"
-            aria-label="Next photo"
-          >
-            <MdChevronRight className="w-8 h-8" />
-          </button>
+                          {/* Current Photo */}
+                          <img
+                            src={media[currentPhotoIndex]?.url}
+                            alt={`Gallery view ${currentPhotoIndex + 1} of ${
+                              media.length
+                            }`}
+                            className="w-full h-full max-h-[80vh] object-contain rounded-lg"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src =
+                                "https://via.placeholder.com/800?text=Photo+Not+Available";
+                            }}
+                          />
 
-          {/* Photo Counter */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-            {currentPhotoIndex + 1} / {media.length}
-          </div>
-        </div>
-      </div>
-    )}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              goToNext();
+                            }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10 transition-all"
+                            aria-label="Next photo"
+                          >
+                            <MdChevronRight className="w-8 h-8" />
+                          </button>
+
+                          {/* Photo Counter */}
+                          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                            {currentPhotoIndex + 1} / {media.length}
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Video
                     <div className="text-left mt-8">

@@ -96,6 +96,39 @@ const UpdateLocation = () => {
     }
   };
 
+  // NavItem component for cleaner code
+  // Mobile NavItem component
+  function NavItemMobile({ to, icon, text }) {
+    return (
+      <NavLink
+        exact
+        to={to}
+        activeClassName="bg-blue-100 text-blue-600"
+        className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-100 min-w-[70px]"
+      >
+        <img src={icon} alt={text} className="w-5 h-5 mb-1" />
+        <span className="text-xs text-center">{text}</span>
+      </NavLink>
+    );
+  }
+
+  // Desktop NavItem component (unchanged from your original)
+  function NavItem({ to, icon, text }) {
+    return (
+      <li>
+        <NavLink
+          exact
+          to={to}
+          activeClassName="bg-blue-50 text-blue-600 font-medium"
+          className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <img src={icon} alt={text} className="w-5 h-5 flex-shrink-0" />
+          <span>{text}</span>
+        </NavLink>
+      </li>
+    );
+  }
+
   return (
     <CommonLayout>
       <section className="all-top-shape">
@@ -111,122 +144,190 @@ const UpdateLocation = () => {
                 <div className="w-full lg:w-1/4 flex-shrink-0">
                   <div className="sticky top-20 space-y-6">
                     {/* Online Users Widget */}
-                    <OnlineUsers/>
+                    <OnlineUsers />
 
-                    {/* Navigation Menu */}
-                    <div className="bg-white rounded-xl shadow-md p-4 overflow-hidden transition-all hover:shadow-lg">
-                      <ul className="space-y-1">
-                        {[
-                          { icon: homea, text: "Home", to: "/profile" },
-                          {
-                            icon: serr,
-                            text: "Search Results",
-                            to: "/search-results",
-                          },
-                          {
-                            icon: liveicon,
-                            text: "Live Users",
-                            to: "/live-users",
-                          },
-                          {
-                            icon: viewedMe,
-                            text: "Who Viewed Me",
-                            to: "/who-viewed-you",
-                          },
-                          {
-                            icon: myLikes,
-                            text: "Who Likes Me",
-                            to: "/who-likes-you",
-                          },
-                          { icon: likesMe, text: "My Likes", to: "/my-likes" },
-                          {
-                            icon: yourm,
-                            text: "Your Matches",
-                            to: "/your-matches",
-                          },
-                          {
-                            icon: blockedUsers,
-                            text: "Blocked Users",
-                            to: "/blocked-users",
-                          },
-                        ].map((item, index) => (
-                          <li key={index}>
-                            <NavLink
-                              exact
-                              to={item.to}
-                              activeClassName="bg-blue-50 text-blue-600 font-medium"
-                              className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                            >
-                              <img
-                                src={item.icon}
-                                alt={item.text}
-                                className="w-5 h-5 opacity-80"
-                              />
-                              <span>{item.text}</span>
-                            </NavLink>
-                          </li>
-                        ))}
+                    {/* Navigation */}
+                    <div className="bg-white rounded-lg shadow-md p-4">
+                      {/* Mobile Horizontal Navigation (shows on small screens) */}
+                      <div className="md:hidden overflow-x-auto pb-3">
+                        <div className="flex space-x-2 w-max">
+                          {/* All navigation items in a single scrollable row */}
+                          <NavItemMobile
+                            to="/profile"
+                            icon={homea}
+                            text="Home"
+                          />
+                          <NavItemMobile
+                            to="/search-results"
+                            icon={serr}
+                            text="Search"
+                          />
+                          <NavItemMobile
+                            to="/live-users"
+                            icon={liveicon}
+                            text="Live"
+                          />
+                          <NavItemMobile
+                            to="/who-viewed-you"
+                            icon={viewedMe}
+                            text="Viewed Me"
+                          />
+                          <NavItemMobile
+                            to="/who-likes-you"
+                            icon={myLikes}
+                            text="Likes Me"
+                          />
+                          <NavItemMobile
+                            to="/my-likes"
+                            icon={likesMe}
+                            text="My Likes"
+                          />
+                          <NavItemMobile
+                            to="/your-matches"
+                            icon={yourm}
+                            text="Matches"
+                          />
+                          <NavItemMobile
+                            to="/blocked-users"
+                            icon={blockedUsers}
+                            text="Blocked"
+                          />
+                          <NavItemMobile
+                            to="/edit-basics"
+                            icon={settingEdit}
+                            text="Edit"
+                          />
+                          <NavItemMobile
+                            to="/manage-media"
+                            icon={manageMedia}
+                            text="Media"
+                          />
+                          <NavItemMobile
+                            to="/reset-password"
+                            icon={settingReset}
+                            text="Password"
+                          />
+                          <NavItemMobile
+                            to="/logout"
+                            icon={settingLogout}
+                            text="Logout"
+                          />
+                        </div>
+                      </div>
 
-                        <div className="border-t border-gray-100 my-2"></div>
+                      {/* Desktop Vertical Navigation (unchanged) */}
+                      <ul className="hidden md:block space-y-2">
+                        {/* Main Actions */}
+                        <div className="mb-4">
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                            Discover
+                          </h3>
+                          <div className="space-y-1">
+                            <NavItem to="/profile" icon={homea} text="Home" />
+                            <NavItem
+                              to="/search-results"
+                              icon={serr}
+                              text="Search Results"
+                            />
+                            <NavItem
+                              to="/live-users"
+                              icon={liveicon}
+                              text="Live Users"
+                            />
+                          </div>
+                        </div>
 
-                        {[
-                          {
-                            icon: settingView,
-                            text: "View Profile",
-                            to: "/profile",
-                          },
-                          {
-                            icon: settingEdit,
-                            text: "Edit Profile",
-                            to: "/edit-basics",
-                          },
-                          {
-                            icon: manageMedia,
-                            text: "Manage Media",
-                            to: "/manage-media",
-                          },
-                          {
-                            icon: settingReset,
-                            text: "Reset Password",
-                            to: "/reset-password",
-                          },
-                          {
-                            icon: settingUpload,
-                            text: "Update Location",
-                            to: "/update-location",
-                          },
-                          {
-                            icon: settingHide,
-                            text: "Hide Profile",
-                            to: "/hide-profile",
-                          },
-                          {
-                            icon: settingDelete,
-                            text: "Delete Account",
-                            to: "/delete-account",
-                          },
-                          {
-                            icon: settingLogout,
-                            text: "Logout",
-                            to: "/logout",
-                          },
-                        ].map((item, index) => (
-                          <li key={index}>
-                            <NavLink
-                              exact
-                              to={item.to}
-                              activeClassName="bg-blue-50 text-blue-600 font-medium"
-                              className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                            >
-                              <img
-                                src={item.icon}
-                                alt={item.text}
-                                className="w-5 h-5 opacity-80"
-                              />
-                              <span>{item.text}</span>
-                            </NavLink>
-                          </li>
-                        ))}
+                        {/* Connections */}
+                        <div className="mb-4">
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                            Connections
+                          </h3>
+                          <div className="space-y-1">
+                            <NavItem
+                              to="/who-viewed-you"
+                              icon={viewedMe}
+                              text="Who Viewed Me"
+                            />
+                            <NavItem
+                              to="/who-likes-you"
+                              icon={myLikes}
+                              text="Who Likes Me"
+                            />
+                            <NavItem
+                              to="/my-likes"
+                              icon={likesMe}
+                              text="My Likes"
+                            />
+                            <NavItem
+                              to="/your-matches"
+                              icon={yourm}
+                              text="Your Matches"
+                            />
+                            <NavItem
+                              to="/blocked-users"
+                              icon={blockedUsers}
+                              text="Blocked Users"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Profile Management */}
+                        <div className="mb-4">
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                            Profile
+                          </h3>
+                          <div className="space-y-1">
+                            <NavItem
+                              to="/profile"
+                              icon={settingView}
+                              text="View Profile"
+                            />
+                            <NavItem
+                              to="/edit-basics"
+                              icon={settingEdit}
+                              text="Edit Profile"
+                            />
+                            <NavItem
+                              to="/manage-media"
+                              icon={manageMedia}
+                              text="Manage Media"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Account Settings */}
+                        <div>
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                            Settings
+                          </h3>
+                          <div className="space-y-1">
+                            <NavItem
+                              to="/reset-password"
+                              icon={settingReset}
+                              text="Reset Password"
+                            />
+                            <NavItem
+                              to="/update-location"
+                              icon={settingUpload}
+                              text="Update Location"
+                            />
+                            <NavItem
+                              to="/hide-profile"
+                              icon={settingHide}
+                              text="Hide Profile"
+                            />
+                            <NavItem
+                              to="/delete-account"
+                              icon={settingDelete}
+                              text="Delete Account"
+                            />
+                            <NavItem
+                              to="/logout"
+                              icon={settingLogout}
+                              text="Logout"
+                            />
+                          </div>
+                        </div>
                       </ul>
                     </div>
                   </div>

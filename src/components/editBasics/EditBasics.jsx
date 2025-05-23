@@ -100,16 +100,53 @@ const EditBasics = () => {
     }
   };
 
+  // NavItem component for cleaner code
+  // Mobile NavItem component
+  function NavItemMobile({ to, icon, text }) {
+    return (
+      <NavLink
+        exact
+        to={to}
+        activeClassName="bg-blue-100 text-blue-600"
+        className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-100 min-w-[70px]"
+      >
+        <img src={icon} alt={text} className="w-5 h-5 mb-1" />
+        <span className="text-xs text-center">{text}</span>
+      </NavLink>
+    );
+  }
+
+  // Desktop NavItem component (unchanged from your original)
+  function NavItem({ to, icon, text }) {
+    return (
+      <li>
+        <NavLink
+          exact
+          to={to}
+          activeClassName="bg-blue-50 text-blue-600 font-medium"
+          className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <img src={icon} alt={text} className="w-5 h-5 flex-shrink-0" />
+          <span>{text}</span>
+        </NavLink>
+      </li>
+    );
+  }
+
   // if (loading) return <div>Loading...</div>;
 
   return (
     <CommonLayout>
-  {/* Hero section with decorative shape */}
-  <div className="relative">
-    <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
-      <img src={shape} alt="shape" className="w-full h-full object-cover opacity-20" />
-    </section>
-  </div>
+      {/* Hero section with decorative shape */}
+      <div className="relative">
+        <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
+          <img
+            src={shape}
+            alt="shape"
+            className="w-full h-full object-cover opacity-20"
+          />
+        </section>
+      </div>
 
       <div className="all-container">
         <div className="pr pb-5 mb-5">
@@ -120,91 +157,212 @@ const EditBasics = () => {
                 {/* Navigation sidebar - takes full width on mobile, 1/4 on desktop */}
                 <div className="w-full md:w-1/4 space-y-6">
                   {/* Online Users */}
-                 <OnlineUsers/>
+                  <OnlineUsers />
 
                   {/* Navigation */}
                   <div className="bg-white rounded-lg shadow-md p-4">
-                    <ul className="space-y-2">
-                      <li>
-                        <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={homea} alt="home" className="w-5 h-5" /> Home
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/search-results" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={serr} alt="search" className="w-5 h-5" /> Search Results
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/live-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={liveicon} alt="live" className="w-5 h-5" /> Live Users
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/who-viewed-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={viewedMe} alt="viewed" className="w-5 h-5" /> Who Viewed Me
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/who-likes-you" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={myLikes} alt="likes" className="w-5 h-5" /> Who Likes Me
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/my-likes" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={likesMe} alt="my likes" className="w-5 h-5" /> My Likes
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/your-matches" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={yourm} alt="matches" className="w-5 h-5" /> Your Matches
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/blocked-users" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={blockedUsers} alt="blocked" className="w-5 h-5" /> Blocked Users
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingView} alt="profile" className="w-5 h-5" /> View Profile
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/edit-basics" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingEdit} alt="edit" className="w-5 h-5" /> Edit Profile
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/manage-media" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={manageMedia} alt="media" className="w-5 h-5" /> Manage Media
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/reset-password" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingReset} alt="reset" className="w-5 h-5" /> Reset Password
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/update-location" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingUpload} alt="location" className="w-5 h-5" /> Update Location
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/hide-profile" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingHide} alt="hide" className="w-5 h-5" /> Hide Profile
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/delete-account" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingDelete} alt="delete" className="w-5 h-5" /> Delete Account
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink exact to="/logout" activeClassName="text-blue-600 font-medium" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                          <img src={settingLogout} alt="logout" className="w-5 h-5" /> Logout
-                        </NavLink>
-                      </li>
+                    {/* Mobile Horizontal Navigation (shows on small screens) */}
+                    <div className="md:hidden overflow-x-auto pb-3">
+                      <div className="flex space-x-2 w-max">
+                        {/* All navigation items in a single scrollable row */}
+                        <NavItemMobile to="/profile" icon={homea} text="Home" />
+                        <NavItemMobile
+                          to="/search-results"
+                          icon={serr}
+                          text="Search"
+                        />
+                        <NavItemMobile
+                          to="/live-users"
+                          icon={liveicon}
+                          text="Live"
+                        />
+                        <NavItemMobile
+                          to="/who-viewed-you"
+                          icon={viewedMe}
+                          text="Viewed Me"
+                        />
+                        <NavItemMobile
+                          to="/who-likes-you"
+                          icon={myLikes}
+                          text="Likes Me"
+                        />
+                        <NavItemMobile
+                          to="/my-likes"
+                          icon={likesMe}
+                          text="My Likes"
+                        />
+                        <NavItemMobile
+                          to="/your-matches"
+                          icon={yourm}
+                          text="Matches"
+                        />
+                        <NavItemMobile
+                          to="/blocked-users"
+                          icon={blockedUsers}
+                          text="Blocked"
+                        />
+
+                        <NavItemMobile
+                          to="/manage-media"
+                          icon={manageMedia}
+                          text="Manage Media"
+                        />
+
+                        <NavItemMobile
+                          to="/edit-basics"
+                          icon={settingEdit}
+                          text="Edit"
+                        />
+
+                        <NavItemMobile
+                          to="/hide-profile"
+                          icon={settingHide}
+                          text="Hide Profile"
+                        />
+
+                        <NavItemMobile
+                          to="/delete-account"
+                          icon={settingDelete}
+                          text="Delete Account"
+                        />
+
+                        <NavItemMobile
+                          to="/update-location"
+                          icon={settingUpload}
+                          text="Update Location"
+                        />
+
+                        <NavItemMobile
+                          to="/manage-media"
+                          icon={manageMedia}
+                          text="Media"
+                        />
+                        <NavItemMobile
+                          to="/reset-password"
+                          icon={settingReset}
+                          text="Password"
+                        />
+                        <NavItemMobile
+                          to="/logout"
+                          icon={settingLogout}
+                          text="Logout"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Desktop Vertical Navigation (unchanged) */}
+                    <ul className="hidden md:block space-y-2">
+                      {/* Main Actions */}
+                      <div className="mb-4">
+                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                          Discover
+                        </h3>
+                        <div className="space-y-1">
+                          <NavItem to="/profile" icon={homea} text="Home" />
+                          <NavItem
+                            to="/search-results"
+                            icon={serr}
+                            text="Search Results"
+                          />
+                          <NavItem
+                            to="/live-users"
+                            icon={liveicon}
+                            text="Live Users"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Connections */}
+                      <div className="mb-4">
+                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                          Connections
+                        </h3>
+                        <div className="space-y-1">
+                          <NavItem
+                            to="/who-viewed-you"
+                            icon={viewedMe}
+                            text="Who Viewed Me"
+                          />
+                          <NavItem
+                            to="/who-likes-you"
+                            icon={myLikes}
+                            text="Who Likes Me"
+                          />
+                          <NavItem
+                            to="/my-likes"
+                            icon={likesMe}
+                            text="My Likes"
+                          />
+                          <NavItem
+                            to="/your-matches"
+                            icon={yourm}
+                            text="Your Matches"
+                          />
+                          <NavItem
+                            to="/blocked-users"
+                            icon={blockedUsers}
+                            text="Blocked Users"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Profile Management */}
+                      <div className="mb-4">
+                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                          Profile
+                        </h3>
+                        <div className="space-y-1">
+                          <NavItem
+                            to="/profile"
+                            icon={settingView}
+                            text="View Profile"
+                          />
+                          <NavItem
+                            to="/edit-basics"
+                            icon={settingEdit}
+                            text="Edit Profile"
+                          />
+                          <NavItem
+                            to="/manage-media"
+                            icon={manageMedia}
+                            text="Manage Media"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Account Settings */}
+                      <div>
+                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
+                          Settings
+                        </h3>
+                        <div className="space-y-1">
+                          <NavItem
+                            to="/reset-password"
+                            icon={settingReset}
+                            text="Reset Password"
+                          />
+                          <NavItem
+                            to="/update-location"
+                            icon={settingUpload}
+                            text="Update Location"
+                          />
+                          <NavItem
+                            to="/hide-profile"
+                            icon={settingHide}
+                            text="Hide Profile"
+                          />
+                          <NavItem
+                            to="/delete-account"
+                            icon={settingDelete}
+                            text="Delete Account"
+                          />
+                          <NavItem
+                            to="/logout"
+                            icon={settingLogout}
+                            text="Logout"
+                          />
+                        </div>
+                      </div>
                     </ul>
                   </div>
                 </div>
@@ -222,7 +380,11 @@ const EditBasics = () => {
                     </div>
 
                     <div className="space-y-6">
-                      <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+                      <form
+                        onSubmit={handleSubmit}
+                        className="needs-validation"
+                        noValidate
+                      >
                         {/* Personal Information Section */}
                         <div className="card bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm">
                           <div className="card-header bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] p-4">
@@ -238,15 +400,23 @@ const EditBasics = () => {
                               </label>
                               <div className="flex flex-wrap gap-4">
                                 {["Woman", "Man"].map((gender) => (
-                                  <div key={gender} className="flex items-center">
+                                  <div
+                                    key={gender}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       className="h-5 w-5 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                       type="radio"
                                       id={gender}
                                       checked={formData.gender === gender}
-                                      onChange={() => handleChange("gender", gender)}
+                                      onChange={() =>
+                                        handleChange("gender", gender)
+                                      }
                                     />
-                                    <label className="ml-2 text-gray-700" htmlFor={gender}>
+                                    <label
+                                      className="ml-2 text-gray-700"
+                                      htmlFor={gender}
+                                    >
                                       {gender}
                                     </label>
                                   </div>
@@ -264,13 +434,21 @@ const EditBasics = () => {
                                   <select
                                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
                                     value={formData.birthDate.month}
-                                    onChange={(e) => handleBirthdayChange("month", e.target.value)}
+                                    onChange={(e) =>
+                                      handleBirthdayChange(
+                                        "month",
+                                        e.target.value
+                                      )
+                                    }
                                     required
                                   >
                                     <option value="">Month</option>
                                     {Array.from({ length: 12 }, (_, i) => (
                                       <option key={i + 1} value={i + 1}>
-                                        {new Date(0, i).toLocaleString("default", { month: "long" })}
+                                        {new Date(0, i).toLocaleString(
+                                          "default",
+                                          { month: "long" }
+                                        )}
                                       </option>
                                     ))}
                                   </select>
@@ -279,7 +457,12 @@ const EditBasics = () => {
                                   <select
                                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
                                     value={formData.birthDate.day}
-                                    onChange={(e) => handleBirthdayChange("day", e.target.value)}
+                                    onChange={(e) =>
+                                      handleBirthdayChange(
+                                        "day",
+                                        e.target.value
+                                      )
+                                    }
                                     required
                                   >
                                     <option value="">Day</option>
@@ -294,7 +477,12 @@ const EditBasics = () => {
                                   <select
                                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
                                     value={formData.birthDate.year}
-                                    onChange={(e) => handleBirthdayChange("year", e.target.value)}
+                                    onChange={(e) =>
+                                      handleBirthdayChange(
+                                        "year",
+                                        e.target.value
+                                      )
+                                    }
                                     required
                                   >
                                     <option value="">Year</option>
@@ -335,9 +523,14 @@ const EditBasics = () => {
                                       type="radio"
                                       id={race.replace(/\s+/g, "")}
                                       checked={formData.ethnicity === race}
-                                      onChange={() => handleChange("ethnicity", race)}
+                                      onChange={() =>
+                                        handleChange("ethnicity", race)
+                                      }
                                     />
-                                    <label className="ml-2 text-gray-700 text-sm" htmlFor={race.replace(/\s+/g, "")}>
+                                    <label
+                                      className="ml-2 text-gray-700 text-sm"
+                                      htmlFor={race.replace(/\s+/g, "")}
+                                    >
                                       {race}
                                     </label>
                                   </div>
@@ -364,7 +557,9 @@ const EditBasics = () => {
                                 <select
                                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
                                   value={formData.height}
-                                  onChange={(e) => handleChange("height", e.target.value)}
+                                  onChange={(e) =>
+                                    handleChange("height", e.target.value)
+                                  }
                                 >
                                   {[
                                     "150cm - (4'11\")",
@@ -410,9 +605,14 @@ const EditBasics = () => {
                                 <select
                                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9b72fe] focus:border-[#9b72fe]"
                                   value={formData.age}
-                                  onChange={(e) => handleChange("age", e.target.value)}
+                                  onChange={(e) =>
+                                    handleChange("age", e.target.value)
+                                  }
                                 >
-                                  {Array.from({ length: 82 }, (_, i) => i + 19).map((age) => (
+                                  {Array.from(
+                                    { length: 82 },
+                                    (_, i) => i + 19
+                                  ).map((age) => (
                                     <option key={age} value={age.toString()}>
                                       {age}
                                     </option>
@@ -431,15 +631,23 @@ const EditBasics = () => {
                                     "Athletic / Fit",
                                     // ... other body types
                                   ].map((type) => (
-                                    <div key={type} className="flex items-center">
+                                    <div
+                                      key={type}
+                                      className="flex items-center"
+                                    >
                                       <input
                                         className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                         type="radio"
                                         id={type.replace(/\s+/g, "")}
                                         checked={formData.bodyType === type}
-                                        onChange={() => handleChange("bodyType", type)}
+                                        onChange={() =>
+                                          handleChange("bodyType", type)
+                                        }
                                       />
-                                      <label className="ml-2 text-gray-700 text-sm" htmlFor={type.replace(/\s+/g, "")}>
+                                      <label
+                                        className="ml-2 text-gray-700 text-sm"
+                                        htmlFor={type.replace(/\s+/g, "")}
+                                      >
                                         {type}
                                       </label>
                                     </div>
@@ -453,7 +661,9 @@ const EditBasics = () => {
                         {/* Lifestyle Section */}
                         <div className="card bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm">
                           <div className="card-header bg-gradient-to-r from-[#9b72fe] to-[#7e5af9] p-4">
-                            <h5 className="mb-0 text-white text-lg font-semibold">Lifestyle</h5>
+                            <h5 className="mb-0 text-white text-lg font-semibold">
+                              Lifestyle
+                            </h5>
                           </div>
                           <div className="card-body p-6 space-y-6">
                             {/* Marital Status */}
@@ -462,22 +672,36 @@ const EditBasics = () => {
                                 Marital Status
                               </label>
                               <div className="flex flex-wrap gap-4">
-                                {["Single", "Divorced", "Separated", "Widowed", "Attached"].map(
-                                  (status) => (
-                                    <div key={status} className="flex items-center">
-                                      <input
-                                        className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
-                                        type="radio"
-                                        id={status}
-                                        checked={formData.maritalStatus === status}
-                                        onChange={() => handleChange("maritalStatus", status)}
-                                      />
-                                      <label className="ml-2 text-gray-700" htmlFor={status}>
-                                        {status}
-                                      </label>
-                                    </div>
-                                  )
-                                )}
+                                {[
+                                  "Single",
+                                  "Divorced",
+                                  "Separated",
+                                  "Widowed",
+                                  "Attached",
+                                ].map((status) => (
+                                  <div
+                                    key={status}
+                                    className="flex items-center"
+                                  >
+                                    <input
+                                      className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
+                                      type="radio"
+                                      id={status}
+                                      checked={
+                                        formData.maritalStatus === status
+                                      }
+                                      onChange={() =>
+                                        handleChange("maritalStatus", status)
+                                      }
+                                    />
+                                    <label
+                                      className="ml-2 text-gray-700"
+                                      htmlFor={status}
+                                    >
+                                      {status}
+                                    </label>
+                                  </div>
+                                ))}
                               </div>
                             </div>
 
@@ -494,15 +718,23 @@ const EditBasics = () => {
                                     "Yes, they sometimes live at home",
                                     "Yes, they live away from home",
                                   ].map((option) => (
-                                    <div key={option} className="flex items-center">
+                                    <div
+                                      key={option}
+                                      className="flex items-center"
+                                    >
                                       <input
                                         className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                         type="radio"
                                         id={option.replace(/\s+/g, "")}
                                         checked={formData.hasKids === option}
-                                        onChange={() => handleChange("hasKids", option)}
+                                        onChange={() =>
+                                          handleChange("hasKids", option)
+                                        }
                                       />
-                                      <label className="ml-2 text-gray-700 text-sm" htmlFor={option.replace(/\s+/g, "")}>
+                                      <label
+                                        className="ml-2 text-gray-700 text-sm"
+                                        htmlFor={option.replace(/\s+/g, "")}
+                                      >
                                         {option}
                                       </label>
                                     </div>
@@ -515,20 +747,32 @@ const EditBasics = () => {
                                   Want Kids
                                 </label>
                                 <div className="space-y-2">
-                                  {["Yes", "No", "Maybe", "Undecided"].map((option) => (
-                                    <div key={option} className="flex items-center">
-                                      <input
-                                        className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
-                                        type="radio"
-                                        id={`w${option}`}
-                                        checked={formData.wantsKids === option}
-                                        onChange={() => handleChange("wantsKids", option)}
-                                      />
-                                      <label className="ml-2 text-gray-700 text-sm" htmlFor={`w${option}`}>
-                                        {option}
-                                      </label>
-                                    </div>
-                                  ))}
+                                  {["Yes", "No", "Maybe", "Undecided"].map(
+                                    (option) => (
+                                      <div
+                                        key={option}
+                                        className="flex items-center"
+                                      >
+                                        <input
+                                          className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
+                                          type="radio"
+                                          id={`w${option}`}
+                                          checked={
+                                            formData.wantsKids === option
+                                          }
+                                          onChange={() =>
+                                            handleChange("wantsKids", option)
+                                          }
+                                        />
+                                        <label
+                                          className="ml-2 text-gray-700 text-sm"
+                                          htmlFor={`w${option}`}
+                                        >
+                                          {option}
+                                        </label>
+                                      </div>
+                                    )
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -556,15 +800,23 @@ const EditBasics = () => {
                                   "Friendship",
                                   "Hangout Buddy",
                                 ].map((option) => (
-                                  <div key={option} className="flex items-center">
+                                  <div
+                                    key={option}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                       type="radio"
                                       id={option.replace(/\s+/g, "")}
                                       checked={formData.hereFor === option}
-                                      onChange={() => handleChange("hereFor", option)}
+                                      onChange={() =>
+                                        handleChange("hereFor", option)
+                                      }
                                     />
-                                    <label className="ml-2 text-gray-700" htmlFor={option.replace(/\s+/g, "")}>
+                                    <label
+                                      className="ml-2 text-gray-700"
+                                      htmlFor={option.replace(/\s+/g, "")}
+                                    >
                                       {option}
                                     </label>
                                   </div>
@@ -579,15 +831,25 @@ const EditBasics = () => {
                               </label>
                               <div className="flex flex-wrap gap-4">
                                 {["No", "Yes", "Undecided"].map((option) => (
-                                  <div key={option} className="flex items-center">
+                                  <div
+                                    key={option}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       className="h-4 w-4 text-[#9b72fe] border-gray-300 focus:ring-[#9b72fe]"
                                       type="radio"
                                       id={`${option}r`}
-                                      checked={formData.wouldRelocate === option}
-                                      onChange={() => handleChange("wouldRelocate", option)}
+                                      checked={
+                                        formData.wouldRelocate === option
+                                      }
+                                      onChange={() =>
+                                        handleChange("wouldRelocate", option)
+                                      }
                                     />
-                                    <label className="ml-2 text-gray-700" htmlFor={`${option}r`}>
+                                    <label
+                                      className="ml-2 text-gray-700"
+                                      htmlFor={`${option}r`}
+                                    >
                                       {option}
                                     </label>
                                   </div>

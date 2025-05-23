@@ -1054,6 +1054,7 @@ const SearchResults = () => {
                             <Col md={12} className="pagination-list">
                             <Pagination>
   
+
   <Pagination.Prev className="pagi-list-next-pre" />
   <Pagination.Item active>{1}</Pagination.Item>
   
