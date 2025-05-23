@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom';
 import ImageGallary from '../imageGallary/ImageGallary';
 import SimilarUsersSection from './SimilarUsersSection/SimilarUsersSection';
 import axios from 'axios';
+import OnlineStatusUpdater from './OnlineUsers/OnlineStatusUpdater';
 
 const UserProfilePage = () => {
     const currentUserId = localStorage.getItem('userId');
@@ -479,6 +480,7 @@ const BlockUserModal = ({ onClose, userId }) => {
           </button>
         </div>
       </div>
+      <OnlineStatusUpdater userId={localStorage.getItem("userId")} />
     </div>
   );
 };

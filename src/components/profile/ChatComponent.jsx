@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import Picker from 'emoji-picker-react';
 import { Send, Paperclip, Smile, X, Image, FileText, Check, CheckCheck } from 'lucide-react';
 import notificationSound from '../../../public/notification.mp3'; // if you import directly
+import OnlineStatusUpdater from './OnlineUsers/OnlineStatusUpdater';
 
 const audio = new Audio(notificationSound); // or use: new Audio('/notification.mp3') if in public
 
@@ -510,6 +511,7 @@ const [user, setUser] = useState(null);
       </button>
     </div>
   </div>
+  <OnlineStatusUpdater userId={localStorage.getItem("userId")} />
 </div>
 
   );

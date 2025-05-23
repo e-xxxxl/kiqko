@@ -33,6 +33,7 @@ import serr from "../../../assets/images/serr.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaComment } from "react-icons/fa";
+import OnlineUsers from "../../profile/OnlineUsers/OnlineUsers";
 
 const MyLikes = () => {
  
@@ -80,21 +81,7 @@ const toggleFavorite = (id) => {
             <Col lg={3} className="w-full">
               <div className="bg-white rounded-xl shadow-md overflow-hidden">
                 {/* Online Users Card */}
-                <div className="p-4 border-b">
-                  <h5 className="font-bold text-lg text-center text-gray-800 pb-2 mb-3 border-b border-gray-200">
-                    Users Online Now
-                  </h5>
-                  <div className="flex justify-around">
-                    <div className="text-center px-4 py-2">
-                      <h6 className="text-sm text-gray-600">Women</h6>
-                      <h4 className="text-xl font-bold text-pink-600">1,234</h4>
-                    </div>
-                    <div className="text-center px-4 py-2">
-                      <h6 className="text-sm text-gray-600">Men</h6>
-                      <h4 className="text-xl font-bold text-blue-600">1,565</h4>
-                    </div>
-                  </div>
-                </div>
+                <OnlineUsers/>
 
                 {/* Navigation Menu */}
                 <nav className="p-4">

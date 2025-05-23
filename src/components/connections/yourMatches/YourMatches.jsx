@@ -31,6 +31,7 @@ import liveicon from '../../../assets/images/liveicon.png';
 import yourm from '../../../assets/images/yourm.png';
 import blockedUsers from '../../../assets/images/blockedUsers.png';
 import serr from '../../../assets/images/serr.png';
+import OnlineUsers from '../../profile/OnlineUsers/OnlineUsers';
 const YourMatches = () => {
     return (
        <CommonLayout>
@@ -47,31 +48,7 @@ const YourMatches = () => {
       {/* Sidebar - Collapsible on mobile */}
       <div className="w-full lg:w-80 flex-shrink-0">
         {/* User status card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <div className="text-center">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Community Activity</h3>
-            <div className="flex justify-between px-4">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <svg className="w-8 h-8 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                  </svg>
-                </div>
-                <h4 className="text-sm font-medium text-gray-500">Women Online</h4>
-                <p className="text-xl font-bold text-gray-800">1,234</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <svg className="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                  </svg>
-                </div>
-                <h4 className="text-sm font-medium text-gray-500">Men Online</h4>
-                <p className="text-xl font-bold text-gray-800">1,565</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <OnlineUsers/>
 
         {/* Navigation */}
         <nav className="bg-white rounded-xl shadow-lg overflow-hidden">

@@ -33,6 +33,7 @@ import serr from "../../assets/images/serr.png";
 import OnlineUsers from "../profile/OnlineUsers/OnlineUsers";
 import { useState, useRef } from "react";
 import axios from "axios"; // or your preferred HTTP client
+import OnlineStatusUpdater from "../profile/OnlineUsers/OnlineStatusUpdater";
 
 const ManageMedia = () => {
   // State for uploaded media
@@ -616,6 +617,7 @@ const ManageMedia = () => {
           </div>
         </div>
       </div>
+      <OnlineStatusUpdater userId={localStorage.getItem("userId")} />
     </CommonLayout>
   );
 };

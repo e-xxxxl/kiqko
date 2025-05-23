@@ -38,7 +38,7 @@ import { MdNearMe } from "react-icons/md";
 import { MdOutlineClose } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import { MdClear } from "react-icons/md";
+// import { MdClear } from "react-icons/md";
 
 import gender from "../../assets/images/gender.png";
 import ages from "../../assets/images/ages.png";
@@ -93,83 +93,43 @@ import { Link } from "react-router-dom/cjs/react-router-dom";
 import SimilarUsersSection from "./SimilarUsersSection/SimilarUsersSection";
 import OnlineUsers from "./OnlineUsers/OnlineUsers";
 import OnlineStatusUpdater from "./OnlineUsers/OnlineStatusUpdater";
+import axios from "axios";
+import { MdClear, MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-const useOnlineStatus = (userId) => {
-  useEffect(() => {
-    if (!userId) return;
-
-    // Function to update online status
-    const updateOnlineStatus = async (isOnline) => {
-      try {
-        await fetch(
-          `https://kiqko-backend.onrender.com/api/users/online-status/${userId}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ isOnline }),
-          }
-        );
-      } catch (error) {
-        console.error("Error updating online status:", error);
-      }
-    };
-
-    // Initial update when component mounts
-    updateOnlineStatus(true);
-
-    // Set up interval for periodic updates (every 5 minutes)
-    const intervalId = setInterval(() => {
-      if (navigator.onLine) {
-        updateOnlineStatus(true);
-      }
-    }, 5 * 60 * 1000); // 5 minutes
-
-    // Update status when window gets focus
-    const handleFocus = () => {
-      if (navigator.onLine) {
-        updateOnlineStatus(true);
-      }
-    };
-
-    // Update status when connection is restored
-    const handleOnline = () => {
-      updateOnlineStatus(true);
-    };
-
-    // Update status when connection is lost
-    const handleOffline = () => {
-      updateOnlineStatus(false);
-    };
-
-    window.addEventListener("focus", handleFocus);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    // Cleanup function
-    return () => {
-      clearInterval(intervalId);
-      window.removeEventListener("focus", handleFocus);
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-      // Set offline when component unmounts
-      updateOnlineStatus(false);
-    };
-  }, [userId]);
-};
 
 const Profile = () => {
   const userId = localStorage.getItem("userId");
 
   // Add this hook call
-  useOnlineStatus(userId);
+  
   const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
   const [isShowBlockUser, setIsBlockUser] = useState(false);
   const [user, setUser] = useState(null);
   const [profileDetails, setProfileDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
+  const [media, setMedia] = useState([]);
+  const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
+
+const openModal = (index) => {
+  setCurrentPhotoIndex(index);
+  setIsModalOpen(true);
+};
+
+const closeModal = () => {
+  setIsModalOpen(false);
+};
+
+const goToPrev = () => {
+  setCurrentPhotoIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
+};
+
+const goToNext = () => {
+  setCurrentPhotoIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
+};
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -245,6 +205,64 @@ const Profile = () => {
     fetchData();
     fetchProfileDetails();
   }, []);
+
+  useEffect(() => {
+    const fetchUserMedia = async () => {
+      if (!userId) {
+        setError("User not authenticated");
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `https://kiqko-backend.onrender.com/api/users/${userId}/media`,
+          { withCredentials: true } // Add this to include cookies
+        );
+        
+        console.log("API Response:", response.data); // Debug log
+        
+        // Check response structure
+        if (response.data && Array.isArray(response.data)) {
+          // If the API returns an array directly
+          const normalizedMedia = response.data.map(item => ({
+            _id: item._id || item.id,
+            url: item.url
+          }));
+          setMedia(normalizedMedia);
+        } else if (response.data && Array.isArray(response.data.media)) {
+          // If the API returns an object with media array
+          const normalizedMedia = response.data.media.map(item => ({
+            _id: item._id || item.id,
+            url: item.url
+          }));
+          setMedia(normalizedMedia);
+        } else if (response.data && response.data.profile && Array.isArray(response.data.profile.media)) {
+          // If the API returns a nested structure
+          const normalizedMedia = response.data.profile.media.map(item => ({
+            _id: item._id || item.id,
+            url: item.url
+          }));
+          setMedia(normalizedMedia);
+        } else {
+          // Fallback for empty state
+          setMedia([]);
+        }
+        
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch media:", err);
+        setError("Failed to load media. Please refresh the page.");
+        setMedia([]); // Reset to empty array on error
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserMedia();
+  }, [userId]);
+
 
   //   if (!user) return <p>Loading...</p>;
 
@@ -922,17 +940,104 @@ const Profile = () => {
                       <img src={adda} alt="ad" className="w-full rounded" />
                     </div>
 
-                    {/* Photos */}
-                    <div className="text-left mt-8">
-                      <h3 className="text-xl font-semibold mb-4">
-                        My Photos <span className="text-gray-500">9</span>
-                      </h3>
-                      <div className="my-photo-block">
-                        <ImageGallary imgList={gallaryImgList} />
-                      </div>
-                    </div>
+                   {/* Photos Section */}
+  {/* Photos Section */}
+    <div className="mt-10">
+      <div className="mb-6">
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+          My Photos 
+          <span className="ml-2 text-gray-500 dark:text-gray-400 font-medium">{media.length}</span>
+        </h3>
+      </div>
 
-                    {/* Video */}
+      {/* Photo Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {media.map((item, index) => (
+          <div 
+            key={item._id} 
+            className="relative group aspect-square rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+            onClick={() => openModal(index)}
+          >
+            {/* Hover Overlay with Delete Button */}
+            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteMedia(item._id);
+                }}
+                className="bg-white/90 hover:bg-white text-red-500 rounded-full p-2 shadow-lg transition-all transform translate-y-3 group-hover:translate-y-0 hover:scale-110"
+                disabled={isLoading}
+                aria-label="Delete photo"
+              >
+                <MdClear className="w-5 h-5" />
+              </button>
+            </div>
+            
+            {/* Image */}
+            <img
+              src={item.url}
+              alt={`User upload ${item._id}`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://via.placeholder.com/300?text=Photo+Not+Available';
+              }}
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Photo Modal */}
+    {isModalOpen && (
+      <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+        <button 
+          onClick={closeModal}
+          className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+          aria-label="Close gallery"
+        >
+          <MdClear className="w-8 h-8" />
+        </button>
+
+        <div className="relative w-full max-w-4xl max-h-[90vh]">
+          {/* Navigation Arrows */}
+          <button
+            onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10 transition-all"
+            aria-label="Previous photo"
+          >
+            <MdChevronLeft className="w-8 h-8" />
+          </button>
+
+          {/* Current Photo */}
+          <img
+            src={media[currentPhotoIndex]?.url}
+            alt={`Gallery view ${currentPhotoIndex + 1} of ${media.length}`}
+            className="w-full h-full max-h-[80vh] object-contain rounded-lg"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://via.placeholder.com/800?text=Photo+Not+Available';
+            }}
+          />
+
+          <button
+            onClick={(e) => { e.stopPropagation(); goToNext(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 z-10 transition-all"
+            aria-label="Next photo"
+          >
+            <MdChevronRight className="w-8 h-8" />
+          </button>
+
+          {/* Photo Counter */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+            {currentPhotoIndex + 1} / {media.length}
+          </div>
+        </div>
+      </div>
+    )}
+
+                    {/* Video
                     <div className="text-left mt-8">
                       <h3 className="text-xl font-semibold mb-4">
                         Video <span className="text-gray-500">1</span>
@@ -948,7 +1053,7 @@ const Profile = () => {
                           </li>
                         </ul>
                       </div>
-                    </div>
+                    </div> */}
 
                     {/* About Me */}
                     <div className="text-left mt-8">

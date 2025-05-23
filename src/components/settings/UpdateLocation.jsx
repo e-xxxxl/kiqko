@@ -25,6 +25,7 @@ import liveicon from "../../assets/images/liveicon.png";
 import yourm from "../../assets/images/yourm.png";
 import blockedUsers from "../../assets/images/blockedUsers.png";
 import serr from "../../assets/images/serr.png";
+import OnlineUsers from "../profile/OnlineUsers/OnlineUsers";
 
 const UpdateLocation = () => {
   const [formData, setFormData] = useState({
@@ -110,25 +111,7 @@ const UpdateLocation = () => {
                 <div className="w-full lg:w-1/4 flex-shrink-0">
                   <div className="sticky top-20 space-y-6">
                     {/* Online Users Widget */}
-                    <div className="bg-white rounded-xl shadow-md p-5 text-center transition-all hover:shadow-lg">
-                      <h5 className="font-bold text-lg border-b border-gray-100 pb-3 mb-4">
-                        Users Online Now
-                      </h5>
-                      <div className="flex justify-between px-2">
-                        <div className="w-1/2 pr-3 border-r border-gray-100">
-                          <h6 className="text-sm text-gray-500 mb-1">Women</h6>
-                          <h4 className="text-2xl font-bold text-pink-500">
-                            1,234
-                          </h4>
-                        </div>
-                        <div className="w-1/2 pl-3">
-                          <h6 className="text-sm text-gray-500 mb-1">Men</h6>
-                          <h4 className="text-2xl font-bold text-blue-500">
-                            1,565
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
+                    <OnlineUsers/>
 
                     {/* Navigation Menu */}
                     <div className="bg-white rounded-xl shadow-md p-4 overflow-hidden transition-all hover:shadow-lg">

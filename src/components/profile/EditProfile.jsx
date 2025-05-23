@@ -90,6 +90,7 @@ import Button from 'react-bootstrap/Button'
 import serr from '../../assets/images/serr.png';
 import utils from '../utils';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import OnlineStatusUpdater from './OnlineUsers/OnlineStatusUpdater';
 const EditProfile = () => {
   const [isShowHideFormSearch, setIsShowHideFormSearch] = useState(false);
   const [isShowBlockUser, setIsBlockUser] = useState(false);
@@ -707,6 +708,7 @@ Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh
                 
             </div>
             </div>
+            <OnlineStatusUpdater userId={localStorage.getItem("userId")} />
     </CommonLayout>
     );
 };

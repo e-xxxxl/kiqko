@@ -27,6 +27,7 @@ import blockedUsers from "../../assets/images/blockedUsers.png";
 import serr from "../../assets/images/serr.png";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import OnlineUsers from "../profile/OnlineUsers/OnlineUsers";
+import OnlineStatusUpdater from "../profile/OnlineUsers/OnlineStatusUpdater";
 const EditBasics = () => {
   const [formData, setFormData] = useState({
     gender: "",
@@ -614,6 +615,7 @@ const EditBasics = () => {
           </div>
         </div>
       </div>
+      <OnlineStatusUpdater userId={localStorage.getItem("userId")} />
     </CommonLayout>
   );
 };
