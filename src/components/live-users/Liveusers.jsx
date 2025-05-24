@@ -70,14 +70,41 @@ const Liveusers = () => {
 
   return (
     <CommonLayout>
-      {/* Hero section with gradient background */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-500 py-6">
-        <div className="container mx-auto px-4">
-          <h1 className="text-2xl md:text-3xl font-bold text-white text-center">
-            Connect with Live Users Now
-          </h1>
-          <p className="text-white/80 text-center mt-2"></p>
-        </div>
+<div className="relative">
+        {/* Mobile version (shown on small screens) */}
+        <section className="md:hidden h-20 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500/30 via-purple-500/30 to-indigo-600/30">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"
+                fill="white"
+                opacity="0.1"
+              />
+            </svg>
+          </div>
+          <div className="container mx-auto px-4 h-full flex items-center"></div>
+        </section>
+
+        {/* Desktop version (shown on medium+ screens) */}
+        <section className="hidden md:block h-32 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 overflow-hidden relative">
+          <div className="absolute inset-0 opacity-20">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 1440 320"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+          <div className="container mx-auto px-6 h-full flex items-center justify-between"></div>
+        </section>
       </div>
 
       {/* Main content container */}
