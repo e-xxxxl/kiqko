@@ -61,6 +61,7 @@ import Loginr from './components/landing/loginr/Loginr';
 import OtpReset from './components/settings/OtpReset';
 import UserProfilePage from './components/profile/UserProfilePage';
 import ChatComponent from './components/profile/ChatComponent';
+import ViewMessages from './components/profile/ViewMessages';
 
 
 
@@ -146,6 +147,10 @@ function App() {
 <Route  path="/chat/:userId">
   <ChatComponent />
 </Route> 
+<Route  path="/messages">
+  <ViewMessages/>
+</Route> 
+
 
 
            
