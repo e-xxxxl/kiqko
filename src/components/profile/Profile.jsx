@@ -398,12 +398,39 @@ const Profile = () => {
       <ImgViewer />
       {/* Hero section with decorative shape */}
       <div className="relative">
-        <section className="hidden md:block h-24 bg-gradient-to-r from-pink-500 to-purple-600 overflow-hidden">
-          <img
-            src={shape}
-            alt="shape"
-            className="w-full h-full object-cover opacity-20"
-          />
+        {/* Mobile version (shown on small screens) */}
+        <section className="md:hidden h-20 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500/30 via-purple-500/30 to-indigo-600/30">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"
+                fill="white"
+                opacity="0.1"
+              />
+            </svg>
+          </div>
+          <div className="container mx-auto px-4 h-full flex items-center"></div>
+        </section>
+
+        {/* Desktop version (shown on medium+ screens) */}
+        <section className="hidden md:block h-32 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 overflow-hidden relative">
+          <div className="absolute inset-0 opacity-20">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 1440 320"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+          <div className="container mx-auto px-6 h-full flex items-center justify-between"></div>
         </section>
       </div>
 
@@ -416,7 +443,7 @@ const Profile = () => {
                 <OnlineUsers />
 
                 {/* Navigation */}
-                <div className="bg-white rounded-lg shadow-md p-4">
+                <div className="bg-purple rounded-lg shadow-md p-4">
                   {/* Mobile Horizontal Navigation (shows on small screens) */}
                   <div className="md:hidden overflow-x-auto pb-3">
                     <div className="flex space-x-2 w-max">
@@ -458,11 +485,11 @@ const Profile = () => {
                         text="Blocked"
                       />
 
-                        <NavItemMobile
-                          to="/manage-media"
-                          icon={manageMedia}
-                          text="Manage Media"
-                        />
+                      <NavItemMobile
+                        to="/manage-media"
+                        icon={manageMedia}
+                        text="Manage Media"
+                      />
 
                       <NavItemMobile
                         to="/edit-basics"
@@ -470,23 +497,23 @@ const Profile = () => {
                         text="Edit"
                       />
 
-                        <NavItemMobile
-                          to="/hide-profile"
-                          icon={settingHide}
-                          text="Hide Profile"
-                        />
+                      <NavItemMobile
+                        to="/hide-profile"
+                        icon={settingHide}
+                        text="Hide Profile"
+                      />
 
-                         <NavItemMobile
-                          to="/delete-account"
-                          icon={settingDelete}
-                          text="Delete Account"
-                        />
+                      <NavItemMobile
+                        to="/delete-account"
+                        icon={settingDelete}
+                        text="Delete Account"
+                      />
 
-                        <NavItemMobile
-                          to="/update-location"
-                          icon={settingUpload}
-                          text="Update Location"
-                        />
+                      <NavItemMobile
+                        to="/update-location"
+                        icon={settingUpload}
+                        text="Update Location"
+                      />
 
                       <NavItemMobile
                         to="/manage-media"
@@ -672,193 +699,238 @@ const Profile = () => {
                   </div>
 
                   {/* Profile Details */}
-                  <div className="text-center mb-6">
-                    <h1 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
-                      {user?.username}
-                      <span className="relative group">
-                        <img
-                          src={proficon}
-                          alt="verified"
-                          className="w-5 h-5"
-                        />
-                        <span className="absolute hidden group-hover:block bg-white p-2 rounded shadow-lg text-xs w-32 left-1/2 transform -translate-x-1/2 mt-2">
-                          Verified!{" "}
+                  <div className="text-center mb-8 px-4 sm:px-6">
+                    {/* Username with badges */}
+                    <div className="flex flex-col items-center mb-4">
+                      <h1 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-2 mb-2">
+                        {user?.username}
+                        {/* Verified Badge */}
+                        <span className="relative group">
                           <img
-                            src={verifiedvac}
+                            src={proficon}
                             alt="verified"
-                            className="inline ml-1"
+                            className="w-5 h-5 hover:opacity-80 transition-opacity"
                           />
-                        </span>
-                      </span>
-                      <span className="relative group">
-                        <NavLink exact to="">
-                          <img
-                            src={vaccineIcon}
-                            alt="vaccine"
-                            className="w-5 h-5"
-                          />
-                          <span className="absolute hidden group-hover:block bg-white p-2 rounded shadow-lg text-xs w-48 left-1/2 transform -translate-x-1/2 mt-2">
-                            Yes, I'm Vaccinated{" "}
-                            <img
-                              src={likevac}
-                              alt="like"
-                              className="inline ml-1"
-                            />
-                          </span>
-                        </NavLink>
-                      </span>
-                    </h1>
-
-                    <p className="text-gray-600 mb-4 flex items-center justify-center gap-1">
-                      {userLocation?.city && userLocation?.country ? (
-                        <>
-                          <img
-                            src={location}
-                            alt="location"
-                            className="w-4 h-4"
-                          />
-                          {userLocation.city}, {userLocation.country}
-                        </>
-                      ) : (
-                        <span>No location set</span>
-                      )}
-
-                      <Accordion
-                        className="inline-block"
-                        defaultActiveKey={["0"]}
-                        alwaysOpen
-                      >
-                        <Accordion.Item eventKey="0">
-                          <Accordion.Header className="p-0">
-                            <img
-                              src={threedots}
-                              alt="menu"
-                              className="w-4 h-4 cursor-pointer"
-                            />
-                          </Accordion.Header>
-                          <Accordion.Body className="absolute bg-white shadow-lg rounded-md p-2 z-10">
-                            <div className="space-y-2">
-                              <Dropdown.Item
-                                onClick={() => setIsShowHideFormSearch(true)}
-                                className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                              >
-                                <img
-                                  src={hideicona}
-                                  alt="hide"
-                                  className="w-4 h-4"
-                                />
-                                Hide from search
-                              </Dropdown.Item>
-                              {isShowHideFormSearch && (
-                                <HideFormSearch
-                                  isShowHideFormSearch={isShowHideFormSearch}
-                                  handleHideFormSearch={setIsShowHideFormSearch}
-                                />
-                              )}
-                              <Dropdown.Item
-                                onClick={() => setIsBlockUser(true)}
-                                className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded"
-                              >
-                                <img
-                                  src={blockusericon}
-                                  alt="block"
-                                  className="w-4 h-4"
-                                />
-                                Block user
-                              </Dropdown.Item>
-                              {isShowBlockUser && (
-                                <BlockUserPro
-                                  isShowBlockUser={isShowBlockUser}
-                                  handleBlockUser={setIsBlockUser}
-                                />
-                              )}
-                              <Dropdown.Item className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
-                                <NavLink
-                                  exact
-                                  to="/report"
-                                  className="flex items-center gap-2"
-                                >
-                                  <img
-                                    src={reporticon}
-                                    alt="report"
-                                    className="w-4 h-4"
-                                  />
-                                  Report
-                                </NavLink>
-                              </Dropdown.Item>
+                          <span className="absolute hidden group-hover:block bg-white p-2 rounded-lg shadow-md text-xs w-36 left-1/2 transform -translate-x-1/2 mt-2 border border-gray-100 z-10">
+                            <div className="flex items-center justify-center gap-1">
+                              Verified!
+                              <img
+                                src={verifiedvac}
+                                alt="verified"
+                                className="w-4 h-4"
+                              />
                             </div>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      </Accordion>
-                    </p>
+                          </span>
+                        </span>
 
-                    <div className="text-left max-w-2xl mx-auto">
+                        {/* Vaccinated Badge */}
+                        <span className="relative group">
+                          <NavLink exact to="">
+                            <img
+                              src={vaccineIcon}
+                              alt="vaccine"
+                              className="w-5 h-5 hover:opacity-80 transition-opacity"
+                            />
+                            <span className="absolute hidden group-hover:block bg-white p-2 rounded-lg shadow-md text-xs w-48 left-1/2 transform -translate-x-1/2 mt-2 border border-gray-100 z-10">
+                              <div className="flex items-center justify-center gap-1">
+                                Yes, I'm Vaccinated
+                                <img
+                                  src={likevac}
+                                  alt="like"
+                                  className="w-4 h-4"
+                                />
+                              </div>
+                            </span>
+                          </NavLink>
+                        </span>
+                      </h1>
+
+                      {/* Location with menu */}
+                      <div className="flex items-center justify-center gap-2 mb-4">
+                        {userLocation?.city && userLocation?.country ? (
+                          <div className="flex items-center bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
+                            <img
+                              src={location}
+                              alt="location"
+                              className="w-4 h-4 opacity-70 mr-1"
+                            />
+                            <span className="text-sm text-gray-700">
+                              {userLocation.city}, {userLocation.country}
+                            </span>
+                            <Accordion
+                              className="inline-block ml-1"
+                              defaultActiveKey={["0"]}
+                              alwaysOpen
+                            >
+                              <Accordion.Item eventKey="0" className="border-0">
+                                <Accordion.Header className="p-0 !shadow-none">
+                                  <button className="p-1 rounded-full hover:bg-gray-100 transition-colors">
+                                    <img
+                                      src={threedots}
+                                      alt="menu"
+                                      className="w-4 h-4 opacity-70 cursor-pointer"
+                                    />
+                                  </button>
+                                </Accordion.Header>
+                                <Accordion.Body className="absolute right-0 mt-1 bg-white shadow-md rounded-md p-2 z-20 w-56 border border-gray-100">
+                                  <div className="space-y-1">
+                                    <Dropdown.Item
+                                      onClick={() =>
+                                        setIsShowHideFormSearch(true)
+                                      }
+                                      className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded text-sm text-gray-700"
+                                    >
+                                      <img
+                                        src={hideicona}
+                                        alt="hide"
+                                        className="w-4 h-4 opacity-70"
+                                      />
+                                      Hide from search
+                                    </Dropdown.Item>
+                                    {isShowHideFormSearch && (
+                                      <HideFormSearch
+                                        isShowHideFormSearch={
+                                          isShowHideFormSearch
+                                        }
+                                        handleHideFormSearch={
+                                          setIsShowHideFormSearch
+                                        }
+                                      />
+                                    )}
+                                    <Dropdown.Item
+                                      onClick={() => setIsBlockUser(true)}
+                                      className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded text-sm text-gray-700"
+                                    >
+                                      <img
+                                        src={blockusericon}
+                                        alt="block"
+                                        className="w-4 h-4 opacity-70"
+                                      />
+                                      Block user
+                                    </Dropdown.Item>
+                                    {isShowBlockUser && (
+                                      <BlockUserPro
+                                        isShowBlockUser={isShowBlockUser}
+                                        handleBlockUser={setIsBlockUser}
+                                      />
+                                    )}
+                                    <Dropdown.Item className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded text-sm text-gray-700">
+                                      <NavLink
+                                        exact
+                                        to="/report"
+                                        className="flex items-center gap-2 w-full"
+                                      >
+                                        <img
+                                          src={reporticon}
+                                          alt="report"
+                                          className="w-4 h-4 opacity-70"
+                                        />
+                                        Report
+                                      </NavLink>
+                                    </Dropdown.Item>
+                                  </div>
+                                </Accordion.Body>
+                              </Accordion.Item>
+                            </Accordion>
+                          </div>
+                        ) : (
+                          <span className="text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
+                            No location set
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Profile Information */}
+                    <div className="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left">
                       {profileDetails ? (
                         <>
-                          <h2 className="font-semibold mb-2">
+                          <h2 className="font-semibold text-gray-800 mb-4 text-lg">
                             {profileDetails.gender === "Woman"
                               ? "Woman seeking Man"
                               : profileDetails.gender === "Man"
                               ? "Man seeking Woman"
                               : "Not specified"}
-                            {profileDetails.age &&
-                              ` age(${profileDetails.age}) +`}
+                            {profileDetails.age && `, ${profileDetails.age}`}
                           </h2>
-                          <div className="space-y-2">
-                            <p className="flex items-center gap-2">
-                              <span className="inline-flex items-center">
-                                {profileDetails.age &&
-                                  `${profileDetails.age}, `}
-                                {profileDetails.maritalStatus &&
-                                  `${profileDetails.maritalStatus}, `}
-                                {profileDetails.ethnicity &&
-                                  `${profileDetails.ethnicity}, `}
-                                {profileDetails.height && profileDetails.height}
-                              </span>
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <img
-                                src={bodytype2}
-                                alt="body type"
-                                className="w-4 h-4"
-                              />
-                              {profileDetails.bodyType || "Not specified"}
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <img src={kids2} alt="kids" className="w-4 h-4" />
-                              {profileDetails.hasKids || "Not specified"}
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <img
-                                src={wantkids2}
-                                alt="wants kids"
-                                className="w-4 h-4"
-                              />
-                              {profileDetails.wantsKids || "Not specified"}
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <img
-                                src={herefor2}
-                                alt="relationship"
-                                className="w-4 h-4"
-                              />
-                              {profileDetails.hereFor || "Not specified"}
-                            </p>
+
+                          <div className="space-y-3">
+                            {/* Basic Info */}
+                            <div className="flex items-start gap-3">
+                              <div className="flex-1">
+                                <p className="text-gray-700">
+                                  {[
+                                    profileDetails.maritalStatus,
+                                    profileDetails.ethnicity,
+                                    profileDetails.height,
+                                  ]
+                                    .filter(Boolean)
+                                    .join(" • ")}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Details with icons */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                              <div className="flex items-center gap-2">
+                                <img
+                                  src={bodytype2}
+                                  alt="body type"
+                                  className="w-5 h-5 opacity-70"
+                                />
+                                <span className="text-gray-700">
+                                  {profileDetails.bodyType || "Not specified"}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <img
+                                  src={kids2}
+                                  alt="kids"
+                                  className="w-5 h-5 opacity-70"
+                                />
+                                <span className="text-gray-700">
+                                  {profileDetails.hasKids || "Not specified"}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <img
+                                  src={wantkids2}
+                                  alt="wants kids"
+                                  className="w-5 h-5 opacity-70"
+                                />
+                                <span className="text-gray-700">
+                                  {profileDetails.wantsKids || "Not specified"}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <img
+                                  src={herefor2}
+                                  alt="relationship"
+                                  className="w-5 h-5 opacity-70"
+                                />
+                                <span className="text-gray-700">
+                                  {profileDetails.hereFor || "Not specified"}
+                                </span>
+                              </div>
+                            </div>
                           </div>
+
                           <Link
                             to="/edit-basics"
-                            className="inline-block mt-4 px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50"
+                            className="inline-block mt-6 px-5 py-2.5 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition-colors text-sm font-medium"
                           >
                             Edit Information
                           </Link>
                         </>
                       ) : (
-                        <Link
-                          to="/edit-profile"
-                          className="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        >
-                          Add Your Information
-                        </Link>
+                        <div className="text-center py-4">
+                          <Link
+                            to="/edit-profile"
+                            className="inline-block px-5 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                          >
+                            Add Your Information
+                          </Link>
+                        </div>
                       )}
                     </div>
                   </div>
